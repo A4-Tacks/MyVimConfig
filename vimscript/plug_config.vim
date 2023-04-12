@@ -15,7 +15,7 @@ Plug 'artur-shaik/vim-javacomplete2' , { 'on': 'JCEnable' }
 Plug 'maralla/completor.vim' , { 'on': 'CompletorEnable' }
 
 " ale
-Plug 'https://github.com/w0rp/ale', { 'on': 'ALEEnable' }
+Plug 'https://github.com/w0rp/ale', " { 'on': 'ALEEnable' }
 
 call plug#end() " Plug配置文件
 
