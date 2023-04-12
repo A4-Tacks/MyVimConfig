@@ -1,3 +1,5 @@
+" add `execute "source " . fnameescape(expand("<sfile>:p:h") . "/MyVimConfig/main.vim")` to ~/.vim/vimrc
+" git to ~/.vim/MyVimConfig
 function Log(...) " {{{1
     let l:msg = join(a:000)
     call add(g:loader_debug_log, l:msg)
