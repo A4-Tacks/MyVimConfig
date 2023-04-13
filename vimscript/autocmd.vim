@@ -72,22 +72,34 @@ function AutoLightWordTimer(time)
 endfunction
 call AutoLightWordTimer(143)
 " Load plugged {{{1
-autocmd VimEnter * call SetDefaultFileTypeOptions()
+autocmd BufNewFile,BufRead * call SetDefaultFileTypeOptions()
 function SetDefaultFileTypeOptions()
     " 设置映射 属性 参数 及启动插件
+    let b:lang_fold_method = 'syntax'
     let l:type = &filetype
     if l:type == 'python'
-        inoremap !main if __name__ == '__main__':<Cr>
-        inoremap !self def (self):<Left><Left><Left><Left><Left><Left><Left>
+        inoremap <buffer> !main if __name__ == '__main__':<Cr>
+        inoremap <buffer> !self def (self):<Left><Left><Left><Left><Left><Left><Left>
+        let b:lang_fold_method = "indent"
 
     elseif l:type == 'rust'
-        set foldmethod=syntax
+        let b:lang_fold_method = "syntax"
 
     elseif l:type == 'java'
         JCEnable
         CocEnable
         setlocal omnifunc=javacomplete#Complete
-        inoremap <C-b> <C-x><C-o>
+        inoremap <buffer> <C-b> <C-x><C-o>
+        let b:lang_fold_method = "syntax"
+
+    elseif l:type == 'awk'
+        let b:lang_fold_method = "marker"
+        setlocal foldmarker={,}
+
+    elseif l:type == 'vim'
+        let b:lang_fold_method = "marker"
+
     endif
+    execute "setlocal foldmethod=" . b:lang_fold_method
 endfunction
 " }}}1

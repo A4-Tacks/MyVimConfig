@@ -6,7 +6,9 @@ command Wq :wq
 command WQ :wq
 
 " syntax or tag fold {{{1
-command Fold :exec 'set foldmethod=' . (&foldmethod == 'marker' ? 'syntax' : 'marker')
+command Fold :exec 'set foldmethod=' .
+            \(&foldmethod == b:lang_fold_method
+            \? 'marker' : b:lang_fold_method)
 " Running code {{{1
 command Run :call CompileRun()
 command SetDefaultFileTypeOptions :call SetDefaultFileTypeOptions() " {{{1
