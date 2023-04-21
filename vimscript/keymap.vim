@@ -129,7 +129,7 @@ inoremap <expr> #@ Clipboard() . "\<Esc>"
 " Running or save source code {{{1
 function! Runer() " -> dict
     function! s:python(args) dict " -> str {{{2
-        return "python3 " . FileNameToShell(expand("%:p")) . " " . join(a:args)
+        return "time python3 " . FileNameToShell(expand("%:p")) . " " . join(a:args)
     endfunction
     function! s:clang(args) dict " -> str {{{2
         let args = SplitLevelsArgs(2, a:args)
