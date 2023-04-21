@@ -103,7 +103,7 @@ nnoremap <silent><expr> <Space>B g:autoBigWinEnabled ? BigWin(0) : BigWin(1)
 nnoremap <silent> <Space>t :terminal<Cr>
 
 " Select Clipboard Paste {{{1
-function Clipboard()
+function! Clipboard()
     let l:display_width = float2nr(&columns * 0.8) - 6
     let l:lines = []
     let l:Format = {name -> 
@@ -127,62 +127,80 @@ function Clipboard()
 endfunction
 inoremap <expr> #@ Clipboard() . "\<Esc>"
 " Running or save source code {{{1
-" filetype : command
-let s:v =<< EOF
-c:              gcc % -o %:t:r.out
-sh:             bash % $$
-vim:            vim -u % $$
-awk:            awk -f % $$
-rust:           cargo run $$
-python:         python % $$
-javascript:     node % $$
-EOF
-
-" to map
-python3 << EOF
-lines = vim.eval("s:v")
-res = {}
-old = None
-for line in lines:
-    line = line.lstrip()
-    if line[0] == "\\":
-        res[old] += " " + line[1:]
-    else:
-        type_, cmd = re.split(r":\s*", line, 1)
-        old = type_
-        res[old] = cmd
-EOF
-let g:lang_run_command = py3eval("res")
-
+function! Runer() " -> dict
+    function! s:python(args) dict " -> str {{{2
+        return "python3 " . FileNameToShell(expand("%:p")) . " " . join(a:args)
+    endfunction
+    function! s:clang(args) dict " -> str {{{2
+        let args = SplitLevelsArgs(2, a:args)
+        let outf = FileNameToShell(expand("%:p:r") . ".out")
+        return "time gcc " . FileNameToShell(expand("%:p")) . " -o "
+                    \. outf . " " . join(args[0])
+                    \. "&& time " . outf . " " . join(args[1])
+    endfunction
+    function! s:sh(args) dict " -> str {{{2
+        let args = SplitLevelsArgs(2, a:args)
+        return "time bash " . join(args[0])
+                    \. " " . expand("%:p") . " " . join(args[1])
+    endfunction
+    function! s:vim(args) dict " -> str {{{2
+        let args = SplitLevelsArgs(2, a:args)
+        return "time vim " . join(args[0])
+                    \. " -u " . expand("%:p") . " " . join(args[1])
+    endfunction
+    function! s:rust(args) dict " -> str {{{2
+        let args = SplitLevelsArgs(2, a:args)
+        if expand("%:t") == "main.rs"
+            return "time cargo run " . join(args[0])
+                        \. " -- " . join(args[1])
+        else
+            return "time cargo test " . join(args[0])
+                        \. " -- " . join(args[1])
+        endif
+    endfunction
+    function! s:awk(args) dict " -> str {{{2
+        let args = SplitLevelsArgs(2, a:args)
+        return "time awk " . join(args[0])
+                    \. " -f " . expand("%:p") . " " . join(args[1])
+    endfunction
+    function! s:js(args) dict " -> str {{{2
+        let args = SplitLevelsArgs(2, a:args)
+        return "time node " . join(args[0])
+                    \. " " . expand("%:p") . " " . join(args[1])
+    endfunction
+    " result dict functions {{{2
+    return
+                \{
+                \"python": funcref("s:python"),
+                \"c": funcref("s:clang"),
+                \"sh": funcref("s:sh"),
+                \"vim": funcref("s:vim"),
+                \"rust": funcref("s:rust"),
+                \"awk": funcref("s:awk"),
+                \"javascript": funcref("s:js"),
+                \}
+    " }}}2
+endfunction
 nnoremap <F5> :call CompileRun()<CR>
 
-func! CompileRun() " {{{
+let g:runer = Runer()
+
+function! CompileRun() " {{{
     if &modified
         " 编辑后仅保存
-        exec "w"
+        write
         return v:false
     endif
-    if index(keys(g:lang_run_command), &filetype) == -1
-        echo "file not in lang config. " . string(keys(g:lang_run_command))
+    if index(keys(g:runer), &filetype) == -1
+        echo &filetype . " not in lang config. " . string(keys(g:runer))
         return v:none
     endif
-    let l:F = {_, x -> substitute(fnameescape(x), 
-                        \'\([();&>]\)', {x -> '\' . x[1]}, 'g')}
-    let l:command = ShlexSplit(g:lang_run_command[&filetype])
-    let l:args = map(ShlexSplit(input("args> ")),
-                \l:F)
-    for l:i in range(len(l:command))
-        let l:token = l:command[l:i]
-        if l:token[0] == '%'
-            let l:command[l:i] = F(0, expandcmd(l:token))
-        elseif l:token == '$$'
-            let l:command[l:i] = join(l:args)
-        else
-            let l:command[l:i] = shellescape(l:token, 1)
-        endif
-    endfor
-    execute "!set -x;" . 'echo -ne "\e[0m\e[' . &lines . 'S\e[H";time ' . join(l:command)
-endfunc " }}}
+    let args = map(ShlexSplit(input("args> ")),
+                \funcref("FileNameToShell"))
+    execute "!set -x;" . 'echo -ne "\e[0m\e[' . &lines . 'S\e[H";'
+                \. g:runer[&filetype](args)
+    return v:true
+endfunction " }}}
 
 " Translate {{{1
 nnoremap <F7> yy:call Appends(line("."), Translate("c", @@))<Cr>
@@ -198,25 +216,26 @@ func TabGoTu() " {{{2
     let column=col(".")
     return "\<Tab>"
 endfunc
-function Completion_start() " {{{2
+function! Completion_start() " {{{2
     let result = 0
     try
         let result = result || coc#pum#visible()
     catch /.*/
     endtry
     return pumvisible() || result
-endfunction " }}}2
+endfunction! " }}}2
 
 inoremap #<Tab> <Tab>
 
-imap <expr><silent> <Tab> Completion_start() ? "\<C-n>" : TabGoTu()
-imap <expr><silent> <S-Tab> Completion_start() ? "\<C-p>" : "\<Tab>"
-imap <expr><silent> <Up> Completion_start() ? "\<C-p>" : "\<Up>"
-imap <expr><silent> <Down> Completion_start() ? "\<C-n>" : "\<Down>"
+" from coc
+"imap <expr><silent> <Tab> Completion_start() ? "\<C-n>" : TabGoTu()
+"imap <expr><silent> <S-Tab> Completion_start() ? "\<C-p>" : "\<Tab>"
+"imap <expr><silent> <Up> Completion_start() ? "\<C-p>" : "\<Up>"
+"imap <expr><silent> <Down> Completion_start() ? "\<C-n>" : "\<Down>"
 
 " Enter map {{{1
 " Insert mode Enter {{{2
-function EnterInsert()
+function! EnterInsert()
     if Completion_start()
         " 补全菜单展开则直接选择
         return "\<C-p>\<C-n>\<Esc>a"
@@ -233,13 +252,13 @@ inoremap #<Cr> <Cr>
 " imap <expr> <Cr> EnterInsert()
 
 " Normal Enter open fold " {{{2
-function NEnterInsert()
+function! NEnterInsert()
     if foldclosed(line(".")) != -1
         return "zo"
     else 
         return "\<Cr>"
     endif 
-endfunction 
+endfunction! 
 nnoremap <expr> <Cr> NEnterInsert()
 " }}}2
 " }}}1
