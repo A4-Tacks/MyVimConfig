@@ -33,7 +33,9 @@ function! BuildShellArgs(args) " {{{1
     call map(l:res, {k, v -> fnameescape(v)})
     return join(l:res, " ")
 endfunction
-function! ShlexSplit(str) " -> list {{{1
+function! ShlexSplit(str, ...) " -> list {{{1
+    echomsg a:str
+    echomsg a:000
     return py3eval('shlex.split(vim.eval("a:str"))')
 endfunction
 function! ReversedStr(string) " {{{1

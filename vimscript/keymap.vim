@@ -196,7 +196,7 @@ function! CompileRun() " {{{
         return v:none
     endif
     let args = map(ShlexSplit(input("args> ")),
-                \funcref("FileNameToShell"))
+                \{ _, x -> FileNameToShell(x) })
     execute "!set -x;" . 'echo -ne "\e[0m\e[' . &lines . 'S\e[H";'
                 \. g:runer[&filetype](args)
     return v:true
