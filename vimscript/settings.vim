@@ -1,5 +1,5 @@
 " 关闭兼容模式, 也就是去除vi一致性
-set nocompatible 
+set nocompatible
 
 " 语法高亮
 syntax on
@@ -22,7 +22,7 @@ set cursorline
 set mouse=a
 
 " 显示光标位置
-set ruler 
+set ruler
 
 " 使用空格来替换Tab
 set expandtab
@@ -43,29 +43,29 @@ autocmd BufEnter * set formatoptions-=c formatoptions-=r formatoptions-=o
 set autoindent smartindent
 
 " Backspace Detele range
-" start:old char, eol:line, 
+" start:old char, eol:line,
 set backspace=indent,start,eol
 
 " 开启实时搜索功能
 set incsearch
 
 " 关闭搜索忽略大小写
-set noignorecase 
+set noignorecase
 
 " vim 命令自动补全
 set wildmenu
 
 " 文件自动更新
-set autoread 
+set autoread
 
 " GUI - 禁止光标闪烁
-set gcr=a:block-blinkon0 
+set gcr=a:block-blinkon0
 
 " 高亮显示搜索结果
-set hlsearch 
+set hlsearch
 
 " Split line
-set wrap 
+set wrap
 
 " 不在单词内部换行
 set linebreak

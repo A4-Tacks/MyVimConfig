@@ -1,12 +1,12 @@
 autocmd BufNewFile * call SetTitle() " {{{1
 function SetTitle()
     if     &l:filetype == "python"
-        call setline(1, "# -*- coding: " . &l:encoding . "; -*-")
+        call setline(1, "# -*- coding: " .. &l:encoding .. "; -*-")
         call append(line(".")+0, "")
         call append(line(".")+1, "")
 
     elseif &l:filetype == "java"
-        call setline(1, "public class ".expand("%:t:r")." {}")
+        call setline(1, "public class " .. expand("%:t:r") .. " {}")
 
     elseif &l:filetype == "sh"
         call setline(1, "#!/usr/bin/bash")
@@ -65,7 +65,7 @@ function AutoLightWordTimer(time)
         endif
         let g:cursor_word = l:word
         execute 'match WordLight /\<'
-                    \. substitute(l:word, '\([\/~.\[\]]\)', '\\\1', 'g') . '\>/'
+                    \.. substitute(l:word, '\([\/~.\[\]]\)', '\\\1', 'g') .. '\>/'
     endfunction
 
     call timer_start(a:time, 'AutoLightWordTimerF', {'repeat': -1})
@@ -100,6 +100,6 @@ function SetDefaultFileTypeOptions()
         let b:lang_fold_method = "marker"
 
     endif
-    execute "setlocal foldmethod=" . b:lang_fold_method
+    execute "setlocal foldmethod=" .. b:lang_fold_method
 endfunction
 " }}}1

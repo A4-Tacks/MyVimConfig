@@ -107,10 +107,10 @@ function! Clipboard()
     let l:display_width = float2nr(&columns * 0.8) - 6
     let l:lines = []
     let l:Format = {name -> 
-                \add(l:lines, "@" . name . ": ["
-                \. SplitLongStr(
-                \substitute(eval('@' . name), '\n', '\\n', 'g'),
-                \l:display_width) . "];")}
+                \add(l:lines, "@" .. name .. ": ["
+                \.. SplitLongStr(
+                \substitute(eval('@' .. name), '\n', '\\n', 'g'),
+                \l:display_width) .. "];")}
     call add(l:lines, "-*- Clipboard -*-")
     call l:Format('"')
     call l:Format('+')
@@ -123,50 +123,50 @@ function! Clipboard()
         return ""
     endif
     set paste
-    return "\<C-r>" . l:input
+    return "\<C-r>" .. l:input
 endfunction
-inoremap <expr> #@ Clipboard() . "\<Esc>"
+inoremap <expr> #@ Clipboard() .. "\<Esc>"
 " Running or save source code {{{1
 function! Runer() " -> dict
     function! s:python(args) dict " -> str {{{2
-        return "time python3 " . FileNameToShell(expand("%:p")) . " " . join(a:args)
+        return "time python3 " .. FileNameToShell(expand("%:p")) .. " " .. join(a:args)
     endfunction
     function! s:clang(args) dict " -> str {{{2
         let args = SplitLevelsArgs(2, a:args)
-        let outf = FileNameToShell(expand("%:p:r") . ".out")
-        return "time gcc " . FileNameToShell(expand("%:p")) . " -o "
-                    \. outf . " " . join(args[0])
-                    \. "&& time " . outf . " " . join(args[1])
+        let outf = FileNameToShell(expand("%:p:r") .. ".out")
+        return "time gcc " .. FileNameToShell(expand("%:p")) .. " -o "
+                    \.. outf .. " " .. join(args[0])
+                    \.. "&& time " .. outf .. " " .. join(args[1])
     endfunction
     function! s:sh(args) dict " -> str {{{2
         let args = SplitLevelsArgs(2, a:args)
-        return "time bash " . join(args[0])
-                    \. " " . expand("%:p") . " " . join(args[1])
+        return "time bash " .. join(args[0])
+                    \.. " " .. expand("%:p") .. " " .. join(args[1])
     endfunction
     function! s:vim(args) dict " -> str {{{2
         let args = SplitLevelsArgs(2, a:args)
-        return "time vim " . join(args[0])
-                    \. " -u " . expand("%:p") . " " . join(args[1])
+        return "time vim " .. join(args[0])
+                    \.. " -u " .. expand("%:p") .. " " .. join(args[1])
     endfunction
     function! s:rust(args) dict " -> str {{{2
         let args = SplitLevelsArgs(2, a:args)
         if expand("%:t") == "main.rs"
-            return "time cargo run " . join(args[0])
-                        \. " -- " . join(args[1])
+            return "time cargo run " .. join(args[0])
+                        \.. " -- " .. join(args[1])
         else
-            return "time cargo test " . join(args[0])
-                        \. " -- " . join(args[1])
+            return "time cargo test " .. join(args[0])
+                        \.. " -- " .. join(args[1])
         endif
     endfunction
     function! s:awk(args) dict " -> str {{{2
         let args = SplitLevelsArgs(2, a:args)
-        return "time awk " . join(args[0])
-                    \. " -f " . expand("%:p") . " " . join(args[1])
+        return "time awk " .. join(args[0])
+                    \.. " -f " .. expand("%:p") .. " " .. join(args[1])
     endfunction
     function! s:js(args) dict " -> str {{{2
         let args = SplitLevelsArgs(2, a:args)
-        return "time node " . join(args[0])
-                    \. " " . expand("%:p") . " " . join(args[1])
+        return "time node " .. join(args[0])
+                    \.. " " .. expand("%:p") .. " " .. join(args[1])
     endfunction
     " result dict functions {{{2
     return
@@ -192,13 +192,15 @@ function! CompileRun() " {{{
         return v:false
     endif
     if index(keys(g:runer), &filetype) == -1
-        echo &filetype . " not in lang config. " . string(keys(g:runer))
+        echo &filetype .. " not in lang config. " .. string(keys(g:runer))
         return v:none
     endif
     let args = map(ShlexSplit(input("args> ")),
                 \{ _, x -> FileNameToShell(x) })
-    execute "!set -x;" . 'echo -ne "\e[0m\e[' . &lines . 'S\e[H";'
-                \. g:runer[&filetype](args)
+    execute "!set -x;" .. 'echo -ne "\e[0m\e[' .. &lines .. 'S\e[H";'
+                \.. g:runer[&filetype](args)
+    " execute "terminal bash -c " .. FileNameToShell("set -x;" .. 'echo -ne "\e[0m\e[' .. &lines .. 'S\e[H";'
+    "             \.. g:runer[&filetype](args))
     return v:true
 endfunction " }}}
 

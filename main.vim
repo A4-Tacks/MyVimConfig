@@ -1,5 +1,8 @@
 " add `execute "source " . fnameescape(expand("<sfile>:p:h") . "/MyVimConfig/main.vim")` to ~/.vim/vimrc
 " git to ~/.vim/MyVimConfig
+
+set nocompatible
+
 function Log(...) " {{{1
     let l:msg = join(a:000)
     call add(g:loader_debug_log, l:msg)
@@ -12,7 +15,7 @@ let s:project_root = expand("<sfile>:p:h")
 let g:loader_debug = v:false
 let g:loader_debug_log = []
 " load python main {{{1
-execute "py3file " . fnameescape(s:project_root . "/python/__main__.py")
+execute "py3file " .. fnameescape(s:project_root .. "/python/__main__.py")
 " Vim Scripts {{{1
 let s:vim_scripts =<< trim EOF
 {
@@ -57,7 +60,7 @@ for s:line in s:vim_scripts
     elseif s:line == '}'
         call remove(s:stack, -1)
     else
-        let s:tmp = s:stack[-1] . "/" . s:line
+        let s:tmp = s:stack[-1] .. "/" .. s:line
         call add(s:run_vimscript_queue, s:tmp)
     endif
 endfor
@@ -65,6 +68,6 @@ endfor
 for s:path in s:run_vimscript_queue
     let s:tmp = fnameescape(s:path)
     call Log("load:", s:tmp)
-    execute "source " . s:tmp
+    execute "source " .. s:tmp
 endfor
 " }}}1

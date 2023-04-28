@@ -11,7 +11,7 @@ function! Appends(line, str) " {{{
 endfunction
 function! Py3Call(name, ...) " {{{1
     " py3eval 有一个很坑的坑, int和float会变成str
-    return py3eval('parse_to_vim(' . a:name . '(*vim.eval("a:000")))')
+    return py3eval('parse_to_vim(' .. a:name .. '(*vim.eval("a:000")))')
 endfunction
 function! SplitLongStr(string, len) " {{{1
     " len > 0
@@ -24,7 +24,7 @@ function! SplitLongStr(string, len) " {{{1
         endif
     endif
     if strlen(a:string) > a:len
-        return a:string[:l:l - 1] . "..."
+        return a:string[:l:l - 1] .. "..."
     endif
     return a:string
 endfunction
@@ -42,7 +42,7 @@ endfunction
 function! GetCursorWord() " {{{1
     let l:col = col(".") - 1
     let l:line = line(".")
-    let l:line_text = getline(l:line) . ' '
+    let l:line_text = getline(l:line) .. ' '
     let l:index = matchend(ReversedStr(l:line_text[:col]), '^.\{-0,}\>')
     if l:index == -1
         return ''
@@ -58,11 +58,11 @@ endfunction
 function! FileNameToShell(name) " {{{1
     " 将 vim 中的文件名转义至shell不会有其它含义的字符, 且不会被vim的expand转义
     return substitute(fnameescape(a:name),
-                \'\([();&>]\)', {x -> '\' . x[1]}, 'g')
+                \'\([();&>]\)', {x -> '\' .. x[1]}, 'g')
 endfunction
 function! VarInit(name, default) " {{{1
     if ! exists(a:name)
-        execute "let " . a:name . " = a:default"
+        execute "let " .. a:name .. " = a:default"
     endif
 endfunction
 function! ToSnake(name, big_start = v:true) " {{{1
@@ -77,7 +77,7 @@ function! ToSnake(name, big_start = v:true) " {{{1
                 let l:upper_tag = v:false
                 let l:char = toupper(l:char)
             endif
-            let l:res .= l:char
+            let l:res ..= l:char
         endif
     endfor
     return l:res
