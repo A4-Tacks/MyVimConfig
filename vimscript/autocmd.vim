@@ -86,10 +86,10 @@ function SetDefaultFileTypeOptions()
         let b:lang_fold_method = "syntax"
 
     elseif l:type == 'java'
-        JCEnable
-        CocEnable
-        setlocal omnifunc=javacomplete#Complete
-        inoremap <buffer> <C-b> <C-x><C-o>
+    "    JCEnable
+    "    CocEnable
+    "    setlocal omnifunc=javacomplete#Complete
+    "    inoremap <buffer> <C-b> <C-x><C-o>
         let b:lang_fold_method = "syntax"
 
     elseif l:type == 'awk'

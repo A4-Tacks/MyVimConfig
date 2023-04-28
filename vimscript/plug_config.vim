@@ -9,10 +9,10 @@ Plug 'Yggdroot/indentLine'
 Plug 'neoclide/coc.nvim'
 
 " java补全插件
-Plug 'artur-shaik/vim-javacomplete2' , { 'on': 'JCEnable' } 
+"Plug 'artur-shaik/vim-javacomplete2' , { 'on': 'JCEnable' } 
 
 " py 船新补全
-Plug 'maralla/completor.vim' , { 'on': 'CompletorEnable' }
+"Plug 'maralla/completor.vim' , { 'on': 'CompletorEnable' }
 
 " ale
 Plug 'https://github.com/w0rp/ale', " { 'on': 'ALEEnable' }
