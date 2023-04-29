@@ -274,25 +274,30 @@ function Commands(page = 0)
         return
     endif
     redraw " 重绘屏幕来避免输出堆积到一起
+    let fmtter = '{}: {}'
     let page_max = 10
+    let page_count = len(g:commands_list) / page_max
     let start = page_max * a:page
     let end = start + (page_max - 1) " last some idx
     let line_buf = ["page: " .. a:page]
     let idx = 0
     for item in g:commands_list[start:end]
-        call add(line_buf, StrFmt('{}: {}', idx - start, item[0]))
+        call add(line_buf, StrFmt(fmtter, idx - start, item[0]))
         let idx += 1
     endfor
-    let [pgup_idx, pgdn_idx] = [idx + 0, idx + 1]
-    call add(line_buf, StrFmt('{}: {}', pgup_idx, 'page up'))
-    call add(line_buf, StrFmt('{}: {}', pgdn_idx, 'page down'))
+    let [pgup_idx, pgdn_idx, pggoto_idx] = [idx + 0, idx + 1, idx + 2]
+    call add(line_buf, StrFmt(fmtter, pgup_idx, 'page up'))
+    call add(line_buf, StrFmt(fmtter, pgdn_idx, 'page down'))
+    call add(line_buf, StrFmt(fmtter, pggoto_idx, 'page goto'))
     echon join(line_buf, "\n")
-    let input_number = InputRangeNumber("select number> ", 0, pgdn_idx)
+    let input_number = InputRangeNumber("select number> ", 0, pggoto_idx)
     echon "\n"
     if input_number == pgup_idx
         call Commands(a:page - 1)
     elseif input_number == pgdn_idx
         call Commands(a:page + 1)
+    elseif input_number == pggoto_idx
+        call Commands(InputRangeNumber("goto page> ", 0, page_count))
     else
         call g:commands_list[input_number + start][1]()
     endif
