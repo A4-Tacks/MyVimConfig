@@ -210,14 +210,14 @@ vnoremap <F7> y:call Appends(line("."), Translate("c", @@))<Cr>
 vnoremap <F8> :%!mybaidufanyiapireadinput a<Cr>
 
 " Tab map {{{1
-func TabGoTu() " {{{2
+function TabGoTu() " {{{2
     if foldclosed(line(".")) != -1
         return "\<C-o>zo"
     endif 
     let text=getline(".")[col(".")-1]
     let column=col(".")
     return "\<Tab>"
-endfunc
+endfunction
 function! Completion_start() " {{{2
     let result = 0
     try
@@ -225,7 +225,7 @@ function! Completion_start() " {{{2
     catch /.*/
     endtry
     return pumvisible() || result
-endfunction! " }}}2
+endfunction " }}}2
 
 inoremap #<Tab> <Tab>
 
@@ -260,7 +260,42 @@ function! NEnterInsert()
     else 
         return "\<Cr>"
     endif 
-endfunction! 
+endfunction 
 nnoremap <expr> <Cr> NEnterInsert()
 " }}}2
-" }}}1
+" Commands {{{1
+let g:commands_list = [
+            \['SelectLineNumber', funcref('SelectLineNumberDisplay')],
+            \['Wrap', { -> execute('set ' .. (&wrap ? 'no' : '') .. 'wrap')}],
+            \]
+nnoremap <leader><leader> :call Commands()<Cr>
+function Commands(page = 0)
+    if a:page < 0
+        return
+    endif
+    redraw " 重绘屏幕来避免输出堆积到一起
+    let page_max = 10
+    let start = page_max * a:page
+    let end = start + (page_max - 1) " last some idx
+    let line_buf = ["page: " .. a:page]
+    let idx = 0
+    for item in g:commands_list[start:end]
+        call add(line_buf, StrFmt('{}: {}', idx - start, item[0]))
+        let idx += 1
+    endfor
+    let [pgup_idx, pgdn_idx] = [idx + 0, idx + 1]
+    call add(line_buf, StrFmt('{}: {}', pgup_idx, 'page up'))
+    call add(line_buf, StrFmt('{}: {}', pgdn_idx, 'page down'))
+    echon join(line_buf, "\n")
+    let input_number = InputRangeNumber("select number> ", 0, pgdn_idx)
+    echon "\n"
+    if input_number == pgup_idx
+        call Commands(a:page - 1)
+    elseif input_number == pgdn_idx
+        call Commands(a:page + 1)
+    else
+        call g:commands_list[input_number + start][1]()
+    endif
+endfunction
+" End {{{1
+" }}}

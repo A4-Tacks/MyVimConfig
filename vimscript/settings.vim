@@ -1,5 +1,7 @@
 " 关闭兼容模式, 也就是去除vi一致性
-set nocompatible
+if &compatible
+    set nocompatible
+endif
 
 " 语法高亮
 syntax on

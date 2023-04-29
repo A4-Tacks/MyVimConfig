@@ -104,4 +104,37 @@ function! SplitLevelsArgs(level, args) " -> list[list[str]] {{{1
     endfor
     return res
 endfunction
+function! StrFmt(fmtter, ...) " {{{1
+    return py3eval('str(vim.eval("a:fmtter")).format(*vim.eval("a:000"))')
+endfunction
+function! Assert(expr, msg = "assert field") " {{{1
+    if ! a:expr
+        echoerr a:msg .. ': ' .. a:expr
+    endif
+endfunction
+function! InputRangeNumber(msg, ...) " {{{1
+    " input number in [start, stop]
+    if len(a:000) == 0
+        return input(a:msg) + 0
+    elseif len(a:000) == 1
+        call Assert(0 <= a:1)
+        return min([input(a:msg) + 0, a:1])
+    elseif len(a:000) == 2
+        call Assert(a:1 <= a:2)
+        return min([max([input(a:msg) + 0, a:1]), a:2])
+    else
+        echoerr 'args length error: ' .. len(a:000)
+    endif
+endfunction
+function! SelectLineNumberDisplay() " {{{1
+    let lines_buf = []
+    for i in range(4)
+        let [nu, rnu] = [and(i, 1), i >> 1]
+        call add(lines_buf, StrFmt("{}: number: {}, relativenumber: {}", i, nu, rnu))
+    endfor
+    echon join(lines_buf, "\n")
+    let input_number = InputRangeNumber("select number> ", 3)
+    let [&number, &relativenumber] = [and(input_number, 1), input_number >> 1]
+endfunction
+" End {{{1
 " }}}1
