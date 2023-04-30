@@ -181,27 +181,21 @@ function! Runer() " -> dict
                 \}
     " }}}2
 endfunction
-nnoremap <F5> :call CompileRun()<CR>
+nnoremap <silent> <F5> :if &modified \| write \| else \| call CompileRun(input("args> ")) \| endif<CR>
 
 let g:runer = Runer()
 
-function! CompileRun() " {{{
-    if &modified
-        " 编辑后仅保存
-        write
-        return v:false
-    endif
+function! CompileRun(args_text) " {{{
     if index(keys(g:runer), &filetype) == -1
         echo &filetype .. " not in lang config. " .. string(keys(g:runer))
         return v:none
     endif
-    let args = map(ShlexSplit(input("args> ")),
+    let args = map(ShlexSplit(a:args_text),
                 \{ _, x -> FileNameToShell(x) })
     execute "!set -x;" .. 'echo -ne "\e[0m\e[' .. &lines .. 'S\e[H";'
                 \.. g:runer[&filetype](args)
     " execute "terminal bash -c " .. FileNameToShell("set -x;" .. 'echo -ne "\e[0m\e[' .. &lines .. 'S\e[H";'
     "             \.. g:runer[&filetype](args))
-    return v:true
 endfunction " }}}
 
 " Translate {{{1

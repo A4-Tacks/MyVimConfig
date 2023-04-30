@@ -8,6 +8,9 @@ function SetTitle()
     elseif &l:filetype == "java"
         call setline(1, "public class " .. expand("%:t:r") .. " {}")
 
+    elseif &l:filetype == "vim"
+        call append(0, 'if &compatible | set nocompatible | endif')
+
     elseif &l:filetype == "sh"
         call setline(1, "#!/usr/bin/bash")
     endif
