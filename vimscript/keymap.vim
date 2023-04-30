@@ -273,7 +273,7 @@ function Commands(page = 0)
     if a:page < 0
         return
     endif
-    redraw " 重绘屏幕来避免输出堆积到一起
+    redrawstatus " 重绘状态行来避免输出堆积到一起
     let fmtter = '{}: {}'
     let page_max = 10
     let page_count = len(g:commands_list) / page_max
