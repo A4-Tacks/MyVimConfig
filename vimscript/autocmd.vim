@@ -88,6 +88,9 @@ function SetDefaultFileTypeOptions()
     elseif l:type == 'rust'
         let b:lang_fold_method = "syntax"
 
+    elseif l:type == 'sh'
+        let b:lang_fold_method = "marker"
+
     elseif l:type == 'java'
     "    JCEnable
     "    CocEnable
