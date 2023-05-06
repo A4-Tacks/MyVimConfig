@@ -21,7 +21,7 @@ nmap <silent> <F2> <Plug>(coc-rename)
 
 " 代码操作选择
 xmap <F3> <Plug>(coc-codeaction-selected)
-nmap <F3> <Plug>(coc-codeaction-selected)
+nmap <F3> <Plug>(coc-codeaction-selected)l
 
 
 " display doc
