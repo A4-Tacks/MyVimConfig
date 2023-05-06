@@ -19,6 +19,10 @@ hi CocWarningSign ctermfg=0 ctermbg=11
 " rename
 nmap <silent> <F2> <Plug>(coc-rename)
 
+" 代码操作选择
+xmap <F3> <Plug>(coc-codeaction-selected)
+nmap <F3> <Plug>(coc-codeaction-selected)
+
 
 " display doc
 " Use K to show documentation in preview window.
