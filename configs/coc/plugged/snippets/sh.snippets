@@ -110,7 +110,8 @@ ${1:pat})
 	;;
 endsnippet
 snippet select "select x in ..." b
-select ${1:item} in ${2:"\$\{${3:x}[@]\}"}; do
+PS3="${1:#?> }"
+select ${2:item} in ${3:"\$\{${4:x}[@]\}"}; do
 	${0:true}
 done
 endsnippet
