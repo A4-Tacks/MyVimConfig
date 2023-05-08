@@ -2,6 +2,10 @@
 " git to ~/.vim/MyVimConfig
 
 set nocompatible
+if ! has('python3')
+    echoerr "vim is not has python3"
+    exit
+endif
 
 function Log(...) " {{{1
     let l:msg = join(a:000)

@@ -1,0 +1,94 @@
+# python
+
+snippet fn "define function" b
+def ${1:name}(${2:args})${3: -> ${4:None}}:
+	"""${5:doc}
+	"""
+	${0:pass}
+endsnippet
+snippet fm "define method" b
+def ${1:name}(self, ${2:args})${3: -> ${4:None}}:
+	"""${5:doc}
+	"""
+	${0:pass}
+endsnippet
+snippet def "define function" b
+def ${1:name}(${2:args})${3: -> ${4:None}}:
+	"""${5:doc}
+	"""
+	${0:pass}
+endsnippet
+snippet defm "define method" b
+def ${1:name}(self, ${2:args})${3: -> ${4:None}}:
+	"""${5:doc}
+	"""
+	${0:pass}
+endsnippet
+snippet main "main block" b
+if __name__ == '__main__':
+	${0:pass}
+endsnippet
+snippet try "try...except" b
+try:
+	${1:pass}
+except ${2:Exception}${3: as ${4:e}}:
+	${0:raise $2}
+endsnippet
+snippet tryfy "try...finally" b
+try:
+	${1:pass}
+finally:
+	${0:pass}
+endsnippet
+snippet with "with...as..." b
+with ${1:open(${2:path})} as ${3:file}:
+	${0:pass}
+endsnippet
+snippet if "if" b
+if ${1:True}:
+	${0:pass}
+endsnippet
+snippet elif "elif" b
+elif ${1:True}:
+	${0:pass}
+endsnippet
+snippet else "else" b
+else:
+	${0:pass}
+endsnippet
+snippet while "while" b
+while ${1:True}:
+	${0:pass}
+endsnippet
+snippet until "until" b
+while not ${1:False}:
+	${0:pass}
+endsnippet
+snippet for "for in" b
+for ${1:i} in ${2:range(${3:n})}:
+	${0:pass}
+endsnippet
+snippet match "match" b
+match ${1:var}:
+	${0:pass}
+endsnippet
+snippet case "case" b
+case ${1:_}:
+	${0:pass}
+endsnippet
+snippet class "new class" b
+class ${1:ClassName}(${2:object}):
+	"""${3:doc}
+	"""
+	def __init__(self${4}):
+		${0:pass}
+endsnippet
+snippet from "from ... import ..." b
+from $1 import $0
+endsnippet
+snippet dbg "print(f'{var=}')" b
+print(f"\{${1:var}=\}")$0
+endsnippet
+snippet comprehensions "comprehensions" i
+${1:i}${0} for $1 in ${2:range(${3:n})}
+endsnippet

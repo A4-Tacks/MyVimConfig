@@ -12,7 +12,11 @@ function SetTitle()
         call append(0, 'if &compatible | set nocompatible | endif')
 
     elseif &l:filetype == "sh"
-        call setline(1, "#!/usr/bin/bash")
+        call append(0, "#!/usr/bin/bash")
+
+    elseif &l:filetype == 'awk'
+        call append(0, "#!/usr/bin/awk -f")
+
     endif
     normal G$
 endfunction
@@ -45,7 +49,8 @@ autocmd InsertEnter * exec 'let @/ = ""'
 " Clear search buffer {{{1
 autocmd VimEnter * let @/ = ""
 " In cmd line tag variable {{{1
-let g:in_cmd_line = v:false  " init
+" init
+let g:in_cmd_line = v:false
 autocmd CmdlineEnter * let g:in_cmd_line = v:true
 autocmd CmdlineLeave * let g:in_cmd_line = v:false
 " Auto Light word {{{1
@@ -81,8 +86,9 @@ function SetDefaultFileTypeOptions()
     let b:lang_fold_method = 'syntax'
     let l:type = &filetype
     if l:type == 'python'
-        inoremap <buffer> !main if __name__ == '__main__':<Cr>
-        inoremap <buffer> !self def (self):<Left><Left><Left><Left><Left><Left><Left>
+        "inoremap <buffer> !main if __name__ == '__main__':
+        "inoremap <buffer> !self def (self):<Left><Left><Left><Left><Left><Left><Left>
+        "inoremap <buffer> !with with  as f:<Left><Left><Left><Left><Left><Left>
         let b:lang_fold_method = "indent"
 
     elseif l:type == 'rust'
@@ -108,4 +114,5 @@ function SetDefaultFileTypeOptions()
     endif
     execute "setlocal foldmethod=" .. b:lang_fold_method
 endfunction
+" END {{{1
 " }}}1

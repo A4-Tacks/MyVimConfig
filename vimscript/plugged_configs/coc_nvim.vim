@@ -1,5 +1,5 @@
 " 准备工作:
-" CocInstall coc-json coc-tsserver coc-marketplace
+" CocInstall coc-json coc-tsserver coc-marketplace coc-snippets
 " 提供json解析 ts服务器 coc插件管理器
 
 " 搜索软件包

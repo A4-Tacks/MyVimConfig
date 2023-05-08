@@ -1,0 +1,122 @@
+snippet func "function func {}" b
+function ${1:name} {
+	local ${2:var=0}
+}
+endsnippet
+snippet funcl "func() {}" b
+${1:name}() {
+	local ${2:var=0}
+}
+endsnippet
+snippet local "local var" b
+local ${1:var}${2:=${3:value}}$0
+endsnippet
+snippet coproc "new coproc" b
+coproc ${1:name} {
+	${0:true}
+}
+endsnippet
+snippet for "for i in ..." b
+for ${1:i} in ${2:"\$\{${3:list}[@]\}"}; do
+	${0:true}
+done
+endsnippet
+snippet forx "for ((i=0; i<...; ++i))" b
+for ((${1:i} = ${2:0}; $1 < ${3:n}; ++$1)); do
+	${0:true}
+done
+endsnippet
+snippet if "if []" b
+if ${1:[ ${2:"\$x" = yes} ]}; then
+	${0:true}
+fi
+endsnippet
+snippet ifx "if (())" b
+if ((${1:n == 1})); then
+	${0:true}
+fi
+endsnippet
+snippet ifs "if [[]]" b
+if [[ ${1:"\$x" = yes} ]]; then
+	${0:true}
+fi
+endsnippet
+snippet elif "elif []" b
+elif [ ${1:"\$x" = yes} ]; then
+	${0:true}
+endsnippet
+snippet elifx "elif (())" b
+elif ((${1:n == 1})); then
+	${0:true}
+endsnippet
+snippet elifs "elif [[]]" b
+elif [[ ${1:"\$x" = yes} ]]; then
+	${0:true}
+endsnippet
+snippet else "else" b
+else
+	${0:true}
+endsnippet
+snippet while "while []" b
+while ${1:[ ${2:"\$x" = yes} ]}; do
+	${0:true}
+done
+endsnippet
+snippet whilex "while (())" b
+while ((${1:n == 1})); do
+	${0:true}
+done
+endsnippet
+snippet whiles "while [[]]" b
+while [[ ${1:"\$x" = yes} ]]; do
+	${0:true}
+done
+endsnippet
+snippet until "until []" b
+until ${1:[ ${2:"\$x" = yes} ]}; do
+	${0:true}
+done
+endsnippet
+snippet untilx "until (())" b
+until ((${1:n == 1})); do
+	${0:true}
+done
+endsnippet
+snippet untils "until [[]]" b
+until [[ ${1:"\$x" = yes} ]]; do
+	${0:true}
+done
+endsnippet
+snippet v "use var"
+"\$\{${1:var}\}"$0
+endsnippet
+snippet iv "in string var"
+\$\{${1:var}\}$0
+endsnippet
+snippet lv "list var"
+"\$\{${1:var}[@]\}"$0
+endsnippet
+snippet expr "((expr))" b
+((${1:n = 0}))$0
+endsnippet
+snippet match "case...esac" b
+case "\$\{${1:var}\}" in
+	$0
+esac
+endsnippet
+snippet case "pat) ... ;;" b
+${1:pat})
+	$0
+	;;
+endsnippet
+snippet select "select x in ..." b
+select ${1:n} in ${2:"\$\{${3:x}[@]\}"}; do
+	${0:true}
+done
+endsnippet
+snippet dbg "debug variable" b
+echo "\$\{${1:var}@A\}" >&2
+endsnippet
+snippet err ">&2"
+>&2$0
+endsnippet
