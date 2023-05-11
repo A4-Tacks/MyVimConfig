@@ -13,7 +13,25 @@ function SetTitle()
         call append(0, 'if &compatible | set nocompatible | endif')
 
     elseif &l:filetype == "sh"
-        call append(0, "#!/usr/bin/bash")
+        let script =<< trim EOF
+        #!/usr/bin/bash
+        set -o nounset
+        set -o errtrace
+        function catch_error {
+            local LEC=$? name i line file
+            echo "Traceback (most recent call last):" >&2
+            for ((i = ${#FUNCNAME[@]} - 1; i >= 0; --i)); do
+                name="${FUNCNAME[$i]}"
+                line="${BASH_LINENO[$i]}"
+                file="${BASH_SOURCE[$i]}"
+                echo "  File ${file@Q}, line ${line}, in ${name@Q}" >&2
+            done
+            echo "Error: [ExitCode: ${LEC}]" >&2
+            exit "${LEC}"
+        }
+        trap catch_error ERR
+        EOF
+        call Appends(0, script)
 
     elseif &l:filetype == 'awk'
         call append(0, "#!/usr/bin/awk -f")

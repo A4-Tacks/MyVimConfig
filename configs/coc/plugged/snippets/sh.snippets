@@ -94,7 +94,10 @@ snippet vi "in string var" i
 \$\{${1:var}\}$0
 endsnippet
 snippet vl "list var" i
-"\$\{${1:var}[@]\}"$0
+"\$\{${1:var}[${2:@}]\}"$0
+endsnippet
+snippet vli "list var in string" i
+\$\{${1:var}[${2:@}]\}$0
 endsnippet
 snippet expr "((expr))" b
 ((${1:n = 0}))$0
