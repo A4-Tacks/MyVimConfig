@@ -8,8 +8,10 @@ let g:indentLine_char = '┆' " 设置缩进线字符
 " 此插件启用"维姆隐藏"功能,该功能根据语法突出显示自动隐藏拉伸文本.
 " 此设置将应用于所有语法项目.
 " 您可以自定义这些设置,但如果conceallevel未设置为1或2,则插件将无法工作.
-" let g:indentLine_concealcursor = 'inc'
-let g:indentLine_conceallevel = 1       "隐藏级别调为1不进行压缩
+" 该选项定义在何时会对行内进行语法隐藏
+let g:indentLine_concealcursor = &concealcursor
+" 用于覆盖 conceallevel 选项, 1 为不压缩的隐藏
+let g:indentLine_conceallevel = &conceallevel
 
 " 如果要保留隐藏设置， 请将此行放入vim点缀:
 " let g:indentLine_setConceal = 0

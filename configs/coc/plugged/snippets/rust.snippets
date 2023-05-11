@@ -4,3 +4,6 @@ snippet ExampleDoc "Example doc" b
 /// # use $1;
 /// \`\`\`$0
 endsnippet
+snippet let "let $(mut)? $ident = $expr;" b
+let ${1:mut $2} = $3;
+endsnippet

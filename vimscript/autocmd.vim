@@ -1,9 +1,10 @@
 autocmd BufNewFile * call SetTitle() " {{{1
 function SetTitle()
     if     &l:filetype == "python"
-        call setline(1, "# -*- coding: " .. &l:encoding .. "; -*-")
-        call append(line(".")+0, "")
-        call append(line(".")+1, "")
+        call Appends(0, [
+                    \"# -*- coding: " .. &l:encoding .. "; -*-",
+                    \"",
+                    \])
 
     elseif &l:filetype == "java"
         call setline(1, "public class " .. expand("%:t:r") .. " {}")
@@ -18,6 +19,7 @@ function SetTitle()
         call append(0, "#!/usr/bin/awk -f")
 
     endif
+    " goto end
     normal G$
 endfunction
 " 进入常规模式关闭粘贴模式 {{{1
@@ -114,5 +116,7 @@ function SetDefaultFileTypeOptions()
     endif
     execute "setlocal foldmethod=" .. b:lang_fold_method
 endfunction
+" TabAutoToEnd {{{1
+autocmd TabNew * tabmove $
 " END {{{1
 " }}}1

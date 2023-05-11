@@ -38,13 +38,19 @@ set softtabstop=4
 " 每一级缩进长度, 同时也代表了代码折叠判定
 set shiftwidth=4
 
-" 禁用连续注释 每次切换缓冲区都执行一次
-autocmd BufEnter * set formatoptions-=c formatoptions-=r formatoptions-=o
+
+" 禁用连续注释 每次切换缓冲区都执行一次 详见: `fo-table`
+"autocmd BufEnter * set formatoptions-=cro
+" /: 仅当注释位于行开头时进行续行
+" o: 进行例如 norm_o 时不插入注释
+" m: 断行时对于扩展 Ascii 之外的字符视为一个完整词
+" B: 合并行时, 不要在两个扩展 Ascii 之外的字符之间插入空格 (被M选项覆盖)
+autocmd BufEnter * set formatoptions+=/mB formatoptions-=o
 
 " AutoIndent and 智能缩进
 set autoindent smartindent
 
-" Backspace Detele range
+" Backspace detele range
 " start:old char, eol:line,
 set backspace=indent,start,eol
 
@@ -165,6 +171,12 @@ set nofixeol
 set statusline=%<%f\ %h%m%r%=%-14.(%l,%c%V%)\ %P
 
 
+" 语法隐藏级别 (0:关 1:透明 2:不存在)
+set conceallevel=1
+" 语法隐藏在什么模式下生效 (在光标行)
+set concealcursor=nc
+
+
 " Moust mode shape(形状)
 let &t_SI.="\e[6 q" " SI = INSERT mode
 let &t_SR.="\e[4 q" " SR = REPLACE mode
@@ -178,3 +190,6 @@ let mapleader = "#"
 
 " shell running options
 " let &shellcmdflag = "-x -c"
+
+" awk is gawk
+let g:awk_is_gawk = 1

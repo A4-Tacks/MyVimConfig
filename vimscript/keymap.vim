@@ -81,6 +81,14 @@ inoremap <expr> #cf execute("set paste")
 " line end ;
 inoremap #; <End>;
 inoremap #, <End>,
+
+" next or prev buffer {{{
+command! -count -bar BufferNext execute "bnext " .. (<range> ? <line2>-<line1> + 1 : "")
+command! -count -bar BufferPrev execute "bprevious " .. (<range> ? <line2>-<line1> + 1 : "")
+nnoremap <silent> gb :BufferNext<Cr>
+nnoremap <silent> gB :BufferPrev<Cr>
+" }}}
+
 " Disable Empty Search {{{1
 nnoremap <expr> n strlen(@/) > 0 ? "n" : ""
 nnoremap <expr> N strlen(@/) > 0 ? "N" : ""

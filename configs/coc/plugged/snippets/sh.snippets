@@ -106,8 +106,9 @@ esac
 endsnippet
 snippet case "pat) ... ;;" b
 ${1:pat})
-	$0
+	$2
 	;;
+$0
 endsnippet
 snippet select "select x in ..." b
 PS3="${1:#?> }"

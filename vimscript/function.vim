@@ -1,13 +1,24 @@
 function! Translate(...) " {{{1
     return py3eval('translate.main("", *vim.eval("a:000"))')
 endfunction
-function! Appends(line, str) " {{{
+function! Appends(line, tgt) " {{{1
     " 解决换行无法被追加的问题
+    " 传入列表则追加每一行, 传入字符串则将行分割
+    let type = type(a:tgt)
     let n = a:line
-    for line in split(a:str, "\n")
-        call append(n, line)
-        let n += 1
-    endfor
+    if type == v:t_list
+        for line in a:tgt
+            call append(n, line)
+            let n += 1
+        endfor
+    elseif type == v:t_string
+        for line in split(a:tgt, "\n")
+            call append(n, line)
+            let n += 1
+        endfor
+    else
+        echoerr "type " .. type .. " is not str or list"
+    endif
 endfunction
 function! Py3Call(name, ...) " {{{1
     " py3eval 有一个很坑的坑, int和float会变成str
