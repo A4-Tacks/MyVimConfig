@@ -9,28 +9,24 @@ vnoremap <Bs> <Del>
 " 全角转半角 {{{1
 nnoremap ： :
 
-cnoremap ！ !
-cnoremap ？ ?
-cnoremap ， ,
-cnoremap ～ ~
-cnoremap ； ;
-
-inoremap “ "
-inoremap ” "
-inoremap ， ,
-inoremap ： :
-inoremap ； ;
-inoremap 。 .
-inoremap （ (
-inoremap ） )
-inoremap 【 [
-inoremap 】 ]
-inoremap ｛ {
-inoremap ｝ }
-inoremap 《 <
-inoremap 》 >
-inoremap ？ ?
-inoremap ！ !
+" [nore]map! is insert and command mode
+noremap! ～ ~
+noremap! “ "
+noremap! ” "
+noremap! ， ,
+noremap! ： :
+noremap! ； ;
+noremap! 。 .
+noremap! （ (
+noremap! ） )
+noremap! 【 [
+noremap! 】 ]
+noremap! ｛ {
+noremap! ｝ }
+noremap! 《 <
+noremap! 》 >
+noremap! ？ ?
+noremap! ！ !
 " 括号类 {{{1
 inoremap #kq [
 inoremap #kw {
