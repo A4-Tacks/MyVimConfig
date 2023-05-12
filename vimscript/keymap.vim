@@ -1,6 +1,6 @@
 " 符号转换 {{{1
-inoremap #x \
-inoremap #& \|
+noremap! #x \
+noremap! #& \|
 inoremap #' ''<Left>
 inoremap #_ ~
 inoremap #" `
@@ -28,23 +28,23 @@ noremap! 》 >
 noremap! ？ ?
 noremap! ！ !
 " 括号类 {{{1
-inoremap #kq [
-inoremap #kw {
-inoremap #ke <
+noremap! #kq [
+noremap! #kw {
+noremap! #ke <
 
-inoremap #lq ]
-inoremap #lw }
-inoremap #le >
+noremap! #lq ]
+noremap! #lw }
+noremap! #le >
 
-inoremap #q []<Left>
-inoremap #w {}<Left>
-inoremap #e <><Left>
-inoremap #< <><Left>
+noremap! #q []<Left>
+noremap! #w {}<Left>
+noremap! #e <><Left>
+noremap! #< <><Left>
 
-inoremap ( ()<Left>
-inoremap [ []<Left>
-inoremap { {}<Left>
-inoremap " ""<Left>
+noremap! ( ()<Left>
+noremap! [ []<Left>
+noremap! { {}<Left>
+noremap! " ""<Left>
 " 快捷符号映射 {{{1
 inoremap #lk ->
 inoremap #Lk ->
@@ -225,7 +225,7 @@ function! Completion_start() " {{{2
     return pumvisible() || result
 endfunction " }}}2
 
-inoremap #<Tab> <Tab>
+noremap! #<Tab> <Tab>
 
 " from coc
 "imap <expr><silent> <Tab> Completion_start() ? "\<C-n>" : TabGoTu()
