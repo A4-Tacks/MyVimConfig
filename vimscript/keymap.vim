@@ -208,8 +208,8 @@ endfunction " }}}
 
 " Translate {{{1
 nnoremap <F7> yy:call Appends(line("."), Translate("c", @@))<Cr>
-vnoremap <F7> y:call Appends(line("."), Translate("c", @@))<Cr>
-vnoremap <F8> :%!mybaidufanyiapireadinput a<Cr>
+xnoremap <F7> y:call Appends(line("."), Translate("c", @@))<Cr>
+xnoremap <F8> :%!mybaidufanyiapireadinput a<Cr>
 
 " Tab map {{{1
 function TabGoTu() " {{{2
