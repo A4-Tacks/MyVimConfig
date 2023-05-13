@@ -46,18 +46,18 @@ noremap! [ []<Left>
 noremap! { {}<Left>
 noremap! " ""<Left>
 " 快捷符号映射 {{{1
-inoremap #lk ->
-inoremap #Lk ->
-inoremap #LK ->
+noremap! #lk ->
+noremap! #Lk ->
+noremap! #LK ->
 
-inoremap #kl =>
-inoremap #Kl =>
-inoremap #KL =>
+noremap! #kl =>
+noremap! #Kl =>
+noremap! #KL =>
 
-inoremap #i ""<Left>
-inoremap #o ''<Left>
-inoremap #n +
-inoremap #u =
+noremap! #i ""<Left>
+noremap! #o ''<Left>
+noremap! #n +
+noremap! #u =
 
 " Fold
 inoremap #zk {{{
@@ -84,6 +84,21 @@ command! -count -bar BufferPrev execute "bprevious " .. (<range> ? <line2>-<line
 nnoremap <silent> gb :BufferNext<Cr>
 nnoremap <silent> gB :BufferPrev<Cr>
 " }}}
+
+" 范围选择 {{{1
+function! RangeMapDefine(key, str)
+    execute 'omap a' .. a:key .. ' a' .. a:str
+    execute 'xmap a' .. a:key .. ' a' .. a:str
+    execute 'omap i' .. a:key .. ' i' .. a:str
+    execute 'xmap i' .. a:key .. ' i' .. a:str
+endfunction
+
+call RangeMapDefine('k', '(')
+call RangeMapDefine('q', '[')
+call RangeMapDefine('w', '{')
+call RangeMapDefine('e', 'e')
+call RangeMapDefine('i', '"')
+call RangeMapDefine('o', "'")
 
 " Disable Empty Search {{{1
 nnoremap <expr> n strlen(@/) > 0 ? "n" : ""
