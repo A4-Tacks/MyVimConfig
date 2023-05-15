@@ -72,7 +72,7 @@ tnoremap jk <C-\><C-n>
 " del
 inoremap <C-l> <Del>
 " paste start
-inoremap <expr> #cf execute("set paste")
+noremap! <expr> #cf execute("set paste")
 
 " line end ;
 inoremap #; <End>;
