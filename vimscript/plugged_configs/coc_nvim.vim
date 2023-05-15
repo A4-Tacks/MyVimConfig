@@ -19,9 +19,23 @@ hi CocWarningSign ctermfg=0 ctermbg=11
 " rename
 nmap <silent> <F2> <Plug>(coc-rename)
 
+" 主动补全
+inoremap <silent><expr> <c-x> coc#refresh()
+
 " 代码操作选择
 xmap <F3> <Plug>(coc-codeaction-selected)
-nmap <F3> <Plug>(coc-codeaction-selected)l
+nmap <F3> <Plug>(coc-codeaction-cursor)
+
+" 快速修复
+nmap <C-F3> <Plug>(coc-fix-current)
+
+" 错误跳转
+nmap <silent> <C-k> <Plug>(coc-diagnostic-prev)
+nmap <silent> <C-j> <Plug>(coc-diagnostic-next)
+
+" 显示代码诊断
+nnoremap <silent> <F4> :CocDiagnostics<Cr>
+
 
 
 " display doc
@@ -39,11 +53,6 @@ function! s:show_documentation()
         execute '!' . &keywordprg . " " . expand('<cword>')
     endif
 endfunction
-
-
-" 翻页
-nnoremap <silent><nowait><expr> <C-f> coc#float#has_scroll() ? coc#float#scroll(1) : "\<C-f>"
-nnoremap <silent><nowait><expr> <C-b> coc#float#has_scroll() ? coc#float#scroll(0) : "\<C-b>"
 
 
 
