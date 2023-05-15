@@ -2,7 +2,9 @@ autocmd BufNewFile * call SetTitle() " {{{1
 function SetTitle()
     if     &l:filetype == "python"
         call Appends(0, [
+                    \"#!/usr/bin/python3",
                     \"# -*- coding: " .. &l:encoding .. "; -*-",
+                    \'"""new file"""',
                     \"",
                     \])
 
