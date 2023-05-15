@@ -13,6 +13,9 @@ hi CocFloating ctermfg=15 ctermbg=8
 hi CocPumSearch ctermfg=10
 " 警告侧标
 hi CocWarningSign ctermfg=0 ctermbg=11
+" 行内嵌入类型提示
+hi CocInlayHint cterm=none ctermfg=4 ctermbg=7
+
 
 " maps
 

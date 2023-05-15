@@ -16,5 +16,10 @@
     "jedi.diagnostics.enable": true,
     "jedi.diagnostics.didOpen": true,
     "jedi.diagnostics.didChange": true,
-    "jedi.diagnostics.didSave": true
+    "jedi.diagnostics.didSave": true,
+    "pyright.enable": true,
+    "pyright.disableDiagnostics": false,
+    "pyright.disableDocumentation": false,
+    "pyright.completion.importSupport": true,
+    "pyright.disableCompletion": false
 }
