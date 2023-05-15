@@ -11,15 +11,15 @@
             "sh"
         ]
     },
-    "jedi.enable": false,
+    "jedi.enable": true,
     "jedi.trace.server": "messages",
     "jedi.diagnostics.enable": true,
     "jedi.diagnostics.didOpen": true,
     "jedi.diagnostics.didChange": true,
     "jedi.diagnostics.didSave": true,
-    "pyright.enable": true,
+    "pyright.enable": false,
     "pyright.disableDiagnostics": false,
-    "pyright.disableDocumentation": false,
+    "pyright.disableDocumentation": true,
     "pyright.completion.importSupport": true,
-    "pyright.disableCompletion": false
+    "pyright.disableCompletion": true
 }
