@@ -3,7 +3,18 @@
     "snippets.userSnippetsDirectory": "~/.vim/MyVimConfig/configs/coc/plugged/snippets/",
     "snippets.priority": 900,
     "snippets.extends": {
-        "zsh": ["sh", "bash"],
-        "bash": ["sh"]
-    }
+        "zsh": [
+            "sh",
+            "bash"
+        ],
+        "bash": [
+            "sh"
+        ]
+    },
+    "jedi.enable": true,
+    "jedi.trace.server": "messages",
+    "jedi.diagnostics.enable": true,
+    "jedi.diagnostics.didOpen": true,
+    "jedi.diagnostics.didChange": true,
+    "jedi.diagnostics.didSave": true
 }
