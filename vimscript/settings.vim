@@ -186,7 +186,7 @@ let &t_EI.="\e[2 q" " EI = NORMAL mode (ELSE)
 set pastetoggle=#cf
 
 " leader
-let mapleader = "#"
+let mapleader = " "
 
 " shell running options
 " let &shellcmdflag = "-x -c"

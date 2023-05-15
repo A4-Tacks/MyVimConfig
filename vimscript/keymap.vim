@@ -106,20 +106,32 @@ nnoremap <expr> N strlen(@/) > 0 ? "N" : ""
 " Leader maps {{{1
 nnoremap <leader>t :NERDTreeToggle<Cr>
 nnoremap <leader>T :NERDTreeClose<Cr>
-" Window control {{{1
-nmap <silent> <Space> <C-w>
-nnoremap <silent> <Space><Space> <C-w><C-w>
-nnoremap <silent> <Space>M :res<Cr>:vertical res<Cr>
-nnoremap <silent> <Space>= :res+3<Cr>
-nnoremap <silent> <Space>- :res-3<Cr>
-nnoremap <silent> <Space>_ :vertical res-6<Cr>
-nnoremap <silent> <Space>+ :vertical res+6<Cr>
-nnoremap <Space>m <C-w>=
-" Space B 开关自动最大化
-nnoremap <silent><expr> <Space>B g:autoBigWinEnabled ? BigWin(0) : BigWin(1)
+" Old Window control {{{1
+nnoremap <silent> <leader><leader> <C-w><C-w>
+
+" moves
+nnoremap <silent> <leader>h <C-w>h
+nnoremap <silent> <leader>j <C-w>j
+nnoremap <silent> <leader>k <C-w>k
+nnoremap <silent> <leader>l <C-w>l
+
+" split
+nnoremap <silent> <leader>s <C-w>s
+nnoremap <silent> <leader>v <C-w>v
+
+" windows control
+nnoremap <silent> <leader>M :res<Cr>:vertical res<Cr>
+nnoremap <silent> <leader>= :res+3<Cr>
+nnoremap <silent> <leader>- :res-3<Cr>
+nnoremap <silent> <leader>_ :vertical res-6<Cr>
+nnoremap <silent> <leader>+ :vertical res+6<Cr>
+nnoremap <leader>m <C-w>=
+
+" quit
+nnoremap <silent> <leader>q <C-w>q
 
 " open terminal
-nnoremap <silent> <Space>t :terminal<Cr>
+nnoremap <silent> <leader>t :terminal<Cr>
 
 " Select Clipboard Paste {{{1
 function! Clipboard()
@@ -288,7 +300,7 @@ let g:commands_list = [
             \['SelectLineNumber', funcref('SelectLineNumberDisplay')],
             \['Wrap', { -> execute('set ' .. (&wrap ? 'no' : '') .. 'wrap')}],
             \]
-nnoremap <leader><leader> :call Commands()<Cr>
+nnoremap ## :call Commands()<Cr>
 function Commands(page = 0)
     if a:page < 0
         return

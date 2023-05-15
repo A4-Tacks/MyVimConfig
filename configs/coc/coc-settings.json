@@ -11,7 +11,7 @@
             "sh"
         ]
     },
-    "jedi.enable": true,
+    "jedi.enable": false,
     "jedi.trace.server": "messages",
     "jedi.diagnostics.enable": true,
     "jedi.diagnostics.didOpen": true,

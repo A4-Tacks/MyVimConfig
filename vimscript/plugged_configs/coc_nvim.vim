@@ -25,16 +25,18 @@ inoremap <silent><expr> <c-x> coc#refresh()
 " 代码操作选择
 xmap <F3> <Plug>(coc-codeaction-selected)
 nmap <F3> <Plug>(coc-codeaction-cursor)
+" 源码级操作选择
+nmap <C-F3>  <Plug>(coc-codeaction-source)
 
 " 快速修复
-nmap <C-F3> <Plug>(coc-fix-current)
+nmap <F4> <Plug>(coc-fix-current)
 
 " 错误跳转
 nmap <silent> <C-k> <Plug>(coc-diagnostic-prev)
 nmap <silent> <C-j> <Plug>(coc-diagnostic-next)
 
 " 显示代码诊断
-nnoremap <silent> <F4> :CocDiagnostics<Cr>
+nnoremap <silent> <C-F4> :CocDiagnostics<Cr>
 
 
 
