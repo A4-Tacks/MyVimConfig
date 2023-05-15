@@ -284,6 +284,7 @@ nnoremap <expr> <Cr> NEnterInsert()
 " }}}2
 " Commands {{{1
 let g:commands_list = [
+            \['noop', { -> ''}],
             \['SelectLineNumber', funcref('SelectLineNumberDisplay')],
             \['Wrap', { -> execute('set ' .. (&wrap ? 'no' : '') .. 'wrap')}],
             \]
