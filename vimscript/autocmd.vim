@@ -36,6 +36,9 @@ function SetTitle()
     elseif &l:filetype == 'awk'
         call append(0, "#!/usr/bin/awk -f")
 
+    elseif &l:filetype == 'lua'
+        call append(0, "#!/usr/bin/lua --")
+
     endif
     " goto end
     normal G$

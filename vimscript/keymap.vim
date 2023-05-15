@@ -187,6 +187,11 @@ function! Runer() " -> dict
         return "time node " .. join(args[0])
                     \.. " " .. expand("%:p") .. " " .. join(args[1])
     endfunction
+    function! s:lua(args) dict " -> str {{{2
+        let args = SplitLevelsArgs(2, a:args)
+        return "time lua " .. join(args[0])
+                    \.. " -- " .. expand("%:p") .. " " .. join(args[1])
+    endfunction
     " result dict functions {{{2
     return
                 \{
@@ -197,6 +202,7 @@ function! Runer() " -> dict
                 \"rust": funcref("s:rust"),
                 \"awk": funcref("s:awk"),
                 \"javascript": funcref("s:js"),
+                \"lua": funcref("s:lua"),
                 \}
     " }}}2
 endfunction
