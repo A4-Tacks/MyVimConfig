@@ -41,10 +41,10 @@ noremap! #w {}<Left>
 noremap! #e <><Left>
 noremap! #< <><Left>
 
-noremap! ( ()<Left>
-noremap! [ []<Left>
-noremap! { {}<Left>
-noremap! " ""<Left>
+inoremap ( ()<Left>
+inoremap [ []<Left>
+inoremap { {}<Left>
+inoremap " ""<Left>
 " 快捷符号映射 {{{1
 noremap! #lk ->
 noremap! #Lk ->
