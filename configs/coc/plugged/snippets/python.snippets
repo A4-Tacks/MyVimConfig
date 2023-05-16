@@ -1,26 +1,26 @@
 # python
 
 snippet fn "define function" b
-def ${1:name}(${2:args})${3: -> ${4:None}}:
-	"""${5:doc}
+def $1($2)${3: -> ${4:None}}:
+	"""${5:$1}
 	"""
 	${0:pass}
 endsnippet
 snippet fm "define method" b
-def ${1:name}(self, ${2:args})${3: -> ${4:None}}:
-	"""${5:doc}
+def $1(self, $2)${3: -> ${4:None}}:
+	"""${5:$1}
 	"""
 	${0:pass}
 endsnippet
 snippet def "define function" b
-def ${1:name}(${2:args})${3: -> ${4:None}}:
-	"""${5:doc}
+def $1($2)${3: -> ${4:None}}:
+	"""${5:$1}
 	"""
 	${0:pass}
 endsnippet
 snippet defm "define method" b
-def ${1:name}(self, ${2:args})${3: -> ${4:None}}:
-	"""${5:doc}
+def $1(self, $2)${3: -> ${4:None}}:
+	"""${5:$1}
 	"""
 	${0:pass}
 endsnippet
@@ -30,9 +30,9 @@ if __name__ == '__main__':
 endsnippet
 snippet try "try...except" b
 try:
-	${1:pass}
+	$1
 except ${2:Exception}${3: as ${4:e}}:
-	${0:raise $2}
+	${0:raise $4}
 endsnippet
 snippet tryfy "try...finally" b
 try:
@@ -69,7 +69,7 @@ for ${1:i} in ${2:range(${3:n})}:
 	${0:pass}
 endsnippet
 snippet match "match" b
-match ${1:var}:
+match $1:
 	${0:pass}
 endsnippet
 snippet case "case" b
@@ -77,7 +77,7 @@ case ${1:_}:
 	${0:pass}
 endsnippet
 snippet class "new class" b
-class ${1:ClassName}(${2:object}):
+class $1(${2:object}):
 	"""${3:doc}
 	"""
 	def __init__(self${4}):
@@ -87,8 +87,8 @@ snippet from "from ... import ..." b
 from $1 import $0
 endsnippet
 snippet dbg "print(f'{var=}')" b
-print(f"\{${1:var}=\}")$0
+print(f"\{$1=\}")$0
 endsnippet
 snippet comprehensions "comprehensions" i
-${1:i}${0} for $1 in ${2:range(${3:n})}
+${1:i}$0 for $1 in ${2:range(${3:n})}
 endsnippet

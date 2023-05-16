@@ -96,7 +96,7 @@ endfunction
 call RangeMapDefine('k', '(')
 call RangeMapDefine('q', '[')
 call RangeMapDefine('w', '{')
-call RangeMapDefine('e', 'e')
+call RangeMapDefine('e', '<')
 call RangeMapDefine('i', '"')
 call RangeMapDefine('o', "'")
 

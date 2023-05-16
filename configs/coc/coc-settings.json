@@ -13,15 +13,16 @@
     },
     "rust-analyzer.completion.callable.snippets": "fill_arguments",
     "rust-analyzer.updates.checkOnStartup": false,
-    "jedi.enable": true,
+    "jedi.enable": false,
     "jedi.trace.server": "messages",
     "jedi.diagnostics.enable": true,
     "jedi.diagnostics.didOpen": true,
     "jedi.diagnostics.didChange": true,
     "jedi.diagnostics.didSave": true,
-    "pyright.enable": false,
+    "pyright.enable": true,
     "pyright.disableDiagnostics": false,
-    "pyright.disableDocumentation": true,
+    "pyright.disableDocumentation": false,
     "pyright.completion.importSupport": true,
-    "pyright.disableCompletion": true
+    "pyright.completion.snippetSupport": true,
+    "pyright.disableCompletion": false
 }
