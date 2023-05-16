@@ -19,6 +19,7 @@ hi CocInlayHint cterm=none ctermfg=4 ctermbg=7
 
 " maps
 
+
 " rename
 nmap <silent> <F2> <Plug>(coc-rename)
 
