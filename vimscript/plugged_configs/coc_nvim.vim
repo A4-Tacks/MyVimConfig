@@ -48,7 +48,7 @@ nnoremap <silent> <C-F4> :CocDiagnostics<Cr>
 
 " display doc
 " Use K to show documentation in preview window.
-if index(["bash", "sh"], &filetype) == -1
+if index(['bash', 'sh'], &filetype) == -1
     nnoremap <silent> K :call <SID>show_documentation()<CR>
 endif
 
@@ -58,7 +58,7 @@ function! s:show_documentation()
     elseif (coc#rpc#ready())
         call CocActionAsync('doHover')
     else
-        execute '!' . &keywordprg . " " . expand('<cword>')
+        execute '!' . &keywordprg . ' ' . expand('<cword>')
     endif
 endfunction
 
