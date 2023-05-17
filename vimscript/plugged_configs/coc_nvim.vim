@@ -5,6 +5,8 @@
 " 搜索软件包
 " CocList marketplace
 
+" coc-lsp: `https://github-wiki-see.page/m/neoclide/coc.nvim/wiki/Language-servers`
+
 " Color
 " fg: 前景, bg: 背景
 " Coc 扩展菜单项
