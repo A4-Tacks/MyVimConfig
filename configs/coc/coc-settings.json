@@ -1,4 +1,15 @@
 {
+    "languageserver": {
+        //"bashls": {
+        //    "command": "bash-language-server",
+        //    "args": [
+        //        "start"
+        //    ],
+        //    "filetypes": [
+        //        "sh", "bash"
+        //    ]
+        //}
+    },
     "snippets.loadVSCodeProjectSnippets": false,
     "snippets.userSnippetsDirectory": "~/.vim/MyVimConfig/configs/coc/plugged/snippets/",
     "snippets.priority": 900,
