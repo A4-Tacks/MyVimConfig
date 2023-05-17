@@ -87,6 +87,12 @@ until [[ ${1:"\$x" = yes} ]]; do
 	${0:true}
 done
 endsnippet
+snippet return "exit" b
+return $0
+endsnippet
+snippet exit "exit" b
+exit $0
+endsnippet
 snippet v "use var" i
 "\$\{${1:var}\}"$0
 endsnippet
