@@ -1,0 +1,18 @@
+#!/usr/bin/bash
+
+# 由于 man 一次性输出过多, 我们建立一个虚拟环境
+# 给 man 限制输出, 让 bashls 使用的 man 是我们提供的加工过的 man
+# 这个 man 将会输出有限行的信息, 从而避免一次性输出过多
+
+name="bash-language-server"
+if ! proot="$(cd "$(dirname "${0}")" || exit; pwd)"; then
+    echo "cd to ${0@Q} error" >&2
+    exit 3
+fi
+
+if ! server="$(which "${name}")"; then
+    echo "${name@Q} not found" >&2
+    exit 2
+fi
+export PATH="${proot%/}/:$PATH"
+"${server}" "$@"

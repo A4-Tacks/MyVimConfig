@@ -1,0 +1,2 @@
+#!/usr/bin/bash
+head -n+25 <(/bin/man "$@" 2>/dev/null)
