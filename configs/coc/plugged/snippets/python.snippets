@@ -1,5 +1,4 @@
-# python
-
+# python snippets
 snippet fn "define function" b
 def $1($2)${3: -> ${4:None}}:
 	"""${5:$1}
@@ -91,4 +90,17 @@ print(f"\{$1=\}")$0
 endsnippet
 snippet comprehensions "comprehensions" i
 ${1:i}$0 for $1 in ${2:range(${3:n})}
+endsnippet
+snippet fdecorf "func decor func" b
+def $1(target):
+	"""function decortor, target: function"""
+	def ${2:inner}(*args, **kwargs):
+		result = target(*args, **kwargs)$0
+		return result
+	return $2
+endsnippet
+snippet fdecors "func decor self" b
+def $1(self: object):
+	"""function decortor, target: self"""
+	return self
 endsnippet
