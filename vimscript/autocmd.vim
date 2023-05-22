@@ -1,9 +1,10 @@
+scriptencoding utf-8
 autocmd BufNewFile * call SetTitle() " {{{1
 function SetTitle()
     if     &l:filetype == "python"
         call Appends(0, [
                     \"#!/usr/bin/python3",
-                    \"# -*- coding: " .. &l:encoding .. "; -*-",
+                    \"# -*- coding: " . &l:encoding . "; -*-",
                     \'"""new file"""',
                     \"",
                     \])
@@ -12,7 +13,8 @@ function SetTitle()
         call setline(1, "public class " .. expand("%:t:r") .. " {}")
 
     elseif &l:filetype == "vim"
-        call append(0, 'if &compatible | set nocompatible | endif')
+        call append(0, 'scriptencoding utf-8')
+        call append(1, 'if &compatible | set nocompatible | endif')
 
     elseif &l:filetype == "sh"
         let script =<< trim EOF

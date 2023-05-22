@@ -1,3 +1,4 @@
+scriptencoding utf-8
 " 准备工作:
 " CocInstall coc-json coc-tsserver coc-marketplace coc-snippets
 " 提供json解析 ts服务器 coc插件管理器
@@ -6,6 +7,8 @@
 " CocList marketplace
 
 " coc-lsp: `https://github-wiki-see.page/m/neoclide/coc.nvim/wiki/Language-servers`
+
+" 可能用到的软件包: vint shellcheck shfmt ...
 
 " Color
 " fg: 前景, bg: 背景
