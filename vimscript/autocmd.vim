@@ -164,24 +164,28 @@ function SetDefaultFileTypeOptions()
                 enew
             endif
             imap <buffer> <F9> <Esc><F9>
-            execute 'nnoremap <buffer><silent> <F9> '
-                        \.  ':try'
-                        \.      '\|let @@=CType(1,join(getline("^","$")))'
-                        \.  '\|catch /.*/'
-                        \.      '\|echoerr v:exception'
-                        \.      '\|throw "RsToCTypeError"'
-                        \.  '\|endtry'
-                        \.  '\|if @@==#"syntax error"'
-                        \.      '\|echoerr "SyntaxError"'
+            execute 'nnoremap <buffer><silent> <F9> :'
+                        \.  ':let text=join(getline("^","$"))'
+                        \.  '\|if strlen(text)'
+                        \.      '\|try'
+                        \.          '\|let @@=CType(1,text)'
+                        \.      '\|catch /.*/'
+                        \.          '\|echoerr v:exception'
+                        \.          '\|throw "RsToCTypeError"'
+                        \.      '\|endtry'
+                        \.      '\|if @@==#"syntax error"'
+                        \.          '\|echoerr "SyntaxError"'
+                        \.      '\|else'
+                        \.          '\|bp\|bd!#'
+                        \.          '\|execute "normal! ' . control . '"'
+                        \.      '\|endif'
                         \.  '\|else'
                         \.      '\|bp\|bd!#'
-                        \.      '\| execute "normal! '
-                        \.      control . '"'
                         \.  '\|endif'
                         \.  "\<cr>"
         endfunction
-        xnoremap <buffer> <F9> y:call CEditType(@@, 1)<Cr>
-        nnoremap <buffer> <F9> :call CEditType()<Cr>
+        xnoremap <buffer><silent> <F9> y:call CEditType(@@, 1)<Cr>
+        nnoremap <buffer><silent> <F9> :call CEditType()<Cr>
 
     endif
     execute "setlocal foldmethod=" .. b:lang_fold_method
