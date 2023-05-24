@@ -164,9 +164,16 @@ function SetDefaultFileTypeOptions()
                 enew
             endif
             imap <buffer> <F9> <Esc><F9>
-            execute 'nnoremap <buffer> <F9> '
-                        \. ':let @@=CType(1,join(getline("^","$")))'
-                        \. '\|bp\|bd!#' . "\<cr>" . control
+            execute 'nnoremap <buffer><silent> <F9> '
+                        \.  ':try'
+                        \.      '\|let @@=CType(1,join(getline("^","$")))'
+                        \.  '\|catch /.*/'
+                        \.      '\|echoerr v:exception'
+                        \.      '\|throw "RsToCTypeError"'
+                        \.  '\|endtry'
+                        \.  '\|bp\|bd!#'
+                        \.  '\| execute "normal! '
+                        \.  control . "\"\<cr>"
         endfunction
         xnoremap <buffer> <F9> y:call CEditType(@@, 1)<Cr>
         nnoremap <buffer> <F9> :call CEditType()<Cr>
