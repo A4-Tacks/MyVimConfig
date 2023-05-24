@@ -10,7 +10,7 @@ function SetTitle()
                     \])
 
     elseif &l:filetype == "java"
-        call setline(1, "public class " .. expand("%:t:r") .. " {}")
+        call setline(1, "public class " . expand("%:t:r") . " {}")
 
     elseif &l:filetype == "vim"
         call append(0, 'scriptencoding utf-8')
@@ -51,13 +51,13 @@ endfunction
 function ClosePaste()
     if &paste
         set nopaste
-    endif 
+    endif
 endfunction
 autocmd InsertLeave * call ClosePaste()
 " 回到上次查看文件的位置 {{{1
-autocmd BufReadPost * 
-            \if line("'\"") > 1 && line("'\"") <= line("$") 
-            \| execute "normal! g'\"" 
+autocmd BufReadPost *
+            \if line("'\"") > 1 && line("'\"") <= line("$")
+            \| execute "normal! g'\""
             \| endif
 " Auto Maxsize Window {{{1
 function! BigWin(open)
@@ -67,7 +67,7 @@ function! BigWin(open)
         let g:autoBigWinEnabled = a:open != 0 ? 1 : 0
         if a:open
             autocmd BufEnter * execute "res|vertical res"
-        endif 
+        endif
     augroup END
 endfunction
 call BigWin(v:false)
@@ -113,9 +113,6 @@ function SetDefaultFileTypeOptions()
     let b:lang_fold_method = 'syntax'
     let l:type = &filetype
     if l:type == 'python'
-        "inoremap <buffer> !main if __name__ == '__main__':
-        "inoremap <buffer> !self def (self):<Left><Left><Left><Left><Left><Left><Left>
-        "inoremap <buffer> !with with  as f:<Left><Left><Left><Left><Left><Left>
         let b:lang_fold_method = "indent"
 
     elseif l:type == 'rust'
@@ -137,6 +134,17 @@ function SetDefaultFileTypeOptions()
 
     elseif l:type == 'vim'
         let b:lang_fold_method = "marker"
+
+    elseif l:type == 'c'
+        function! CEditType(str = '')
+            enew
+            if strlen(a:str) != 0
+                call setline(1, CType(0, a:str))
+            endif
+            nnoremap <buffer> <F9> :let @@=CType(1,join(getline("^","$")))\|bp\|bd!#<cr>
+        endfunction
+        xnoremap <buffer> <F9> y:call CEditType(@@)<Cr>
+        nnoremap <buffer> <F9> :call CEditType()<Cr>
 
     endif
     execute "setlocal foldmethod=" .. b:lang_fold_method

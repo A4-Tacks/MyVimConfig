@@ -37,7 +37,7 @@
     },
     "rust-analyzer.completion.callable.snippets": "fill_arguments",
     "rust-analyzer.updates.checkOnStartup": false,
-    "jedi.enable": true,
+    "jedi.enable": false,
     "jedi.trace.server": "messages",
     "jedi.diagnostics.enable": false,
     "jedi.diagnostics.didOpen": true,
@@ -45,8 +45,8 @@
     "jedi.diagnostics.didSave": true,
     "pyright.enable": true,
     "pyright.disableDiagnostics": false,
-    "pyright.disableDocumentation": true,
-    "pyright.disableCompletion": true,
+    "pyright.disableDocumentation": false,
+    "pyright.disableCompletion": false,
     "pyright.completion.importSupport": true,
     "pyright.completion.snippetSupport": true
 }

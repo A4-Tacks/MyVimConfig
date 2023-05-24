@@ -22,7 +22,7 @@ function! Appends(line, tgt) " {{{1
 endfunction
 function! Py3Call(name, ...) " {{{1
     " py3eval 有一个很坑的坑, int和float会变成str
-    return py3eval('parse_to_vim(' .. a:name .. '(*vim.eval("a:000")))')
+    return py3eval(a:name .. '(*vim.eval("a:000"))')
 endfunction
 function! SplitLongStr(string, len) " {{{1
     " len > 0
@@ -146,6 +146,25 @@ function! SelectLineNumberDisplay() " {{{1
     echon join(lines_buf, "\n")
     let input_number = InputRangeNumber("select number> ", 3)
     let [&number, &relativenumber] = [and(input_number, 1), input_number >> 1]
+endfunction
+function! CType(mode, str) " {{{1
+    " 将 c 类型 和 rs 类型转换
+    " mode(0) c -> rs
+    " mode(1) rs -> c
+    let Rename = {x -> substitute(x, '\<func\>', 'func_', 'g')}
+    let URename = {x -> substitute(x, '\<func_\>', 'func', 'g')}
+    let String = {x -> "'" . substitute(x, "'", "'\\\\''", 'g') . "'"}
+    let Strip = {x -> substitute(x, '^\(\n\|\s\)\+\|\(\n\|\s\)\+$', '', 'g')}
+    let str = Rename(a:str)
+    if a:mode
+        " rs to c
+        let cdecl_expr = Py3Call("rs_to_cdecl", str)
+        return Strip(URename(system("echo " . String(cdecl_expr) . '| cdecl')))
+    else
+        " c to rs
+        let sys_res = system("echo explain " . String(str) . '| cdecl')
+        return Strip(URename(Py3Call("cdecl_to_rs", sys_res)))
+    endif
 endfunction
 " End {{{1
 " }}}1
