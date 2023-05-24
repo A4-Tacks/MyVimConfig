@@ -56,9 +56,14 @@ endfunction
 autocmd InsertLeave * call ClosePaste()
 " 回到上次查看文件的位置 {{{1
 autocmd BufReadPost *
-            \if line("'\"") > 1 && line("'\"") <= line("$")
-            \| execute "normal! g'\""
-            \| endif
+            \   if line("'\"") > 0
+            \|      if line("'\"") <= line("$")
+            \|          execute "normal! '\""
+            \|      else
+            \|          execute "normal! $"
+            \|      endif
+            \|  endif
+
 " Auto Maxsize Window {{{1
 function! BigWin(open)
     augroup BigWin
@@ -146,9 +151,17 @@ function SetDefaultFileTypeOptions()
                 let control = StrFmt("{}G0{}p",
                             \ line("."), ColMove(col(".")))
             endif
-            enew
             if strlen(a:str) != 0
-                call setline(1, CType(0, a:str))
+                try
+                    let text = CType(0, a:str)
+                catch /.*/
+                    echoerr v:exception
+                    throw "CTypeToRsError"
+                endtry
+                enew
+                call setline(1, text)
+            else
+                enew
             endif
             imap <buffer> <F9> <Esc><F9>
             execute 'nnoremap <buffer> <F9> '
