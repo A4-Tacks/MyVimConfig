@@ -10,18 +10,18 @@
                 "yaml"
             ]
         },
-        "bashls": {
-            "command": "~/.vim/MyVimConfig/virtual_cmd/bash-language-server/main",
-            "args": [
-                "start"
-            ],
-            "filetypes": [
-                "sh", "bash"
-            ],
-            "ignoredRootPaths": [
-                "~"
-            ]
-        }
+        //"bashls": {
+        //    "command": "~/.vim/MyVimConfig/virtual_cmd/bash-language-server/main",
+        //    "args": [
+        //        "start"
+        //    ],
+        //    "filetypes": [
+        //        "sh", "bash"
+        //    ],
+        //    "ignoredRootPaths": [
+        //        "~"
+        //    ]
+        //}
     },
     "snippets.loadVSCodeProjectSnippets": false,
     "snippets.userSnippetsDirectory": "~/.vim/MyVimConfig/configs/coc/plugged/snippets/",

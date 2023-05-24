@@ -171,9 +171,14 @@ function SetDefaultFileTypeOptions()
                         \.      '\|echoerr v:exception'
                         \.      '\|throw "RsToCTypeError"'
                         \.  '\|endtry'
-                        \.  '\|bp\|bd!#'
-                        \.  '\| execute "normal! '
-                        \.  control . "\"\<cr>"
+                        \.  '\|if @@==#"syntax error"'
+                        \.      '\|echoerr "SyntaxError"'
+                        \.  '\|else'
+                        \.      '\|bp\|bd!#'
+                        \.      '\| execute "normal! '
+                        \.      control . '"'
+                        \.  '\|endif'
+                        \.  "\<cr>"
         endfunction
         xnoremap <buffer> <F9> y:call CEditType(@@, 1)<Cr>
         nnoremap <buffer> <F9> :call CEditType()<Cr>
