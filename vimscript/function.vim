@@ -162,7 +162,13 @@ function! CType(mode, str) " {{{1
         return Strip(URename(system("echo " . String(cdecl_expr) . '| cdecl')))
     else
         " c to rs
-        let sys_res = system("echo explain " . String(str) . '| cdecl')
+        let tmp_file = expand("~/") . ".vim_ctype_out_tmp_" . rand()
+        let sys_res = system("echo explain " . String(str)
+                    \. '| cdecl 2> ' . String(tmp_file))
+        for line in readfile(tmp_file)
+            30 echowindow line
+        endfor
+        call Py3Call('os.remove', tmp_file)
         return Strip(URename(Py3Call("cdecl_to_rs", sys_res)))
     endif
 endfunction
