@@ -136,14 +136,26 @@ function SetDefaultFileTypeOptions()
         let b:lang_fold_method = "marker"
 
     elseif l:type == 'c'
-        function! CEditType(str = '')
+        function! CEditType(str = '', select = 0)
+            let ColMove = {col -> col < 2 ? "" : (col - 1) .. "l"}
+            if a:select
+                let control = StrFmt("{}G0{}v{}G0{}p",
+                            \ line("'<"), ColMove(col("'<")),
+                            \ line("'>"), ColMove(col("'>")))
+            else
+                let control = StrFmt("{}G0{}p",
+                            \ line("."), ColMove(col(".")))
+            endif
             enew
             if strlen(a:str) != 0
                 call setline(1, CType(0, a:str))
             endif
-            nnoremap <buffer> <F9> :let @@=CType(1,join(getline("^","$")))\|bp\|bd!#<cr>
+            imap <buffer> <F9> <Esc><F9>
+            execute 'nnoremap <buffer> <F9> '
+                        \. ':let @@=CType(1,join(getline("^","$")))'
+                        \. '\|bp\|bd!#' . "\<cr>" . control
         endfunction
-        xnoremap <buffer> <F9> y:call CEditType(@@)<Cr>
+        xnoremap <buffer> <F9> y:call CEditType(@@, 1)<Cr>
         nnoremap <buffer> <F9> :call CEditType()<Cr>
 
     endif
