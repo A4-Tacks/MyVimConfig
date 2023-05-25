@@ -1,5 +1,11 @@
-function! Translate(...) " {{{1
-    return py3eval('translate.main("", *vim.eval("a:000"))')
+function! Translate(text, args) " {{{1
+    return CliStdIn(a:text, ["baidu_fanyi"] + a:args)
+endfunction
+function! CliStdIn(text, args) " {{{1
+    " text, cli args
+    " text to stdin
+    return system('echo ' . SystemString(a:text)
+                \ . '|' . join(map(a:args[:], {k, v -> SystemString(v)})))
 endfunction
 function! Appends(line, tgt) " {{{1
     " 解决换行无法被追加的问题
@@ -41,7 +47,7 @@ function! SplitLongStr(string, len) " {{{1
 endfunction
 function! BuildShellArgs(args) " {{{1
     let l:res = a:args[:]
-    call map(l:res, {k, v -> fnameescape(v)})
+    call map(l:res, {k, v -> FileNameToShell(v)})
     return join(l:res, " ")
 endfunction
 function! ShlexSplit(str, ...) " -> list {{{1
@@ -147,24 +153,26 @@ function! SelectLineNumberDisplay() " {{{1
     let input_number = InputRangeNumber("select number> ", 3)
     let [&number, &relativenumber] = [and(input_number, 1), input_number >> 1]
 endfunction
+function! SystemString(x) " {{{1
+    return "'" . substitute(a:x, "'", "'\\\\''", 'g') . "'"
+endfunction
 function! CType(mode, str) " {{{1
     " 将 c 类型 和 rs 类型转换
     " mode(0) c -> rs
     " mode(1) rs -> c
     let Rename = {x -> substitute(x, '\<func\>', 'func_', 'g')}
     let URename = {x -> substitute(x, '\<func_\>', 'func', 'g')}
-    let String = {x -> "'" . substitute(x, "'", "'\\\\''", 'g') . "'"}
     let Strip = {x -> substitute(x, '^\(\n\|\s\)\+\|\(\n\|\s\)\+$', '', 'g')}
     let str = Rename(a:str)
     if a:mode
         " rs to c
         let cdecl_expr = Py3Call("rs_to_cdecl", str)
-        return Strip(URename(system("echo " . String(cdecl_expr) . '| cdecl')))
+        return Strip(URename(system("echo " . SystemString(cdecl_expr) . '| cdecl')))
     else
         " c to rs
         let tmp_file = expand("~/") . ".vim_ctype_out_tmp_" . rand()
-        let sys_res = system("echo explain " . String(str)
-                    \. '| cdecl 2> ' . String(tmp_file))
+        let sys_res = system("echo explain " . SystemString(str)
+                    \. '| cdecl 2> ' . SystemString(tmp_file))
         for line in readfile(tmp_file)
             30 echowindow line
         endfor
