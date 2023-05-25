@@ -37,11 +37,12 @@ def try_import(name: str, *, target_path=None) -> bool:
 
 
 try_import("cdecl_to_rust", target_path="/home/lrne/command")
-import cdecl_to_rust
 def cdecl_to_rs(expr: str):
+    import cdecl_to_rust
     return cdecl_to_rust.english_to_rs(cdecl_to_rust.split_tokens(expr))
 
 def rs_to_cdecl(expr: str):
+    import cdecl_to_rust
     return cdecl_to_rust.rs_to_english(cdecl_to_rust.split_tokens(expr))
 
 
