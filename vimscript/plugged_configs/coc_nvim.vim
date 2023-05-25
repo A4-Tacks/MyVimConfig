@@ -40,6 +40,10 @@ nmap <C-F3>  <Plug>(coc-codeaction-source)
 " 快速修复
 nmap <F4> <Plug>(coc-fix-current)
 
+" 命令列表
+nnoremap <C-x> :CocCommand<CR>
+
+
 " 错误跳转
 nmap <silent> <C-k> <Plug>(coc-diagnostic-prev)
 nmap <silent> <C-j> <Plug>(coc-diagnostic-next)

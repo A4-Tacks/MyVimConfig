@@ -177,6 +177,23 @@ set conceallevel=1
 set concealcursor=nc
 
 
+" 预设填充字符们
+"   item name	default		Used for ~
+"   stl		' ' or '^'	statusline of the current window
+"   stlnc		' ' or '='	statusline of the non-current windows
+"   vert		'|'		vertical separators |:vsplit|
+"   fold		'-'		filling 'foldtext'
+"   foldopen	'-'		mark the beginning of a fold
+"   foldclose	'+'		show a closed fold
+"   foldsep	'|'		open fold middle character
+"   diff		'-'		deleted lines of the 'diff' option
+"   eob		'~'		empty lines below the end of a buffer
+"   lastline	'@'		'display' contains lastline/truncate
+set fillchars=vert:│,fold:─,foldopen:─,foldclose:+,foldsep:│
+set fillchars+=diff:─,eob:~,lastline:@
+
+
+
 " Moust mode shape(形状)
 let &t_SI.="\e[6 q" " SI = INSERT mode
 let &t_SR.="\e[4 q" " SR = REPLACE mode
