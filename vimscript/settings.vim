@@ -1,3 +1,4 @@
+scriptencoding utf-8
 " 关闭兼容模式, 也就是去除vi一致性
 if &compatible
     set nocompatible
@@ -67,7 +68,7 @@ set wildmenu
 set autoread
 
 " GUI - 禁止光标闪烁
-set gcr=a:block-blinkon0
+set guicursor=a:block-blinkon0
 
 " 高亮显示搜索结果
 set hlsearch
@@ -79,10 +80,10 @@ set wrap
 set linebreak
 
 " 垂直滚动阈值
-execute " set scrolloff=" .&lines / 16
+execute ' set scrolloff=' .&lines / 16
 
 " 水平滚动阈值
-execute " set sidescrolloff=" .&columns / 8
+execute ' set sidescrolloff=' .&columns / 8
 
 " if display panel. 0:Disabled, 1:Windows, 2:Enabled
 set laststatus=2
@@ -203,7 +204,7 @@ let &t_EI.="\e[2 q" " EI = NORMAL mode (ELSE)
 set pastetoggle=#cf
 
 " leader
-let mapleader = " "
+let mapleader = ' '
 
 " shell running options
 " let &shellcmdflag = "-x -c"
