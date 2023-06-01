@@ -127,7 +127,7 @@ nnoremap <silent> <leader>s <C-w>s
 nnoremap <silent> <leader>v <C-w>v
 
 " windows control
-nnoremap <silent> <leader>M :res<Cr>:vertical res<Cr>
+nnoremap <silent> <leader>M :res\|vertical res<Cr>
 nnoremap <silent> <leader>= :res+3<Cr>
 nnoremap <silent> <leader>- :res-3<Cr>
 nnoremap <silent> <leader>_ :vertical res-6<Cr>
