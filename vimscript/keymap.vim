@@ -69,6 +69,13 @@ inoremap <silent> jk <Esc>
 " term 回 vim
 tnoremap jk <C-\><C-n>
 
+" fix term keymap
+tnoremap <kHome> <Home>
+tnoremap <kEnd> <End>
+tnoremap <kPageUp> <PageUp>
+tnoremap <kPageDown> <PageDown>
+
+
 " del
 inoremap <C-l> <Del>
 " paste start
