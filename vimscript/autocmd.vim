@@ -37,6 +37,9 @@ function SetTitle()
         EOF
         call Appends(0, script)
 
+    elseif &l:filetype == 'fish'
+        call append(0, '#!/usr/bin/env fish')
+
     elseif &l:filetype == 'awk'
         call append(0, "#!/usr/bin/awk -f")
 

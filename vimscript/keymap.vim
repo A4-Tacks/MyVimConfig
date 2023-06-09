@@ -179,7 +179,7 @@ function! Runer() " -> dict
     function! s:sh(args) dict " -> str {{{2
         let args = SplitLevelsArgs(2, a:args)
         return "time bash " .. join(args[0])
-                    \.. " " .. expand("%:p") .. " " .. join(args[1])
+                    \.. " -- " .. expand("%:p") .. " " .. join(args[1])
     endfunction
     function! s:vim(args) dict " -> str {{{2
         let args = SplitLevelsArgs(2, a:args)
@@ -211,6 +211,11 @@ function! Runer() " -> dict
         return "time lua " .. join(args[0])
                     \.. " -- " .. expand("%:p") .. " " .. join(args[1])
     endfunction
+    function! s:fish(args) dict " -> str {{{2
+        let args = SplitLevelsArgs(2, a:args)
+        return "time fish " .. join(args[0])
+                    \.. " -- " .. expand("%:p") .. " " .. join(args[1])
+    endfunction
     " result dict functions {{{2
     return
                 \{
@@ -222,6 +227,7 @@ function! Runer() " -> dict
                 \"awk": funcref("s:awk"),
                 \"javascript": funcref("s:js"),
                 \"lua": funcref("s:lua"),
+                \"fish": funcref("s:fish"),
                 \}
     " }}}2
 endfunction
