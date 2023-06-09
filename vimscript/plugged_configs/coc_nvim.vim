@@ -41,7 +41,7 @@ nmap <C-F3>  <Plug>(coc-codeaction-source)
 nmap <F4> <Plug>(coc-fix-current)
 
 " 命令列表
-nnoremap <C-x> :CocCommand<CR>
+"nnoremap <C-x> :CocCommand<CR>
 
 
 " 错误跳转
