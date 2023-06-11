@@ -57,20 +57,24 @@ function! ReversedStr(string) " {{{1
     return list2str(reverse(str2list(a:string)))
 endfunction
 function! GetCursorWord() " {{{1
-    let l:col = col(".") - 1
-    let l:line = line(".")
-    let l:line_text = getline(l:line) .. ' '
-    let l:index = matchend(ReversedStr(l:line_text[:col]), '^.\{-0,}\>')
-    if l:index == -1
+    let [ccol, line] = [charcol("."), line(".")]
+    let bcol_idx = col(".") - 1 " byte column (cursor) index
+    let line_text = getline(line)
+    let to_col_text = ReversedStr(strcharpart(line_text, 0, ccol))
+    let idx = matchend(to_col_text,
+                \ '^.\{-0,}\>')
+    if idx == -1
         return ''
     endif
-    let l:l = l:col - l:index + 1
-    let l:index = matchend(line_text[l:l:], '^.\{-0,}\>')
-    let l:r = l:index + l:l - 1 " 坑人的开区间 slice 要减 1
-    if l:index == -1 || l:r < l:col - 1
+    let start = strlen(to_col_text) - idx
+    let from_start_text = line_text[start:]
+    let lend = matchend(from_start_text, '^.\{-0,}\>')
+    if start + lend < bcol_idx
+        " start + lend 为匹配词的末尾字符+1
+        " 如果词末尾小于(光标位置-1) 则失配
         return ''
     endif
-    return l:line_text[l:l:l:r]
+    return from_start_text[:lend - 1]
 endfunction
 function! FileNameToShell(name) " {{{1
     " 将 vim 中的文件名转义至shell不会有其它含义的字符, 且不会被vim的expand转义
