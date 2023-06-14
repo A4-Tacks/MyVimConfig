@@ -18,7 +18,7 @@ Plug 'neoclide/coc.nvim'
 Plug 'https://github.com/w0rp/ale', " { 'on': 'ALEEnable' }
 
 " 彩虹括号
-Plug 'luochen1990/rainbow'
+"Plug 'luochen1990/rainbow'
 
 call plug#end() " Plug配置文件
 

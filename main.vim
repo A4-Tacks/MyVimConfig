@@ -40,7 +40,7 @@ let s:vim_scripts =<< trim EOF
             indent_lines.vim
             JavaComplete2.vim
             NERDTree.vim
-            rainbow.vim
+            // rainbow.vim
         }
     }
 }
