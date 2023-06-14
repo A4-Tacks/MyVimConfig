@@ -40,6 +40,7 @@ let s:vim_scripts =<< trim EOF
             indent_lines.vim
             JavaComplete2.vim
             NERDTree.vim
+            rainbow.vim
         }
     }
 }
@@ -75,3 +76,4 @@ for s:path in s:run_vimscript_queue
     execute "source " .. s:tmp
 endfor
 " }}}1
+
