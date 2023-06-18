@@ -107,8 +107,12 @@ function AutoLightWordTimer(time)
             return
         endif
         let g:cursor_word = l:word
-        execute 'match WordLight /\<'
-                    \.. substitute(l:word, '\([\/~.\[\]]\)', '\\\1', 'g') .. '\>/'
+        let g:cursor_word_regex = '//'
+        if strlen(l:word)
+            let g:cursor_word_regex = StrFmt('/\<{}\>/', substitute(l:word,
+                        \ '\([\/~.\[\]]\)', '\\\1', 'g'))
+        endif
+        execute 'match WordLight ' . g:cursor_word_regex
     endfunction
 
     call timer_start(a:time, 'AutoLightWordTimerF', {'repeat': -1})
