@@ -26,7 +26,7 @@ function! Fmt(line1, line2)
     if index(keys(eval(var_name)), ft) != -1
         execute StrFmt('{},{} {}', a:line1, a:line2, eval(var_name)[ft])
     else
-        echoerr "filetype" .. ft .. " not in " .. string(eval(var_name))
+        echoerr "filetype" .. ft .. " not in " .. string(keys(eval(var_name)))
     endif
 endfunction
 " END {{{1
