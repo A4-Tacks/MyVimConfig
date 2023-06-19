@@ -18,6 +18,7 @@ let g:code_format_buffer_commands = {
             \ "python": '!black -q -- -',
             \ "sh": '!shfmt -ci -sr -i 4 -s -',
             \ "rust": '!rustfmt',
+            \ "json": "!jq .|sed -E 's/^( *)/\\1\\1/g'",
             \ }
 function! Fmt(line1, line2)
     let var_name = 'g:code_format_buffer_commands'
