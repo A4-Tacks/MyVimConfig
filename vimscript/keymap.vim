@@ -232,7 +232,7 @@ function! Runer() " -> dict
                 \}
     " }}}2
 endfunction
-nnoremap <silent> <F5> :if &modified \| write \| else \| call CompileRun(input("args> ", '', 'file')) \| endif<CR>
+nnoremap <silent> <F5> :if &modified \| write \| else \| call CompileRun(input("args> ")) \| endif<CR>
 
 let g:runer = Runer()
 
