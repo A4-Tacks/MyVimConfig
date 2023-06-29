@@ -22,6 +22,9 @@ let g:ale_echo_msg_format = '[%linter%] %s [%severity%]'
 " " <Leader>d查看错误或警告的详细信息
 " nmap <Leader>d :ALEDetail<CR>
 
+" disabled ALE LSP Server
+let g:ale_disable_lsp = 1
+
 " 使用clang对c和c++进行语法检查，对python使用pylint进行语法检查
 let g:ale_linters = {
         \   'c++': ['clang'],
