@@ -56,6 +56,7 @@ noremap! #KL =>
 
 noremap! #i ""<Left>
 noremap! #o ''<Left>
+noremap! #m ``<Left>
 noremap! #n +
 noremap! #u =
 
