@@ -1,4 +1,6 @@
 "colorscheme retrobox
+"colorscheme elflord
+
 " Vim 原生补全菜单
 hi Pmenu ctermfg=7 ctermbg=8
 " Vim 原生补全菜单选中项
