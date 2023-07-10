@@ -51,6 +51,8 @@ nmap <silent> <C-j> <Plug>(coc-diagnostic-next)
 " 显示代码诊断
 nnoremap <silent> <C-F4> :CocDiagnostics<Cr>
 
+" 关闭所有窗口
+nnoremap <silent> <leader>w :call coc#float#close_all()<CR>
 
 
 " display doc
