@@ -30,4 +30,5 @@ let g:ale_linters = {
         \   'c++': ['clang'],
         \   'c': ['clang'],
         \   'python': ['pylint'],
+        \   'rust': [],
         \}
