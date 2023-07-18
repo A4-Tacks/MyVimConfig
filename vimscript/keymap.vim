@@ -251,10 +251,10 @@ function! CompileRun(args_text) " {{{
 endfunction " }}}
 
 " Translate {{{1
-nnoremap <F7> yy:call Appends(line("."), Translate(@@, ["-t", "zh", "-m", "%s%n", "-"]))<Cr>
-nnoremap <C-F7> yy:call Appends(line("."), Translate(@@, ["-t", "en", "-m", "%s%n", "-"]))<Cr>
-xnoremap <F7> y:call Appends(line("."), Translate(@@, ["-t", "zh", "-m", "%s%n", "-"]))<Cr>
-xnoremap <C-F7> y:call Appends(line("."), Translate(@@, ["-t", "en", "-m", "%s%n", "-"]))<Cr>
+nnoremap <F7> yy:call Appends(line(".")-1, Translate(@@, ["-t", "zh", "-m", "%s%n", "-"]))<Cr>
+nnoremap <C-F7> yy:call Appends(line(".")-1, Translate(@@, ["-t", "en", "-m", "%s%n", "-"]))<Cr>
+xnoremap <F7> y:call Appends(line(".")-1, Translate(@@, ["-t", "zh", "-m", "%s%n", "-"]))<Cr>
+xnoremap <C-F7> y:call Appends(line(".")-1, Translate(@@, ["-t", "en", "-m", "%s%n", "-"]))<Cr>
 xnoremap <F8> :%!baidu_fanyi -t zh -m \%1s\%n\%0s\%n -<Cr>
 xnoremap <C-F8> :%!baidu_fanyi -t en -m \%1s\%n\%0s\%n -<Cr>
 " 反复翻译
