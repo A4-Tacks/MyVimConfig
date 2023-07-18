@@ -152,7 +152,7 @@ set redrawtime=5000
 
 " 使用 hex 查看不可显示字符
 " 调成空为默认
-set display=uhex
+set display+=uhex
 
 " 按键映射序列延迟与终端控制序列延迟
 set timeoutlen=500
