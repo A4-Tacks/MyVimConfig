@@ -199,5 +199,9 @@ function SetDefaultFileTypeOptions()
 endfunction
 " TabAutoToEnd {{{1
 autocmd TabNew * tabmove $
+" 语法文件注册 {{{1
+augroup filetypedetect
+    autocmd BufNewFile,BufRead *.mdtlbl setfiletype mdtlbl
+augroup END
 " END {{{1
 " }}}1

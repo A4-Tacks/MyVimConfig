@@ -65,6 +65,7 @@ inoremap #zk {{{
 inoremap #zl }}}
 " 辅助按键 {{{1
 inoremap <silent> jk <Esc>
+snoremap <silent> jk <Esc>
 
 " terminal
 " term 回 vim
