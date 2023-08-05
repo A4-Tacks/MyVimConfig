@@ -10,6 +10,11 @@
                 "yaml"
             ]
         },
+        "ocaml-lsp": {
+            "command": "opam",
+            "args": ["exec", "--", "ocamllsp"],
+            "filetypes": ["ocaml", "reason"]
+        }
         //"bashls": {
         //    "command": "~/.vim/MyVimConfig/virtual_cmd/bash-language-server/main",
         //    "args": [

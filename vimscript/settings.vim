@@ -211,3 +211,6 @@ let mapleader = ' '
 
 " awk is gawk
 let g:awk_is_gawk = 1
+
+" ocamlformat indent
+set runtimepath^=~/.opam/default/share/ocp-indent/vim
