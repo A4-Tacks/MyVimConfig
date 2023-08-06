@@ -32,8 +32,8 @@ set expandtab
 " Tab 显示长度
 set tabstop=4
 
-" 退格缩进长度
-set softtabstop=4
+" 退格与Tab缩进长度, 跟随shiftwidth
+set softtabstop=-1
 
 " 每一级缩进长度, 同时也代表了代码折叠判定
 set shiftwidth=4
