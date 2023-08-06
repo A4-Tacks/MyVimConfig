@@ -194,6 +194,9 @@ function SetDefaultFileTypeOptions()
         xnoremap <buffer><silent> <F9> y:call CEditType(@@, 1)<Cr>
         nnoremap <buffer><silent> <F9> :call CEditType()<Cr>
 
+    elseif l:type == 'ocaml'
+        set shiftwidth=2
+
     endif
     execute "setlocal foldmethod=" .. b:lang_fold_method
 endfunction
