@@ -18,7 +18,6 @@ set colorcolumn=79
 set t_Co=16
 
 " 高亮当前行
-hi CursorLine term=nocombine cterm=nocombine ctermbg=235
 set cursorline
 
 " Mouse enable

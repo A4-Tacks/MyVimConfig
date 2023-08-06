@@ -1,5 +1,5 @@
 "colorscheme retrobox
-"colorscheme elflord
+colorscheme elflord
 
 " Vim 原生补全菜单
 hi Pmenu ctermfg=7 ctermbg=8
@@ -9,3 +9,5 @@ hi PmenuSel ctermfg=15 ctermbg=4
 hi default WordLight term=nocombine cterm=underline  " 下划线
 
 hi User1 cterm=none ctermfg=15 ctermbg=4
+
+hi CursorLine term=none cterm=none ctermbg=235
