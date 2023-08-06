@@ -1,5 +1,5 @@
 "colorscheme retrobox
-colorscheme elflord
+"colorscheme elflord
 
 " Vim 原生补全菜单
 hi Pmenu ctermfg=7 ctermbg=8
