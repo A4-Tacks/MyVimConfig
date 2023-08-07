@@ -184,5 +184,37 @@ function! CType(mode, str) " {{{1
         return Strip(URename(Py3Call("cdecl_to_rs", sys_res)))
     endif
 endfunction
+function! SetUserColors() " {{{1
+    " Vim 原生补全菜单
+    hi! Pmenu ctermfg=7 ctermbg=8
+    " Vim 原生补全菜单选中项
+    hi! PmenuSel ctermfg=15 ctermbg=4
+    " 词匹配颜色
+    hi! default WordLight term=nocombine cterm=underline
+
+    " 行高亮
+    hi! CursorLine term=none cterm=none ctermbg=235
+
+    hi! User1 cterm=none ctermfg=15 ctermbg=4
+
+    " 背景
+    hi! Normal term=none cterm=none gui=none ctermfg=15 ctermbg=none guifg=White guibg=Black
+
+    hi! NonText term=bold cterm=none gui=bold ctermfg=12 ctermbg=none guifg=Blue guibg=Black
+
+    hi! link EndOfBuffer NonText
+
+    " 左侧边栏
+    hi! SignColumn term=standout cterm=none gui=bold
+                \ ctermfg=14 ctermbg=242 guifg=Cyan guibg=Grey
+
+    " 行号颜色
+    hi! LineNr term=bold cterm=none gui=none
+                \ ctermfg=11 ctermbg=none guifg=Yellow guibg=Black
+
+    " 光标所在行行号颜色
+    hi! CursorLineNr term=underline cterm=underline gui=underline
+                \ ctermfg=11 ctermbg=none guifg=Yellow guibg=Black
+endfunction
 " End {{{1
 " }}}1

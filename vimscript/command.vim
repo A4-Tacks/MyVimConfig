@@ -5,6 +5,14 @@ command! Vimrc :sp ~/.vimrc
 command! -bang Wq wq<bang>
 command! -bang WQ wq<bang>
 
+function! FColor()
+    set notermguicolors
+    set t_Co=256
+    colorscheme ron
+    call SetUserColors()
+endfunction
+command! FColor call FColor()
+
 " syntax or tag fold {{{1
 command! Fold exec 'set foldmethod=' .
             \(&foldmethod == b:lang_fold_method
