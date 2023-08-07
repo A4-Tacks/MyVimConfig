@@ -5,6 +5,15 @@ endsnippet
 snippet let "let var = value" w
 let $1 = $2
 endsnippet
+snippet letin "let var = value in" w
+let $1 = $2 in$0
+endsnippet
+snippet class "class name = ..." w
+class $1 = $2
+endsnippet
+snippet method "method name = " w
+method $1 = $2
+endsnippet
 snippet rec "rec ..." w
 rec $0
 endsnippet
@@ -17,6 +26,12 @@ endsnippet
 snippet or "or ..." w
 or $0
 endsnippet
+snippet as "as ..." w
+as $0
+endsnippet
+snippet in "in ..." w
+in $0
+endsnippet
 snippet mod "mod ..." w
 mod $0
 endsnippet
@@ -26,8 +41,20 @@ endsnippet
 snippet lazy "lazy ..." w
 lazy $0
 endsnippet
-snippet letin "let var = value in" w
-let $1 = $2 in$0
+snippet raise "raise ..." w
+raise $0
+endsnippet
+snippet virtual "virtual ..." w
+virtual $0
+endsnippet
+snippet inherit "inherit ... [as ...]" w
+inherit $0
+endsnippet
+snippet private "private ..." w
+private $0
+endsnippet
+snippet new "new ..." w
+new $0
 endsnippet
 snippet try "try ... with err -> ..." w
 try $1 with
@@ -85,6 +112,9 @@ endsnippet
 snippet val "val name: type" w
 val $1: $0
 endsnippet
+snippet vale "val name = value" w
+val $1 = $0
+endsnippet
 snippet assert "assert" w
 assert $0
 endsnippet
@@ -103,6 +133,11 @@ end
 endsnippet
 snippet begin "begin ... end" w
 begin
+	$0
+end
+endsnippet
+snippet obj "object (_self) ... end" w
+object (_self)
 	$0
 end
 endsnippet
