@@ -1,0 +1,114 @@
+snippet match "match value with pattern" w
+match ${1:value} with
+| $0
+endsnippet
+snippet let "let var = value" w
+let $1 = $2
+endsnippet
+snippet rec "rec ..." w
+rec $0
+endsnippet
+snippet with "with ..." w
+with $0
+endsnippet
+snippet and "and ..." w
+and $0
+endsnippet
+snippet or "or ..." w
+or $0
+endsnippet
+snippet mod "mod ..." w
+mod $0
+endsnippet
+snippet include "include ..." w
+include $0
+endsnippet
+snippet lazy "lazy ..." w
+lazy $0
+endsnippet
+snippet letin "let var = value in" w
+let $1 = $2 in$0
+endsnippet
+snippet try "try ... with err -> ..." w
+try $1 with
+	${2:err} ->$0
+endsnippet
+snippet ref "ref value" w
+ref $0
+endsnippet
+snippet if "if ... then" w
+if $1 then$0
+endsnippet
+snippet else "else" w
+else$0
+endsnippet
+snippet for "for i = start to stop (* [start,stop]*) do ... done" w
+for ${1:i} = ${2:start} to ${3:stop} do
+	$0
+done
+endsnippet
+snippet ford "for i = start downto stop (* [stop,start]*) do ... done" w
+for ${1:i} = ${2:start} downto ${3:stop} do
+	$0
+done
+endsnippet
+snippet while "while expr do ... done" w
+while $1 do
+	$0
+done
+endsnippet
+snippet comment "(* ... *)" w
+(* $1 *)$0
+endsnippet
+snippet commentdoc "(** ... *)" w
+(** $1 *)$0
+endsnippet
+snippet mut "mutable" w
+mutable $0
+endsnippet
+snippet arr "Array" w
+[|$1|]$0
+endsnippet
+snippet type "type ... = ..." w
+type $1 = $0
+endsnippet
+snippet fun "fun ... -> ..." w
+fun $1 -> $0
+endsnippet
+snippet function "function pattern" w
+function
+| $0
+endsnippet
+snippet open "open ..." w
+open $0
+endsnippet
+snippet val "val name: type" w
+val $1: $0
+endsnippet
+snippet assert "assert" w
+assert $0
+endsnippet
+snippet failwith "failwith" w
+failwith $0
+endsnippet
+snippet struct "struct ... end" w
+struct
+	$0
+end
+endsnippet
+snippet sig "sig ... end" w
+sig
+	$0
+end
+endsnippet
+snippet begin "begin ... end" w
+begin
+	$0
+end
+endsnippet
+snippet md "module ... = ..." w
+module $1 = $0
+endsnippet
+snippet mdt "module type ... = ..." w
+module type $1 = $0
+endsnippet
