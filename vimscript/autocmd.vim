@@ -58,14 +58,23 @@ function ClosePaste()
 endfunction
 autocmd InsertLeave * call ClosePaste()
 " 回到上次查看文件的位置 {{{1
-autocmd BufReadPost *
-            \   if line("'\"") > 0
-            \|      if line("'\"") <= line("$")
-            \|          execute "normal! '\""
-            \|      else
-            \|          execute "normal! $"
-            \|      endif
-            \|  endif
+" last-position-jump
+
+function! LastPositionJump()
+    if &filetype =~# 'commit'
+        return
+    endif
+
+    let line = line("'\"")
+    if line >= 1 && line <= line("$")
+        execute "normal! '\""
+    else
+        execute "normal! $"
+    endif
+endfunction
+
+
+autocmd BufReadPost * call LastPositionJump()
 
 " Auto Maxsize Window {{{1
 function! BigWin(open)
