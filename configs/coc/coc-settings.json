@@ -40,8 +40,12 @@
             "sh"
         ]
     },
+
     "rust-analyzer.completion.callable.snippets": "fill_arguments",
     "rust-analyzer.updates.checkOnStartup": false,
+    "rust-analyzer.inlayHints.reborrowHints.enable": "never",
+    "rust-analyzer.inlayHints.lifetimeElisionHints.enable": "always",
+
     "jedi.enable": true,
     "jedi.trace.server": "messages",
     "jedi.diagnostics.enable": false,
