@@ -1,9 +1,9 @@
 " 杂项 {{{1
-command! -bang Bd bp|bd<bang> #
+command! -bar -bang Bd bp|bd<bang> #
 
 command! Vimrc :sp ~/.vimrc
-command! -bang Wq wq<bang>
-command! -bang WQ wq<bang>
+command! -bar -bang Wq wq<bang>
+command! -bar -bang WQ wq<bang>
 
 function! FColor()
     set notermguicolors
@@ -12,6 +12,9 @@ function! FColor()
     call SetUserColors()
 endfunction
 command! FColor call FColor()
+
+command! -bar -register -range ReverseLines
+            \ call setline("<line1>", getline("<line1>", "<line2>")->reverse())
 
 " syntax or tag fold {{{1
 command! Fold exec 'set foldmethod=' .
