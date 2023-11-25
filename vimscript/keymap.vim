@@ -111,6 +111,7 @@ call RangeMapDefine('w', '{')
 call RangeMapDefine('e', '<')
 call RangeMapDefine('i', '"')
 call RangeMapDefine('o', "'")
+call RangeMapDefine('m', '`')
 
 " Disable Empty Search {{{1
 nnoremap <expr> n strlen(@/) > 0 ? "n" : ""
