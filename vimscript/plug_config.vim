@@ -15,7 +15,7 @@ Plug 'neoclide/coc.nvim'
 "Plug 'maralla/completor.vim' , { 'on': 'CompletorEnable' }
 
 " ale
-Plug 'https://github.com/w0rp/ale', " { 'on': 'ALEEnable' }
+Plug 'w0rp/ale', " { 'on': 'ALEEnable' }
 
 " 彩虹括号
 "Plug 'luochen1990/rainbow'
