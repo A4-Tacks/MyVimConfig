@@ -55,8 +55,11 @@ noremap! #Kl =>
 noremap! #KL =>
 
 noremap! #i ""<Left>
+noremap! #I ""<Left>
 noremap! #o ''<Left>
+noremap! #O ''<Left>
 noremap! #m ``<Left>
+noremap! #M ``<Left>
 noremap! #n +
 noremap! #u =
 
@@ -83,9 +86,11 @@ inoremap <C-l> <Del>
 " paste start
 noremap! <expr> #cf execute("set paste")
 
-" line end ;
+" line end input
 inoremap #; <End>;
+inoremap #: <End>;
 inoremap #, <End>,
+inoremap #< <End>,
 
 " next or prev buffer {{{
 command! -count -bar BufferNext execute "bnext " .. (<range> ? <line2>-<line1> + 1 : "")
@@ -213,6 +218,11 @@ function! Runer() " -> dict
         return "time node " .. join(args[0])
                     \.. " " .. expand("%:p") .. " " .. join(args[1])
     endfunction
+    function! s:ts(args) dict " -> str {{{2
+        let args = SplitLevelsArgs(2, a:args)
+        return "time ts-node " .. join(args[0])
+                    \.. " -- " .. expand("%:p") .. " " .. join(args[1])
+    endfunction
     function! s:lua(args) dict " -> str {{{2
         let args = SplitLevelsArgs(2, a:args)
         return "time lua " .. join(args[0])
@@ -233,6 +243,7 @@ function! Runer() " -> dict
                 \"rust": funcref("s:rust"),
                 \"awk": funcref("s:awk"),
                 \"javascript": funcref("s:js"),
+                \"typescript": funcref("s:ts"),
                 \"lua": funcref("s:lua"),
                 \"fish": funcref("s:fish"),
                 \}

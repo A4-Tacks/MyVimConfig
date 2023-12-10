@@ -206,6 +206,9 @@ function SetDefaultFileTypeOptions()
     elseif l:type == 'ocaml'
         set shiftwidth=2
 
+    elseif ['javascript', 'typescript']->index(l:type) != -1
+        set shiftwidth=2
+
     endif
     execute "setlocal foldmethod=" .. b:lang_fold_method
 endfunction
