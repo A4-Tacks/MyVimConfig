@@ -217,6 +217,7 @@ autocmd TabNew * tabmove $
 " 语法文件注册 {{{1
 augroup filetypedetect
     autocmd BufNewFile,BufRead *.mdtlbl setfiletype mdtlbl
+    autocmd BufNewFile,BufRead *.mtsx setfiletype mtsyntax
 augroup END
 " END {{{1
 " }}}1
