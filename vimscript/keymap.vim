@@ -100,7 +100,12 @@ nnoremap <silent> gB :BufferPrev<Cr>
 " }}}
 
 " 在命令模式下, 也就是`normal_:`下, 输入当前文件的目录
-cnoremap <C-a> <C-r>=fnameescape(expand("%:h"))<CR>/
+cnoremap <C-s> <C-r>=fnameescape(expand("%:h"))<CR>/
+cnoremap <C-a> <Home>
+cnoremap <C-b> <Left>
+cnoremap <C-f> <Right>
+cnoremap <C-p> <Up>
+cnoremap <C-n> <Down>
 
 " 范围选择 {{{1
 function! RangeMapDefine(key, str)
