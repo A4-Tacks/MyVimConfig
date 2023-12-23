@@ -57,5 +57,6 @@
     "pyright.disableDocumentation": false,
     "pyright.disableCompletion": true,
     "pyright.completion.importSupport": true,
-    "pyright.completion.snippetSupport": true
+    "pyright.completion.snippetSupport": true,
+    "toml.formatter.indentString": "    "
 }
