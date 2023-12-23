@@ -104,10 +104,10 @@ cnoremap <C-a> <C-r>=fnameescape(expand("%:h"))<CR>/
 
 " 范围选择 {{{1
 function! RangeMapDefine(key, str)
-    execute 'omap a' .. a:key .. ' a' .. a:str
-    execute 'xmap a' .. a:key .. ' a' .. a:str
-    execute 'omap i' .. a:key .. ' i' .. a:str
-    execute 'xmap i' .. a:key .. ' i' .. a:str
+    execute 'onoremap <silent> a' .. a:key .. ' a' .. a:str
+    execute 'xnoremap <silent> a' .. a:key .. ' a' .. a:str
+    execute 'onoremap <silent> i' .. a:key .. ' i' .. a:str
+    execute 'xnoremap <silent> i' .. a:key .. ' i' .. a:str
 endfunction
 
 call RangeMapDefine('k', '(')
@@ -117,6 +117,11 @@ call RangeMapDefine('e', '<')
 call RangeMapDefine('i', '"')
 call RangeMapDefine('o', "'")
 call RangeMapDefine('m', '`')
+
+xnoremap <silent> iv _og_
+xnoremap <silent> av 0og_
+onoremap <silent> iv :norm! v_og_<CR>
+onoremap <silent> av :norm! v0og_<CR>
 
 " Disable Empty Search {{{1
 nnoremap <expr> n strlen(@/) > 0 ? "n" : ""
