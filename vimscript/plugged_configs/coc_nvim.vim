@@ -30,6 +30,8 @@ nmap <silent> <F2> <Plug>(coc-rename)
 
 " 主动补全
 inoremap <silent><expr> <c-x> coc#refresh()
+" 关闭补全窗口
+inoremap <silent><expr> <C-e> coc#pum#visible() ? coc#pum#cancel() : "\<End>"
 
 " 代码操作选择
 xmap <F3> <Plug>(coc-codeaction-selected)

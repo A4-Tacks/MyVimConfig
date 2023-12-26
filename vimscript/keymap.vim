@@ -86,6 +86,12 @@ inoremap <C-l> <Del>
 " paste start
 noremap! <expr> #cf execute("set paste")
 
+" emacs
+inoremap <C-a> <Home>
+inoremap <C-e> <End>
+inoremap <C-b> <Left>
+inoremap <C-f> <Right>
+
 " line end input
 inoremap #; <End>;
 inoremap #: <End>;
