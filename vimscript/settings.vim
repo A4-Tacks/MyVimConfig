@@ -130,9 +130,9 @@ set updatecount=50
 
 " Encoding
 set encoding=utf-8
-set fileencodings=utf-8,ucs-bom,shift-jis,
-set fileencodings+=gb18030,gbk,gb2312,cp936,
-set fileencodings+=utf-16-be,utf-16-le,utf-32-be,utf-32-le,
+set fileencodings=utf-8
+set fileencodings+=gb18030,gbk,gb2312,cp936
+set fileencodings+=ucs-bom,shift-jis,utf-16-be,utf-16-le,utf-32-be,utf-32-le
 
 " Allow unsaved to other buffer
 set hidden
