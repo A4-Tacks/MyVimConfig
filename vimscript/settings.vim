@@ -172,7 +172,7 @@ set statusline=%<%f\ %h%m%r%=%-14.(%l,%c%V%)\ %P
 
 
 " 语法隐藏级别 (0:关 1:透明 2:不存在)
-set conceallevel=1
+set conceallevel=2
 " 语法隐藏在什么模式下生效 (在光标行)
 set concealcursor=nc
 
