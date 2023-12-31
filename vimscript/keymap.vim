@@ -42,6 +42,7 @@ noremap! #e <><Left>
 noremap! #Q []<Left>
 noremap! #W {}<Left>
 noremap! #E <><Left>
+noremap! #< <><Left>
 noremap! #> <><Left>
 
 inoremap ( ()<Left>
@@ -99,7 +100,6 @@ inoremap <C-f> <Right>
 inoremap #; <End>;
 inoremap #: <End>;
 inoremap #, <End>,
-inoremap #< <End>,
 
 " next or prev buffer {{{
 command! -count -bar BufferNext execute "bnext " .. (<range> ? <line2>-<line1> + 1 : "")
