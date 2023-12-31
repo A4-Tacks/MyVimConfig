@@ -39,7 +39,10 @@ noremap! #le >
 noremap! #q []<Left>
 noremap! #w {}<Left>
 noremap! #e <><Left>
-noremap! #< <><Left>
+noremap! #Q []<Left>
+noremap! #W {}<Left>
+noremap! #E <><Left>
+noremap! #> <><Left>
 
 inoremap ( ()<Left>
 inoremap [ []<Left>
