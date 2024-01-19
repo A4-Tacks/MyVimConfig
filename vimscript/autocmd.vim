@@ -212,6 +212,10 @@ function SetDefaultFileTypeOptions()
     endif
     execute "setlocal foldmethod=" .. b:lang_fold_method
 endfunction
+" Load User Colors {{{1
+" 重新加载颜色, 以避免被一些覆盖
+autocmd BufNewFile,BufRead,VimEnter *
+            \ call SetUserColors()
 " TabAutoToEnd {{{1
 autocmd TabNew * tabmove $
 " 语法文件注册 {{{1

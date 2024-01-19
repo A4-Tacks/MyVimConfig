@@ -195,6 +195,9 @@ function! SetUserColors() " {{{1
     " 行高亮
     hi! CursorLine term=none cterm=none ctermbg=235
 
+    " 语法隐藏颜色
+    hi! Conceal ctermfg=239 guifg=Grey30
+
     hi! User1 cterm=none ctermfg=15 ctermbg=4
 
     " 背景

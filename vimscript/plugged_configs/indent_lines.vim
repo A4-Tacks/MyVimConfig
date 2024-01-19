@@ -1,5 +1,5 @@
 let g:indentLine_enabled = 1 " 使插件生效
-let g:indentLine_char = '┆' " 设置缩进线字符
+let g:indentLine_char = '│' " 设置缩进线字符
 " let g:indentLine_conceallevel = 2 " 使插件运行
 
 " 每个缩进级别不同字符(与设置缩进线字符不兼容)
