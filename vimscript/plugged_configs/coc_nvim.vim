@@ -28,8 +28,6 @@ hi CocInlayHint cterm=none ctermfg=4 ctermbg=7
 " rename
 nmap <silent> <F2> <Plug>(coc-rename)
 
-" 主动补全
-inoremap <silent><expr> <c-x> coc#refresh()
 " 关闭补全窗口
 inoremap <silent><expr> <C-e> coc#pum#visible() ? coc#pum#cancel() : "\<End>"
 
@@ -92,6 +90,14 @@ inoremap <silent><expr> <Tab>
 inoremap <silent><expr> <S-Tab> coc#pum#visible() ? coc#pum#prev(0) : "\<C-h>"
 inoremap <silent><expr> <Up> coc#pum#visible() ? coc#pum#prev(0) : "\<Up>"
 inoremap <silent><expr> <Down> coc#pum#visible() ? coc#pum#next(0) : "\<Down>"
+inoremap <silent><expr> <C-p> coc#pum#visible()
+            \   ? coc#pum#prev(0)
+            \   : "\<C-p>"
+inoremap <silent><expr> <C-n> coc#pum#visible()
+            \   ? coc#pum#next(0)
+            \   : pumvisible()
+            \       ? "\<C-n>"
+            \       : coc#refresh()
 
 " Make <CR> to accept selected completion item or notify coc.nvim to format
 " <C-g>u breaks current undo, please make your own choice
