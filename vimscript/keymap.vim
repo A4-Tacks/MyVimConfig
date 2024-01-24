@@ -116,6 +116,29 @@ cnoremap <C-f> <Right>
 cnoremap <C-p> <Up>
 cnoremap <C-n> <Down>
 
+" 缓冲区信息键强化 {{{
+function! ShowBufferInfo()
+    let fname = buffer_name()
+    let flag = (&modified||!&modifiable?' ['.(&modified?'+':'').(&modifiable?'':'-').']':'')
+                \.(&readonly?' [RO]':'')
+    echo "FileName: {!r}{}"->StrFmt(fname, flag)
+    if fname->filereadable() || fname->filewritable()
+        echo "{}{} {}B {} {}"->StrFmt(
+                    \ fname->getftype()[0],
+                    \ fname->getfperm(),
+                    \ fname->getfsize(),
+                    \ fname->getfsize()->SizeFmt('B'),
+                    \ "%Y-%m-%d %H:%M:%S"->strftime(fname->getftime()),
+                    \ )
+    endif
+    echo "Line: {}/{} --{}%--"->StrFmt(
+                \   line('.'), line('$'),
+                \   float2nr((line('.')+0.0) / line('$') * 100))
+    echo "fenc:{} ff:{} eol:{}"->StrFmt(&fenc->strlen()?&fenc:'NONE', &ff, &eol)
+endfunction
+nnoremap <C-g> :call ShowBufferInfo()<cr>
+" }}}
+
 " 范围选择 {{{1
 function! RangeMapDefine(key, str)
     execute 'onoremap <silent> a' .. a:key .. ' a' .. a:str

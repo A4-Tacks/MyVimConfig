@@ -222,5 +222,26 @@ function! SetUserColors() " {{{1
     syn match EOLWhiteSpace /\s\+$/ containedin=ALL
     hi def link EOLWhiteSpace Visual
 endfunction
+function! SizeFmt(num, suffix,)
+    let num = a:num + 0.0
+    if num < 1<<10
+        let t = ''
+    elseif num < 1<<20
+        let t = 'K'
+        let num /= 1 << 10
+    elseif num < 1<<30
+        let t = 'M'
+        let num /= 1 << 20
+    elseif num < 1<<40
+        let t = 'G'
+        let num /= 1 << 30
+    elseif num < 1<<50
+        let t = 'T'
+        let num /= 1 << 40
+    else
+        let t = '^'
+    endif
+    return (float2nr(num*10)/10.0)->string().t.(t->strlen()?'i':'').a:suffix
+endfunction
 " End {{{1
 " }}}1
