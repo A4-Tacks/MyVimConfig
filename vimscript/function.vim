@@ -218,6 +218,9 @@ function! SetUserColors() " {{{1
     " 光标所在行行号颜色
     hi! CursorLineNr term=underline cterm=underline gui=underline
                 \ ctermfg=11 ctermbg=none guifg=Yellow guibg=Black
+
+    syn match EOLWhiteSpace /\s\+$/ containedin=ALL
+    hi def link EOLWhiteSpace Visual
 endfunction
 " End {{{1
 " }}}1
