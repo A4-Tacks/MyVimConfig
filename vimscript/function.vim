@@ -250,7 +250,7 @@ function! SetUserColors() " {{{1
     augroup indentLine
         autocmd!
         autocmd OptionSet shiftwidth,tabstop call UpdateIndentLine()
-        autocmd BufRead,BufNewFile,ColorScheme,Syntax * call UpdateIndentLine()
+        autocmd BufRead,BufNewFile,ColorScheme,WinEnter,Syntax * call UpdateIndentLine()
     augroup end
     doautocmd indentLine Syntax
 endfunction
