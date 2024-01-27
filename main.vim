@@ -37,10 +37,8 @@ let s:vim_scripts =<< trim EOF
         {
             ale.vim
             coc_nvim.vim
-            indent_lines.vim
             JavaComplete2.vim
             NERDTree.vim
-            // rainbow.vim
         }
     }
 }
@@ -76,4 +74,3 @@ for s:path in s:run_vimscript_queue
     execute "source " .. s:tmp
 endfor
 " }}}1
-

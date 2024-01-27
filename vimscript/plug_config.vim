@@ -2,9 +2,6 @@ call plug#begin('~/.vim/plugged') " {{{1
 " NerdTree
 Plug 'preservim/nerdtree'
 
-" 缩进参考线插件
-Plug 'Yggdroot/indentLine'
-
 " coc.nvim
 Plug 'neoclide/coc.nvim'
 

@@ -184,6 +184,30 @@ function! CType(mode, str) " {{{1
         return Strip(URename(Py3Call("cdecl_to_rs", sys_res)))
     endif
 endfunction
+function! UpdateIndentLine() " {{{1
+    let g:indentLine_ws = get(g:, 'indentLine_ws', ' ')
+    let g:indentLine_char = get(g:, 'indentLine_char', '|')
+    let g:indentLine_indentLevel = get(g:, 'indentLine_indentLevel', 20)
+    let g:indentLine_matchsid = get(g:, 'indentLine_matchsid', [])
+
+    if !g:indentLine_matchsid->empty()
+        for id in g:indentLine_matchsid
+            try
+                call matchdelete(id)
+            catch /^Vim\%((\a\+)\)\=:E80[23]/
+            endtry
+        endfor
+        let g:indentLine_matchsid = []
+    endif
+
+    let sw = &sw ? &sw : &tabstop
+    let ws = g:indentLine_ws
+    for i in range(sw+1, sw*g:indentLine_indentLevel+1, sw)
+        let pat = '^'.ws.'\+\zs\%'.i.'v'.ws
+        let id = matchadd('Conceal', pat, 0, -1, {'conceal': g:indentLine_char})
+        let _ = g:indentLine_matchsid->add(id)
+    endfor
+endfunction
 function! SetUserColors() " {{{1
     " Vim 原生补全菜单
     hi! Pmenu ctermfg=7 ctermbg=8
@@ -196,7 +220,7 @@ function! SetUserColors() " {{{1
     hi! CursorLine term=none cterm=none ctermbg=235
 
     " 语法隐藏颜色
-    hi! Conceal ctermfg=239 guifg=Grey30
+    hi! Conceal ctermfg=239 ctermbg=NONE guifg=Grey30 guibg=NONE
 
     hi! User1 cterm=none ctermfg=15 ctermbg=4
 
@@ -221,6 +245,14 @@ function! SetUserColors() " {{{1
 
     syn match EOLWhiteSpace /\s\+$/ containedin=ALL
     hi def link EOLWhiteSpace Visual
+
+    let g:indentLine_char = '│'
+    augroup indentLine
+        autocmd!
+        autocmd OptionSet shiftwidth,tabstop call UpdateIndentLine()
+        autocmd BufRead,BufNewFile,ColorScheme,Syntax * call UpdateIndentLine()
+    augroup end
+    doautocmd indentLine Syntax
 endfunction
 function! SizeFmt(num, suffix,)
     let num = a:num + 0.0
