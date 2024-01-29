@@ -208,6 +208,19 @@ function! UpdateIndentLine() " {{{1
         let _ = g:indentLine_matchsid->add(id)
     endfor
 endfunction
+function! UpdateUserMatches() " {{{1
+    let g:eol_ws_light_id = get(g:, 'eol_ws_light_id', -1)
+    if g:eol_ws_light_id != -1
+        try
+            call matchdelete(g:eol_ws_light_id)
+        catch /^Vim\%((\a\+)\)\=:E80[23]/
+        endtry
+    endif
+    let g:eol_ws_light_id = matchadd('EOLWhiteSpace', '\s\+$', 0, -1)
+
+
+    call UpdateIndentLine()
+endfunction
 function! SetUserColors() " {{{1
     " Vim 原生补全菜单
     hi! Pmenu ctermfg=7 ctermbg=8
@@ -243,23 +256,15 @@ function! SetUserColors() " {{{1
     hi! CursorLineNr term=underline cterm=underline gui=underline
                 \ ctermfg=11 ctermbg=none guifg=Yellow guibg=Black
 
-    let g:eol_ws_light_id = get(g:, 'eol_ws_light_id', -1)
-    if g:eol_ws_light_id != -1
-        try
-            call matchdelete(g:eol_ws_light_id)
-        catch /^Vim\%((\a\+)\)\=:E80[23]/
-        endtry
-    endif
-    hi def link EOLWhiteSpace Visual
-    let g:eol_ws_light_id = matchadd('EOLWhiteSpace', '\s\+$', 0, -1)
+    hi def EOLWhiteSpace ctermfg=NONE ctermbg=239 guifg=NONE guibg=#3A3A3A
 
     let g:indentLine_char = '│'
-    augroup indentLine
+    augroup UserMatches
         autocmd!
-        autocmd OptionSet shiftwidth,tabstop call UpdateIndentLine()
-        autocmd BufRead,BufNewFile,ColorScheme,WinEnter,Syntax * call UpdateIndentLine()
+        autocmd OptionSet shiftwidth,tabstop call UpdateUserMatches()
+        autocmd BufRead,BufNewFile,ColorScheme,WinEnter,Syntax * call UpdateUserMatches()
     augroup end
-    doautocmd indentLine Syntax
+    doautocmd UserMatches Syntax
 endfunction
 function! SizeFmt(num, suffix,)
     let num = a:num + 0.0
