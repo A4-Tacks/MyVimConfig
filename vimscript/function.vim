@@ -243,8 +243,15 @@ function! SetUserColors() " {{{1
     hi! CursorLineNr term=underline cterm=underline gui=underline
                 \ ctermfg=11 ctermbg=none guifg=Yellow guibg=Black
 
-    syn match EOLWhiteSpace /\s\+$/ containedin=ALL
+    let g:eol_ws_light_id = get(g:, 'eol_ws_light_id', -1)
+    if g:eol_ws_light_id != -1
+        try
+            call matchdelete(g:eol_ws_light_id)
+        catch /^Vim\%((\a\+)\)\=:E80[23]/
+        endtry
+    endif
     hi def link EOLWhiteSpace Visual
+    let g:eol_ws_light_id = matchadd('EOLWhiteSpace', '\s\+$', 0, -1)
 
     let g:indentLine_char = '│'
     augroup indentLine
