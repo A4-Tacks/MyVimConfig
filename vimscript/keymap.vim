@@ -193,6 +193,34 @@ nnoremap <silent> <leader>_ :vertical res-6<Cr>
 nnoremap <silent> <leader>+ :vertical res+6<Cr>
 nnoremap <leader>m <C-w>=
 
+" windows control mode {{{
+nnoremap <silent> <C-w>m :call StartWindowControl()<cr>
+function! StartWindowControl()
+    let num = ''
+    let oprefix = ''
+    while v:true
+        let ch = getcharstr()
+        if ch =~# "[\<C-w>\<esc>m]"
+            return
+        elseif num != '' && ch =~# '\d'
+            let num *= 10
+            let num += ch->str2nr()
+        elseif ch =~# '\d'
+            let num = ch->str2nr()
+        elseif oprefix->empty() && ch ==# 'g'
+            let oprefix = 'g'
+        else
+            let cmd = "norm \<C-w>".num.oprefix.ch
+            execute cmd
+            echo cmd
+            redraw
+            let num = ''
+            let oprefix = ''
+        endif
+    endwhile
+endfunction
+" }}}
+
 " quit
 nnoremap <silent> <leader>q <C-w>q
 
