@@ -79,10 +79,10 @@ set wrap
 set linebreak
 
 " 垂直滚动阈值
-execute ' set scrolloff=' .&lines / 16
+set scrolloff=3
 
 " 水平滚动阈值
-execute ' set sidescrolloff=' .&columns / 8
+set sidescrolloff=22
 
 " if display panel. 0:Disabled, 1:Windows, 2:Enabled
 set laststatus=2
@@ -119,7 +119,7 @@ let g:temp_directory = expand('$HOME/.vim/.tempfile')
 
 
 " 创建必要的文件夹
-call system('mkdir -p ' . join(
+call system('mkdir -p -- ' . join(
             \map([&backupdir, &undodir, &directory, g:temp_directory],
             \{_, x -> FileNameToShell(x)})))
 
