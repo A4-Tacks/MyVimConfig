@@ -145,12 +145,26 @@ nnoremap <C-g> :call ShowBufferInfo()<cr>
 " }}}
 
 " 范围选择 {{{1
-function! RangeMapDefine(key, str)
+function! RangeMapDefine(key, str) " {{{
     execute 'onoremap <silent> a' .. a:key .. ' a' .. a:str
     execute 'xnoremap <silent> a' .. a:key .. ' a' .. a:str
     execute 'onoremap <silent> i' .. a:key .. ' i' .. a:str
     execute 'xnoremap <silent> i' .. a:key .. ' i' .. a:str
-endfunction
+endfunction " }}}
+function! TextObjectIndentBlock(out) " {{{
+    let Mov = {n -> n..'G'}
+    let [line, indent] = [line('.'), indent('.')]
+    let [begin, end] = [line, line]
+
+    if !a:out
+        while indent(end+1)   >  indent | let end += 1   | endwhile
+    else
+        while indent(begin-1) >= indent | let begin -= 1 | endwhile
+        while indent(end+1)   >= indent | let end += 1   | endwhile
+    endif
+
+    return ":\<C-u>norm! V".Mov(begin).'o'.Mov(end).'o'."\<CR>"
+endfunction " }}}
 
 call RangeMapDefine('k', '(')
 call RangeMapDefine('q', '[')
@@ -160,10 +174,15 @@ call RangeMapDefine('i', '"')
 call RangeMapDefine('o', "'")
 call RangeMapDefine('m', '`')
 
-xnoremap <silent> iv _og_
-xnoremap <silent> av 0og_
-onoremap <silent> iv :norm! v_og_<CR>
-onoremap <silent> av :norm! v0og_<CR>
+xnoremap <silent> iv :<C-u>norm! v_og_<CR>
+onoremap <silent> iv :<C-u>norm! v_og_<CR>
+xnoremap <silent> av :<C-u>norm! v0og_<CR>
+onoremap <silent> av :<C-u>norm! v0og_<CR>
+
+xnoremap <silent><expr> in TextObjectIndentBlock(v:false)
+onoremap <silent><expr> in TextObjectIndentBlock(v:false)
+xnoremap <silent><expr> an TextObjectIndentBlock(v:true)
+onoremap <silent><expr> an TextObjectIndentBlock(v:true)
 
 " Disable Empty Search {{{1
 nnoremap <expr> n strlen(@/) > 0 ? "n" : ""
