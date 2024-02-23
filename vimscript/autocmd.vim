@@ -118,14 +118,16 @@ function AutoLightWordTimer(time)
         let g:cursor_word = l:word
         let g:cursor_word_regex = '//'
         if strlen(l:word)
-            let g:cursor_word_regex = StrFmt('/\<{}\>/', substitute(l:word,
-                        \ '\([\/~.\[\]]\)', '\\\1', 'g'))
+            let g:cursor_word_regex = '/\V\<'
+                        \ . l:word->substitute('[/\\]', '\\\0', 'g')
+                        \ . '\>/'
         endif
         execute 'match WordLight ' . g:cursor_word_regex
     endfunction
 
     call timer_start(a:time, 'AutoLightWordTimerF', {'repeat': -1})
 endfunction
+
 call AutoLightWordTimer(143)
 " Load plugged {{{1
 autocmd BufNewFile,BufRead * call SetDefaultFileTypeOptions()
