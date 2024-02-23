@@ -170,6 +170,9 @@ set nofixeol
 " 底部行格式
 set statusline=%<%f\ %h%m%r%=%-14.(%l,%c%V%)\ %P
 
+" 显示正在输入的命令
+set showcmd showcmdloc=last
+
 
 " 语法隐藏级别 (0:关 1:透明 2:不存在)
 set conceallevel=2
