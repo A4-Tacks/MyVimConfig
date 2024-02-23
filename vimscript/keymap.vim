@@ -144,6 +144,9 @@ endfunction
 nnoremap <C-g> :call ShowBufferInfo()<cr>
 " }}}
 
+" 快速buffer切换
+nnoremap <silent> <leader>b :ls\|exec'b'.input('input buffer id> ')<cr>
+
 " 范围选择 {{{1
 function! RangeMapDefine(key, str) " {{{
     execute 'onoremap <silent> a' .. a:key .. ' a' .. a:str
