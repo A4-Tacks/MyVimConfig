@@ -57,6 +57,17 @@ function! ReversedStr(string) " {{{1
     return list2str(reverse(str2list(a:string)))
 endfunction
 function! GetCursorWord() " {{{1
+    if mode() =~# "[vV\<C-v>]"
+        let [_, vbgl, vbgc, _] = getpos('v')
+        let [_, vedl, vedc, _] = getpos('.')
+        if vbgl != vedl | return '' | endif
+        if mode() =~# 'V'
+            return [getline(vbgl)]
+        else
+            if vbgc > vedc | let [vedc, vbgc] = [vbgc, vedc] | endif
+            return [getline(vbgl)[vbgc-1:vedc-1], 'v']
+        endif
+    endif
     let [ccol, line] = [charcol("."), line(".")]
     let bcol_idx = col(".") - 1 " byte column (cursor) index
     let line_text = getline(line)

@@ -57,17 +57,23 @@ nnoremap <silent> <leader>w :call coc#float#close_all()<CR>
 
 " display doc
 " Use K to show documentation in preview window.
-if index(['bash', 'sh'], &filetype) == -1
-    nnoremap <silent> K :call <SID>show_documentation()<CR>
-endif
+nnoremap <silent> K :call <SID>show_documentation()<CR>
+xnoremap <silent> K <cmd>call <SID>show_documentation()<CR>
 
 function! s:show_documentation()
-    if (index(['vim','help'], &filetype) >= 0)
-        execute 'h '.expand('<cword>')
+    if (index(['vim', 'help'], &filetype) != -1)
+        execute 'h '.g:cursor_word_str
+    elseif index(['bash', 'sh'], &filetype) != -1
+        execute '!' . &keywordprg . ' ' . g:cursor_word_str
     elseif (coc#rpc#ready())
         call CocActionAsync('doHover')
+        " not exit visual, do optional range hover
+        return
     else
-        execute '!' . &keywordprg . ' ' . expand('<cword>')
+        execute '!' . &keywordprg . ' ' . g:cursor_word_str
+    endif
+    if mode() =~# '[vV]' " Exit visual mode
+        execute "normal! \<esc>"
     endif
 endfunction
 

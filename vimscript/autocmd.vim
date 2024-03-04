@@ -99,7 +99,7 @@ autocmd CmdlineEnter * let g:in_cmd_line = v:true
 autocmd CmdlineLeave * let g:in_cmd_line = v:false
 " Auto Light word {{{1
 function AutoLightWordTimer(time)
-    let g:cursor_word = ''
+    let [g:cursor_word, g:cursor_word_str] = ['', '']
     let l:oldmode = g:in_cmd_line
 
     function AutoLightWordTimerF(timer) closure
@@ -112,12 +112,17 @@ function AutoLightWordTimer(time)
             endif
         endif " }}}
         let l:oldmode = g:in_cmd_line
-        if l:word == g:cursor_word
+        if type(l:word) == type(g:cursor_word) && l:word == g:cursor_word
             return
         endif
         let g:cursor_word = l:word
+        let g:cursor_word_str = type(l:word) == v:t_list ? l:word[0] : l:word
         let g:cursor_word_regex = '//'
-        if strlen(l:word)
+        if type(l:word) == v:t_list
+            let g:cursor_word_regex = '/\V'
+                        \ . l:word[0]->substitute('[/\\]', '\\\0', 'g')
+                        \ . '/'
+        elseif strlen(l:word)
             let g:cursor_word_regex = '/\V\<'
                         \ . l:word->substitute('[/\\]', '\\\0', 'g')
                         \ . '\>/'
@@ -128,7 +133,7 @@ function AutoLightWordTimer(time)
     call timer_start(a:time, 'AutoLightWordTimerF', {'repeat': -1})
 endfunction
 
-call AutoLightWordTimer(143)
+call AutoLightWordTimer(135)
 " Load plugged {{{1
 autocmd BufNewFile,BufRead * call SetDefaultFileTypeOptions()
 function SetDefaultFileTypeOptions()
