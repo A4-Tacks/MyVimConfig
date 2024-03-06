@@ -50,13 +50,13 @@ function SetTitle()
     " goto end
     normal G$
 endfunction
-" 进入常规模式关闭粘贴模式 {{{1
+" Enter normal disbale paste {{{1
 function ClosePaste()
     if &paste
         set nopaste
     endif
 endfunction
-autocmd InsertLeave * call ClosePaste()
+autocmd InsertLeave * if &paste | set nopaste eventignore= | endif
 " 回到上次查看文件的位置 {{{1
 " last-position-jump
 

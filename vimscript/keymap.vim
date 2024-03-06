@@ -88,7 +88,7 @@ tnoremap <kPageDown> <PageDown>
 " del
 inoremap <C-l> <Del>
 " paste start
-noremap! <expr> #cf execute("set paste")
+noremap! <silent> #cf <C-o>:set paste eventignore=TextChangedI,TextChangedP,InsertChange,InsertCharPre<cr>
 
 " emacs
 inoremap <C-a> <Home>
