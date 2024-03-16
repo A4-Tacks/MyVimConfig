@@ -161,8 +161,7 @@ set ttimeoutlen=0
 set foldmethod=marker
 
 " Display tab char
-set listchars=tab:<=>
-set list
+set listchars=tab:──┤, list
 
 " Disabled Fix EndOfLine. Auto EOL
 set nofixeol
