@@ -156,17 +156,41 @@ function! RangeMapDefine(key, str) " {{{
 endfunction " }}}
 function! TextObjectIndentBlock(out) " {{{
     let Mov = {n -> n..'G'}
-    let [line, indent] = [line('.'), indent('.')]
-    let [begin, end] = [line, line]
+    let indent = indent('.')
+    let [bg, ed, sbg, sed] = [line('.')]->repeat(4)
+    let eof = line('$')
+    let Check = {n -> n >= 1 && n <= eof}
 
     if !a:out
-        while indent(end+1)   >  indent | let end += 1   | endwhile
+        while Check(ed+1)
+            let n = ed+1
+            if getline(n) =~# '^\s*$'
+                let ed = n
+            elseif indent(n) > indent
+                let [ed, sed] = [n, n]
+            else | break | endif
+        endwhile
     else
-        while indent(begin-1) >= indent | let begin -= 1 | endwhile
-        while indent(end+1)   >= indent | let end += 1   | endwhile
+        while Check(bg-1)
+            let n = bg-1
+            if getline(n) =~# '^\s*$'
+                let bg = n
+            elseif indent(n) >= indent
+                let [bg, sbg] = [n, n]
+            else | break | endif
+        endwhile
+
+        while Check(ed+1)
+            let n = ed+1
+            if getline(n) =~# '^\s*$'
+                let ed += 1
+            elseif indent(n) >= indent
+                let [ed, sed] = [n, n]
+            else | break | endif
+        endwhile
     endif
 
-    return ":\<C-u>norm! V".Mov(begin).'o'.Mov(end).'o'."\<CR>"
+    return ":\<C-u>norm! V".Mov(sbg).'o'.Mov(sed).'o'."\<CR>"
 endfunction " }}}
 
 call RangeMapDefine('k', '(')

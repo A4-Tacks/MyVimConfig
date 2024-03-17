@@ -119,9 +119,11 @@ function AutoLightWordTimer(time)
         let g:cursor_word_str = type(l:word) == v:t_list ? l:word[0] : l:word
         let g:cursor_word_regex = '//'
         if type(l:word) == v:t_list
-            let g:cursor_word_regex = '/\V'
-                        \ . l:word[0]->substitute('[/\\]', '\\\0', 'g')
-                        \ . '/'
+            if l:word[0]->match('^\s*$') == -1
+                let g:cursor_word_regex = '/\V'
+                            \ . l:word[0]->substitute('[/\\]', '\\\0', 'g')
+                            \ . '/'
+            endif
         elseif strlen(l:word)
             let g:cursor_word_regex = '/\V\<'
                         \ . l:word->substitute('[/\\]', '\\\0', 'g')
