@@ -215,9 +215,7 @@ onoremap <silent><expr> an TextObjectIndentBlock(v:true)
 nnoremap <expr> n strlen(@/) > 0 ? "n" : ""
 nnoremap <expr> N strlen(@/) > 0 ? "N" : ""
 " Leader maps {{{1
-nnoremap <leader>T :NERDTree<Cr>
-"nnoremap <leader>t :NERDTreeToggle<Cr>
-"nnoremap <leader>T :NERDTreeClose<Cr>
+nnoremap <leader>T :if&ft!=#'nerdtree'\|NERDTreeCWD\|el\|NERDTreeToggle\|en<cr>
 " Old Window control {{{1
 nnoremap <silent> <leader><leader> <C-w><C-w>
 

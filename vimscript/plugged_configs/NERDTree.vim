@@ -1,11 +1,11 @@
 " 当vim无指定文件时自动打开项目目录树
-autocmd StdinReadPre * let s:std_in=1
-autocmd VimEnter * if argc() == 0 && !exists("s:std_in") 
-            \| NERDTree 
-            \| if g:autoBigWinEnabled == 0 
-                \| execute "vertical resize ".&columns / 5
-                \| endif
-            \| endif
+"autocmd StdinReadPre * let s:std_in=1
+"autocmd VimEnter * if argc() == 0 && !exists("s:std_in")
+"            \| NERDTree
+"            \| if g:autoBigWinEnabled == 0
+"                \| execute "vertical resize ".&columns / 5
+"                \| endif
+"            \| endif
 
 " 不显示下述文件
 let NERDTreeIgnore=[] "ignore files in NERDTree
