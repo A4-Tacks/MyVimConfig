@@ -215,7 +215,12 @@ onoremap <silent><expr> an TextObjectIndentBlock(v:true)
 nnoremap <expr> n strlen(@/) > 0 ? "n" : ""
 nnoremap <expr> N strlen(@/) > 0 ? "N" : ""
 " Leader maps {{{1
+
+" open terminal or update NERDTree
+nnoremap <leader>t :if&ft!=#'nerdtree'\|exe'terminal'\|el\|NERDTreeRefreshRoot\|en<cr>
+" NERDTree Toggle
 nnoremap <leader>T :if&ft!=#'nerdtree'\|NERDTreeCWD\|el\|NERDTreeToggle\|en<cr>
+
 " Old Window control {{{1
 nnoremap <silent> <leader><leader> <C-w><C-w>
 
@@ -267,9 +272,6 @@ endfunction
 
 " quit
 nnoremap <silent> <leader>q <C-w>q
-
-" open terminal
-nnoremap <silent> <leader>t :terminal<Cr>
 
 " Select Clipboard Paste {{{1
 function! Clipboard()
