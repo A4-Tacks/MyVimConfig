@@ -144,8 +144,15 @@ endfunction
 nnoremap <C-g> :call ShowBufferInfo()<cr>
 " }}}
 
-" 快速buffer切换
-nnoremap <silent> <leader>b :ls\|exec'b'.input('input buffer id> ')<cr>
+" 快速buffer切换 {{{
+function! s:goto_selected_buffer()
+    let id = input('input buffer id> ')
+    if !id | return | endif
+    execute 'buffer'.id
+endfunction
+nnoremap <silent> <leader>b :ls \|call <SID>goto_selected_buffer()<cr>
+nnoremap <silent> <leader>B :ls!\|call <SID>goto_selected_buffer()<cr>
+" }}}
 
 " 范围选择 {{{1
 function! RangeMapDefine(key, str) " {{{
@@ -277,7 +284,7 @@ nnoremap <silent> <leader>q <C-w>q
 function! Clipboard()
     let l:display_width = float2nr(&columns * 0.8) - 6
     let l:lines = []
-    let l:Format = {name -> 
+    let l:Format = {name ->
                 \add(l:lines, "@" .. name .. ": ["
                 \.. SplitLongStr(
                 \substitute(eval('@' .. name), '\n', '\\n', 'g'),
@@ -401,7 +408,7 @@ xnoremap <A-F8> :%!baidu_fanyi -t en -m \%0s\%n -\|baidu_fanyi -t zh -m \%1s\%n\
 function TabGoTu() " {{{2
     if foldclosed(line(".")) != -1
         return "\<C-o>zo"
-    endif 
+    endif
     let text=getline(".")[col(".")-1]
     let column=col(".")
     return "\<Tab>"
@@ -445,10 +452,10 @@ inoremap #<Cr> <Cr>
 function! NEnterInsert()
     if foldclosed(line(".")) != -1
         return "zo"
-    else 
+    else
         return "\<Cr>"
-    endif 
-endfunction 
+    endif
+endfunction
 nnoremap <expr> <Cr> NEnterInsert()
 " }}}2
 " Commands {{{1
