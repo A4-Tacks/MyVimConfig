@@ -78,6 +78,19 @@ snoremap <silent> jk <Esc>
 " term 回 vim
 tnoremap jk <C-\><C-n>
 
+" 按末尾相对行数而不是合并行数来计范围的行合并 {{{
+command -range -bang -bar SilentRelativeJoin
+            \ if <range> | sil <line1>,<line2> RelativeJoin<bang>
+            \ | el | sil RelativeJoin<bang>
+            \ | en
+command -range -bang -bar RelativeJoin
+            \ | execute 'norm!'.(<range>?<line2>-<line1>+2:'')
+            \   .(<bang>0?'gJ':'J')
+
+nnoremap <silent> J  :SilentRelativeJoin<cr>
+nnoremap <silent> gJ :SilentRelativeJoin!<cr>
+" }}}
+
 " fix term keymap
 tnoremap <kHome> <Home>
 tnoremap <kEnd> <End>
