@@ -137,7 +137,7 @@ endfunction
 
 call AutoLightWordTimer(135)
 " Load plugged {{{1
-autocmd BufNewFile,BufRead * call SetDefaultFileTypeOptions()
+autocmd Syntax * call SetDefaultFileTypeOptions()
 function SetDefaultFileTypeOptions()
     " 设置映射 属性 参数 及启动插件
     let b:lang_fold_method = 'syntax'
@@ -213,10 +213,10 @@ function SetDefaultFileTypeOptions()
         nnoremap <buffer><silent> <F9> :call CEditType()<Cr>
 
     elseif l:type == 'ocaml'
-        set shiftwidth=2
+        setlocal shiftwidth=2
 
     elseif ['javascript', 'typescript']->index(l:type) != -1
-        set shiftwidth=2
+        setlocal shiftwidth=2
 
     endif
     execute "setlocal foldmethod=" .. b:lang_fold_method
