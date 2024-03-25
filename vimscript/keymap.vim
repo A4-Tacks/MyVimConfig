@@ -36,18 +36,18 @@ noremap! #lq ]
 noremap! #lw }
 noremap! #le >
 
-noremap! #q []<Left>
-noremap! #w {}<Left>
-noremap! #e <><Left>
-noremap! #Q []<Left>
-noremap! #W {}<Left>
-noremap! #E <><Left>
-noremap! #< <><Left>
-noremap! #> <><Left>
+noremap! #q ]<Left>[
+noremap! #w }<Left>{
+noremap! #e ><Left><
+noremap! #Q ]<Left>[
+noremap! #W }<Left>{
+noremap! #E ><Left><
+noremap! #< ><Left><
+noremap! #> ><Left><
 
-inoremap ( ()<Left>
-inoremap [ []<Left>
-inoremap { {}<Left>
+inoremap ( )<Left>(
+inoremap [ ]<Left>[
+inoremap { }<Left>{
 inoremap " ""<Left>
 " 快捷符号映射 {{{1
 noremap! #lk ->
