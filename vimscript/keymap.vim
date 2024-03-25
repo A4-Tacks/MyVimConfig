@@ -263,13 +263,14 @@ nnoremap <silent> <leader>+ :vertical res+6<Cr>
 nnoremap <leader>m <C-w>=
 
 " windows control mode {{{
-nnoremap <silent> <C-w>m :call StartWindowControl()<cr>
+nnoremap <silent> <c-w>m :call StartWindowControl()<cr>
+nnoremap <silent> <c-w><c-m> :call StartWindowControl()<cr>
 function! StartWindowControl()
     let num = ''
     let oprefix = ''
     while v:true
         let ch = getcharstr()
-        if ch =~# "[\<C-w>\<esc>m]"
+        if ch =~# "[\<C-w>\<esc>\<c-m>m]"
             return
         elseif num != '' && ch =~# '\d'
             let num *= 10
