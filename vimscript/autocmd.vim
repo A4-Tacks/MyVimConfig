@@ -136,6 +136,9 @@ function AutoLightWordTimer(time)
 endfunction
 
 call AutoLightWordTimer(135)
+" Auto open fold for Insert mode {{{1
+" 从默认行为来说, 这是本来就有的. 但是代码片段插件并不会触发这个, 所以增加这个
+autocmd TextChangedI * if foldclosed('.') != -1 | foldopen! | en
 " Load plugged {{{1
 autocmd Syntax * call SetDefaultFileTypeOptions()
 function SetDefaultFileTypeOptions()
