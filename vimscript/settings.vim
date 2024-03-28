@@ -42,10 +42,10 @@ set shiftwidth=4
 " 禁用连续注释 每次切换缓冲区都执行一次 详见: `fo-table`
 "autocmd BufEnter * set formatoptions-=cro
 " /: 仅当注释位于行开头时进行续行
-" o: 进行例如 norm_o 时不插入注释
+" o: 进行例如 norm_o 时插入注释
 " m: 断行时对于扩展 Ascii 之外的字符视为一个完整词
 " B: 合并行时, 不要在两个扩展 Ascii 之外的字符之间插入空格 (被M选项覆盖)
-autocmd BufEnter * set formatoptions+=/mB formatoptions-=o
+autocmd BufEnter * set formatoptions+=/mBrj formatoptions-=o
 
 " AutoIndent and 智能缩进
 set autoindent smartindent
