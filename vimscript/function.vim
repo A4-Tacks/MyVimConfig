@@ -199,16 +199,16 @@ function! UpdateIndentLine() " {{{1
     let g:indentLine_ws = get(g:, 'indentLine_ws', ' ')
     let g:indentLine_char = get(g:, 'indentLine_char', '|')
     let g:indentLine_indentLevel = get(g:, 'indentLine_indentLevel', 20)
-    let g:indentLine_matchsid = get(g:, 'indentLine_matchsid', [])
+    let w:indentLine_matchsid = get(w:, 'indentLine_matchsid', [])
 
-    if !g:indentLine_matchsid->empty()
-        for id in g:indentLine_matchsid
+    if !w:indentLine_matchsid->empty()
+        for id in w:indentLine_matchsid
             try
                 call matchdelete(id)
             catch /^Vim\%((\a\+)\)\=:E80[23]/
             endtry
         endfor
-        let g:indentLine_matchsid = []
+        let w:indentLine_matchsid = []
     endif
 
     let sw = &sw ? &sw : &tabstop
@@ -216,7 +216,7 @@ function! UpdateIndentLine() " {{{1
     for i in range(sw+1, sw*g:indentLine_indentLevel+1, sw)
         let pat = '^'.ws.'\+\zs\%'.i.'v'.ws
         let id = matchadd('Conceal', pat, 0, -1, {'conceal': g:indentLine_char})
-        let _ = g:indentLine_matchsid->add(id)
+        let _ = w:indentLine_matchsid->add(id)
     endfor
 endfunction
 function! UpdateUserMatches() " {{{1
