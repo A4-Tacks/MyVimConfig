@@ -32,6 +32,8 @@ let g:code_format_buffer_commands = {
             \ "sh": '!shfmt -ci -sr -i 4 -s -',
             \ "rust": '!rustfmt',
             \ "json": "!jq .|sed -E 's/^( *)/\\1\\1/g'",
+            \ "c": "!clang-format --style='{BasedOnStyle: llvm, IndentWidth: 4}'",
+            \ "cpp": "!clang-format --style='{BasedOnStyle: llvm, IndentWidth: 4}'",
             \ }
 function! Fmt(line1, line2)
     let var_name = 'g:code_format_buffer_commands'
