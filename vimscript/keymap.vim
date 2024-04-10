@@ -221,6 +221,8 @@ call RangeMapDefine('e', '<')
 call RangeMapDefine('i', '"')
 call RangeMapDefine('o', "'")
 call RangeMapDefine('m', '`')
+call RangeMapDefine('Q', 'W') " 原本的WORD
+call RangeMapDefine('E', 'w')
 
 xnoremap <silent> iv :<C-u>norm! v_og_<CR>
 onoremap <silent> iv :<C-u>norm! v_og_<CR>
