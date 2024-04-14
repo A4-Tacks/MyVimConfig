@@ -80,6 +80,9 @@ endsnippet
 snippet continue "continue" b
 continue
 endsnippet
+snippet return "return" b
+return $0
+endsnippet
 snippet delarri "delete array[index]" b
 delete $1[$2]$0
 endsnippet
@@ -103,6 +106,17 @@ default:
 	$0
 endsnippet
 
+# Expression
+snippet callref "call function name reference" w
+@$1($2)$0
+endsnippet
+snippet get "get array item" w
+$1[$2]$0
+endsnippet
+snippet constregex "constant regexp" w
+@/$1/$0
+endsnippet
+
 # I/O Statements
 snippet getline "getline" w
 getline $1${2:< $3}$0
@@ -117,10 +131,19 @@ snippet print "print" b
 print $0
 endsnippet
 snippet printf "printf" b
-printf $0
+printf "$1"$0
 endsnippet
-snippet print2file "print2file" b
-print $1 >> $0
+snippet printf2 "printf" b
+printf "$1"$2 > $0
+endsnippet
+snippet printf2a "printf" b
+printf "$1"$2 >> $0
+endsnippet
+snippet print2 "print2file" b
+print "$1"$2 > $0
+endsnippet
+snippet print2a "print2file" b
+print "$1"$2 >> $0
 endsnippet
 
 # functions
