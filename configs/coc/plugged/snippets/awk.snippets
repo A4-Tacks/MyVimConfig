@@ -1,42 +1,347 @@
-# begin
+# Top
 snippet begin "BEGIN CodeBlock" b
 BEGIN {
-	${0}
-}
-endsnippet
-
-# end
-snippet end "END CodeBlock" b
-END {
-	${0}
-}
-endsnippet
-
-# block
-snippet block "block" b
-$1{
 	$0
 }
 endsnippet
-
-snippet for "for" b
-for (${1:i} = $2; $1 < $3; ++$1) {
-	$4
-}
-endsnippet
-
-snippet forin "for in" b
-for (${1:i} in $2) {
-	$3
-}
-endsnippet
-snippet if "if (x)" b
-if (${1:x}) {
+snippet end "END CodeBlock" b
+END {
 	$0
 }
 endsnippet
 snippet function "function" b
-function ${1:name}(${2:args}, _, ${3:locals}) {
+function $1(${2:$3, }_) {
 	$0
 }
+endsnippet
+snippet block "block" w
+$1{
+	$0
+}
+endsnippet
+snippet include "include" b
+@include "$1"$0
+endsnippet
+snippet load "load" b
+@load "$1"$0
+endsnippet
+snippet namespace "namespace" b
+@namespace "${1:awk}"$0
+endsnippet
+
+# Patterns
+snippet BEGIN "BEGIN" w
+BEGIN
+endsnippet
+snippet END "END" w
+END
+endsnippet
+snippet BEGINFILE "BEGINFILE" w
+BEGINFILE
+endsnippet
+snippet ENDFILE "ENDFILE" w
+ENDFILE
+endsnippet
+
+# Control Statements
+snippet if "if (x)" b
+if ($1) {
+	$0
+}
+endsnippet
+snippet else "else" b
+else {
+	$0
+}
+endsnippet
+snippet while "while (x)" b
+while ($1) {
+	$0
+}
+endsnippet
+snippet dowhile "do { ... } while (x)" b
+do {
+	$0
+} while ($1)
+endsnippet
+snippet for "for" b
+for (${1:i} = $2; $1 < $3; ++$1) {
+	$0
+}
+endsnippet
+snippet forin "for in" b
+for (${1:i} in $2) {
+	$0
+}
+endsnippet
+snippet break "break" b
+break
+endsnippet
+snippet continue "continue" b
+continue
+endsnippet
+snippet delarri "delete array[index]" b
+delete $1[$2]$0
+endsnippet
+snippet delarr "delete array" b
+delete $0
+endsnippet
+snippet exit "exit [ expression ]" b
+exit $0
+endsnippet
+snippet switch "switch (expression) cases..." b
+switch ($1) {
+	$0
+}
+endsnippet
+snippet case "in switch statement" b
+case $1:
+	$0
+endsnippet
+snippet default "in switch statement" b
+default:
+	$0
+endsnippet
+
+# I/O Statements
+snippet getline "getline" w
+getline $1${2:< $3}$0
+endsnippet
+snippet next "next" b
+next
+endsnippet
+snippet nextfile "nextfile" b
+nextfile
+endsnippet
+snippet print "print" b
+print $0
+endsnippet
+snippet printf "printf" b
+printf $0
+endsnippet
+snippet print2file "print2file" b
+print $1 >> $0
+endsnippet
+
+# functions
+snippet close "close(file [, how])" w
+close(${1:file}${2:, ${3:how}})$0
+endsnippet
+snippet fflush "fflush([file])" w
+fflush(${1:file})$0
+endsnippet
+snippet system "system(cmd-line)" w
+system(${1:cmd-line})$0
+endsnippet
+snippet close "close()" w
+close()$0
+endsnippet
+snippet atan2 "atan2(y, x)" w
+atan2(${1:y}, ${2:x})$0
+endsnippet
+snippet cos "cos(expr)" w
+cos(${1:expr})$0
+endsnippet
+snippet exp "exp(expr)" w
+exp(${1:expr})$0
+endsnippet
+snippet int "int(expr)" w
+int(${1:expr})$0
+endsnippet
+snippet log "log(expr)" w
+log(${1:expr})$0
+endsnippet
+snippet rand "rand()" w
+rand()$0
+endsnippet
+snippet sin "sin(expr)" w
+sin(${1:expr})$0
+endsnippet
+snippet sqrt "sqrt(expr)" w
+sqrt(${1:expr})$0
+endsnippet
+snippet srand "srand([expr])" w
+srand(${1:expr})$0
+endsnippet
+snippet asort "asort(s [, d [, how] ])" w
+asort(${1:s}${2:, ${3:d}${4:, ${5:how}}})$0
+endsnippet
+snippet asorti "asorti(s [, d [, how] ])" w
+asorti(${1:s}${2:, ${3:d}${4:, ${5:how}}})$0
+endsnippet
+snippet gensub "gensub(r, s, h [, t])" w
+gensub(${1:r}, ${2:s}, ${3:h}${4:, ${5:t}})$0
+endsnippet
+snippet gsub "gsub(r, s [, t])" w
+gsub(${1:r}, ${2:s}${3:, ${4:t}})$0
+endsnippet
+snippet index "index(s, t)" w
+index(${1:s}, ${2:t})$0
+endsnippet
+snippet length "length([s])" w
+length(${1:s})$0
+endsnippet
+snippet match "match(s, r [, a])" w
+match(${1:s}, ${2:r}${3:, ${4:a}})$0
+endsnippet
+snippet patsplit "patsplit(s, a [, r [, seps] ])" w
+patsplit(${1:s}, ${2:a}${3:, ${4:r}${5:, ${6:seps}}})$0
+endsnippet
+snippet split "split(s, a [, r [, seps] ])" w
+split(${1:s}, ${2:a}${3:, ${4:r}${5:, ${6:seps}}})$0
+endsnippet
+snippet sprintf "sprintf(fmt, expr-list)" w
+sprintf(${1:fmt}, ${2:expr-list})$0
+endsnippet
+snippet strtonum "strtonum(str)" w
+strtonum(${1:str})$0
+endsnippet
+snippet sub "sub(r, s [, t])" w
+sub(${1:r}, ${2:s}${3:, ${4:t}})$0
+endsnippet
+snippet substr "substr(s, i [, n])" w
+substr(${1:s}, ${2:i}${3:, ${4:n}})$0
+endsnippet
+snippet tolower "tolower(str)" w
+tolower(${1:str})$0
+endsnippet
+snippet toupper "toupper(str)" w
+toupper(${1:str})$0
+endsnippet
+snippet mktime "mktime(datespec [, utc-flag])" w
+mktime(${1:datespec}${2:, ${3:utc-flag}})$0
+endsnippet
+snippet strftime "strftime([format [, timestamp[, utc-flag]]])" w
+strftime(${1:format${2:, ${3:timestamp}${4:, ${5:utc-flag}}}})$0
+endsnippet
+snippet systime "systime()" w
+systime()$0
+endsnippet
+snippet and "and(v1, v2 [, ...])" w
+and(${1:v1}, ${2:v2}${3:, ...})$0
+endsnippet
+snippet compl "compl(val)" w
+compl(${1:val})$0
+endsnippet
+snippet lshift "lshift(val, count)" w
+lshift(${1:val}, ${2:count})$0
+endsnippet
+snippet or "or(v1, v2 [, ...])" w
+or(${1:v1}, ${2:v2}${3:, ...})$0
+endsnippet
+snippet rshift "rshift(val, count)" w
+rshift(${1:val}, ${2:count})$0
+endsnippet
+snippet xor "xor(v1, v2 [, ...])" w
+xor(${1:v1}, ${2:v2}${3:, ...})$0
+endsnippet
+snippet isarray "isarray(x)" w
+isarray(${1:x})$0
+endsnippet
+snippet typeof "typeof(x)" w
+typeof(${1:x})$0
+endsnippet
+snippet bindtextdomain "bindtextdomain(directory [, domain])" w
+bindtextdomain(${1:directory}${2:, ${3:domain}})$0
+endsnippet
+snippet dcgettext "dcgettext(string [, domain [, category]])" w
+dcgettext(${1:string}${2:, ${3:domain}${4:, ${5:category}}})$0
+endsnippet
+snippet dcngettext "dcngettext(string1, string2, number [, domain [, category]])" w
+dcngettext(${1:string1}, ${2:string2}, ${3:number}${4:, ${5:domain}${6:, ${7:category}}})$0
+endsnippet
+snippet mkbool "mkbool(expression)" w
+mkbool(${1:expression})$0
+endsnippet
+
+# Built-in Variables
+snippet ARGC "ARGC" w
+ARGC$0
+endsnippet
+snippet ARGIND "ARGIND" w
+ARGIND$0
+endsnippet
+snippet ARGV "ARGV" w
+ARGV$0
+endsnippet
+snippet BINMODE "BINMODE" w
+BINMODE$0
+endsnippet
+snippet CONVFMT "CONVFMT" w
+CONVFMT$0
+endsnippet
+snippet ENVIRON "ENVIRON" w
+ENVIRON$0
+endsnippet
+snippet ERRNO "ERRNO" w
+ERRNO$0
+endsnippet
+snippet FIELDWIDTHS "FIELDWIDTHS" w
+FIELDWIDTHS$0
+endsnippet
+snippet FILENAME "FILENAME" w
+FILENAME$0
+endsnippet
+snippet FNR "FNR" w
+FNR$0
+endsnippet
+snippet FPAT "FPAT" w
+FPAT$0
+endsnippet
+snippet FS "FS" w
+FS$0
+endsnippet
+snippet FUNCTAB "FUNCTAB" w
+FUNCTAB$0
+endsnippet
+snippet IGNORECASE "IGNORECASE" w
+IGNORECASE$0
+endsnippet
+snippet LINT "LINT" w
+LINT$0
+endsnippet
+snippet NF "NF" w
+NF$0
+endsnippet
+snippet NR "NR" w
+NR$0
+endsnippet
+snippet OFMT "OFMT" w
+OFMT$0
+endsnippet
+snippet OFS "OFS" w
+OFS$0
+endsnippet
+snippet ORS "ORS" w
+ORS$0
+endsnippet
+snippet PREC "PREC" w
+PREC$0
+endsnippet
+snippet PROCINFO "PROCINFO" w
+PROCINFO$0
+endsnippet
+snippet ROUNDMODE "ROUNDMODE" w
+ROUNDMODE$0
+endsnippet
+snippet RS "RS" w
+RS$0
+endsnippet
+snippet RT "RT" w
+RT$0
+endsnippet
+snippet RSTART "RSTART" w
+RSTART$0
+endsnippet
+snippet RLENGTH "RLENGTH" w
+RLENGTH$0
+endsnippet
+snippet SUBSEP "SUBSEP" w
+SUBSEP$0
+endsnippet
+snippet SYMTAB "SYMTAB" w
+SYMTAB$0
+endsnippet
+snippet TEXTDOMAIN "TEXTDOMAIN" w
+TEXTDOMAIN$0
 endsnippet
