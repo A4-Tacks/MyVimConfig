@@ -234,9 +234,9 @@ onoremap <silent><expr> in TextObjectIndentBlock(v:false)
 xnoremap <silent><expr> an TextObjectIndentBlock(v:true)
 onoremap <silent><expr> an TextObjectIndentBlock(v:true)
 
-" Disable Empty Search {{{1
-nnoremap <expr> n strlen(@/) > 0 ? "n" : ""
-nnoremap <expr> N strlen(@/) > 0 ? "N" : ""
+" Disable Empty Search And Prev Search {{{1
+nnoremap <expr> n strlen(@/) > 0 ? "n" : execute('let@/=get(g:,"prev_search","")').(@/->strlen()?'n':'')
+nnoremap <expr> N strlen(@/) > 0 ? "N" : execute('let@/=get(g:,"prev_search","")').(@/->strlen()?'N':'')
 " Leader maps {{{1
 
 " open terminal or update NERDTree
