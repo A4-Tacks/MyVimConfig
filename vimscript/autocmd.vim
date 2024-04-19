@@ -143,30 +143,29 @@ autocmd TextChangedI * if foldclosed('.') != -1 | foldopen! | en
 autocmd Syntax * call SetDefaultFileTypeOptions()
 function SetDefaultFileTypeOptions()
     " 设置映射 属性 参数 及启动插件
-    let b:lang_fold_method = 'syntax'
     let l:type = &filetype
     if l:type == 'python'
-        let b:lang_fold_method = "indent"
+        setlocal foldmethod=indent
 
     elseif l:type == 'rust'
-        let b:lang_fold_method = "syntax"
+        setlocal foldmethod=syntax
 
     elseif l:type == 'sh'
-        let b:lang_fold_method = "marker"
+        setlocal foldmethod=marker
 
     elseif l:type == 'java'
     "    JCEnable
     "    CocEnable
     "    setlocal omnifunc=javacomplete#Complete
     "    inoremap <buffer> <C-b> <C-x><C-o>
-        let b:lang_fold_method = "syntax"
+        setlocal foldmethod=syntax
 
     elseif l:type == 'awk'
-        let b:lang_fold_method = "marker"
+        setlocal foldmethod=marker
         setlocal foldmarker={,}
 
     elseif l:type == 'vim'
-        let b:lang_fold_method = "marker"
+        setlocal foldmethod=marker
 
     elseif l:type == 'c'
         function! CEditType(str = '', select = 0)
@@ -214,15 +213,21 @@ function SetDefaultFileTypeOptions()
         endfunction
         xnoremap <buffer><silent> <F9> y:call CEditType(@@, 1)<Cr>
         nnoremap <buffer><silent> <F9> :call CEditType()<Cr>
+        setlocal foldmethod=syntax
 
     elseif l:type == 'ocaml'
         setlocal shiftwidth=2
+        setlocal foldmethod=syntax
 
     elseif ['javascript', 'typescript']->index(l:type) != -1
         setlocal shiftwidth=2
+        setlocal foldmethod=syntax
 
     endif
-    execute "setlocal foldmethod=" .. b:lang_fold_method
+
+    if &foldmethod ==# 'manual'
+        setlocal foldmethod=syntax
+    endif
 endfunction
 " TabAutoToEnd {{{1
 autocmd TabNew * tabmove $
