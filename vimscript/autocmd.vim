@@ -160,10 +160,6 @@ function SetDefaultFileTypeOptions()
     "    inoremap <buffer> <C-b> <C-x><C-o>
         setlocal foldmethod=syntax
 
-    elseif l:type == 'awk'
-        setlocal foldmethod=marker
-        setlocal foldmarker={,}
-
     elseif l:type == 'vim'
         setlocal foldmethod=marker
 
