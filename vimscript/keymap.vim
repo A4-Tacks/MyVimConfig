@@ -266,14 +266,19 @@ nnoremap <silent> <leader>+ :vertical res+6<Cr>
 nnoremap <leader>m <C-w>=
 
 " windows control mode {{{
+nnoremap <silent> mm :call StartWindowControl()<cr>
 nnoremap <silent> <c-w>m :call StartWindowControl()<cr>
 nnoremap <silent> <c-w><c-m> :call StartWindowControl()<cr>
 function! StartWindowControl()
+    let extra_cmd = {
+                \ 'M': 'res|vert res',
+                \ 'm': 'norm!'."\<c-w>=",
+                \ }
     let num = ''
     let oprefix = ''
     while v:true
         let ch = getcharstr()
-        if ch =~# "[\<C-w>\<esc>\<c-m>m]"
+        if ch =~# "[\<C-w>\<esc>\<c-m> ]"
             return
         elseif num != '' && ch =~# '\d'
             let num *= 10
@@ -283,7 +288,11 @@ function! StartWindowControl()
         elseif oprefix->empty() && ch ==# 'g'
             let oprefix = 'g'
         else
-            let cmd = "norm \<C-w>".num.oprefix.ch
+            if extra_cmd->has_key(ch)
+                let cmd = extra_cmd[ch]
+            else
+                let cmd = "norm \<C-w>".num.oprefix.ch
+            endif
             execute cmd
             echo cmd
             redraw
