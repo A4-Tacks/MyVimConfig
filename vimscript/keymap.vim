@@ -273,6 +273,8 @@ function! StartWindowControl()
     let extra_cmd = {
                 \ 'M': 'res|vert res',
                 \ 'm': 'norm!'."\<c-w>=",
+                \ 'gb': 'bn',
+                \ 'gB': 'bp',
                 \ }
     let num = ''
     let oprefix = ''
@@ -288,8 +290,8 @@ function! StartWindowControl()
         elseif oprefix->empty() && ch ==# 'g'
             let oprefix = 'g'
         else
-            if extra_cmd->has_key(ch)
-                let cmd = extra_cmd[ch]
+            if extra_cmd->has_key(oprefix.ch)
+                let cmd = extra_cmd[oprefix.ch]
             else
                 let cmd = "norm \<C-w>".num.oprefix.ch
             endif
