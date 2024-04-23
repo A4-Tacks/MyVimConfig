@@ -28,6 +28,14 @@ noremap! 》 >
 noremap! ？ ?
 noremap! ！ !
 " 括号类 {{{1
+noremap #kq [
+noremap #kw {
+noremap #ke <
+
+noremap #lq ]
+noremap #lw }
+noremap #le >
+
 noremap! #kq [
 noremap! #kw {
 noremap! #ke <
