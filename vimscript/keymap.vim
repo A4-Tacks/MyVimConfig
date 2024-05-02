@@ -31,10 +31,12 @@ noremap! ！ !
 noremap #kq [
 noremap #kw {
 noremap #ke <
+noremap #zk {
 
 noremap #lq ]
 noremap #lw }
 noremap #le >
+noremap #zl }
 
 noremap! #kq [
 noremap! #kw {
