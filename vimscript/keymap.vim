@@ -221,7 +221,7 @@ function! TextObjectIndentBlock(out) " {{{
         endwhile
     endif
 
-    return ":\<C-u>norm! V".Mov(sbg).'o'.Mov(sed).'o'."\<CR>"
+    return ":\<C-u>norm! V".Mov(sbg).'o'.Mov(sed).'g_o'."\<CR>"
 endfunction " }}}
 
 call RangeMapDefine('k', '(')
