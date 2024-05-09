@@ -496,6 +496,9 @@ function! NEnterInsert()
 endfunction
 nnoremap <expr> <Cr> NEnterInsert()
 " }}}2
+vnoremap <expr> <cr> foldclosed('.') != -1
+            \ ? execute('foldopen!')
+            \ : "\<cr>"
 " Commands {{{1
 let g:commands_list = [
             \['noop', { -> ''}],
