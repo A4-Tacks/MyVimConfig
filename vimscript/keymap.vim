@@ -1,6 +1,8 @@
 " 符号转换 {{{1
 noremap! #x \
 noremap! #& \|
+noremap! #h \|
+noremap! #a \|\|
 inoremap #' ''<Left>
 inoremap #_ ~
 inoremap #" `
