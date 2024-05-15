@@ -127,6 +127,9 @@ inoremap #: <End>;
 inoremap #, <End>,
 inoremap #. <End>,
 
+nnoremap & @@
+nnoremap #& &
+
 " next or prev buffer {{{
 command! -count -bar BufferNext execute "bnext " .. (<range> ? <line2>-<line1> + 1 : "")
 command! -count -bar BufferPrev execute "bprevious " .. (<range> ? <line2>-<line1> + 1 : "")
