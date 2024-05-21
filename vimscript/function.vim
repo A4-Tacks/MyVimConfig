@@ -53,16 +53,13 @@ endfunction
 function! ShlexSplit(str, ...) " -> list {{{1
     return py3eval('shlex.split(vim.eval("a:str"))')
 endfunction
-function! ReversedStr(string) " {{{1
-    return list2str(reverse(str2list(a:string)))
-endfunction
 function! GetCursorWord() " {{{1
     if mode() =~# "[vV\<C-v>]"
         let [_, vbgl, vbgc, _] = getpos('v')
         let [_, vedl, vedc, _] = getpos('.')
         if vbgl != vedl | return '' | endif
         if mode() =~# 'V'
-            return [getline(vbgl)]
+            return [getline(vbgl), 'V']
         else
             if vbgc > vedc | let [vedc, vbgc] = [vbgc, vedc] | endif
             let line = getline(vbgl)
@@ -73,9 +70,8 @@ function! GetCursorWord() " {{{1
     let [ccol, line] = [charcol("."), line(".")]
     let bcol_idx = col(".") - 1 " byte column (cursor) index
     let line_text = getline(line)
-    let to_col_text = ReversedStr(strcharpart(line_text, 0, ccol))
-    let idx = matchend(to_col_text,
-                \ '^.\{-0,}\>')
+    let to_col_text = reverse(strcharpart(line_text, 0, ccol))
+    let idx = matchend(to_col_text, '^.\{-0,}\>')
     if idx == -1
         return ''
     endif
