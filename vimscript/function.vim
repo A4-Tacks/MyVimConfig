@@ -232,9 +232,9 @@ function! UpdateUserMatches() " {{{1
 endfunction
 function! SetUserColors() " {{{1
     " Vim 原生补全菜单
-    hi! Pmenu ctermfg=7 ctermbg=8
+    hi! Pmenu ctermbg=237
     " Vim 原生补全菜单选中项
-    hi! PmenuSel ctermfg=15 ctermbg=4
+    hi! PmenuSel ctermfg=35 ctermbg=238
     " 词匹配颜色
     hi! default WordLight term=nocombine cterm=underline
 
@@ -261,7 +261,9 @@ function! SetUserColors() " {{{1
 
     hi! CocFloating ctermbg=237
     " Coc 搜索匹配项
-    hi! CocPumSearch ctermfg=35
+    hi! CocSearch ctermfg=35
+    " Coc 搜索匹配项背景
+    hi! CocMenuSel ctermbg=238 guibg=#494949
     " 警告侧标
     hi! CocWarningSign ctermfg=0 ctermbg=3
 
