@@ -213,7 +213,7 @@ aug AlphaGoto
                 \   if g:after_alpha_goto_do == 2
                 \           && reltimefloat(reltime())
                 \               - g:after_alpha_goto_time
-                \               > 0.3 " 没有成功移动的情况下用超时判定
+                \               > 0.3
                 \ |     let g:after_alpha_goto_do = 0
                 \ | el
                 \ |     let g:after_alpha_goto_do -= g:after_alpha_goto_do > 0
