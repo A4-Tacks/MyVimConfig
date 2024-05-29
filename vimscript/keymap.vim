@@ -186,6 +186,56 @@ nnoremap <silent> <leader>b :ls \|call <SID>goto_selected_buffer()<cr>
 nnoremap <silent> <leader>B :ls!\|call <SID>goto_selected_buffer()<cr>
 " }}}
 
+" 在非fFtT情况下, 分号可以表示冒号 {{{
+nnoremap <expr> ; AlphaGotoNext(';')
+nnoremap <expr> , AlphaGotoNext(',')
+
+xnoremap <expr> ; AlphaGotoNext(';')
+xnoremap <expr> , AlphaGotoNext(',')
+
+
+nnoremap <expr> f AlphaGoto('f')
+nnoremap <expr> F AlphaGoto('F')
+nnoremap <expr> t AlphaGoto('t')
+nnoremap <expr> T AlphaGoto('T')
+
+xnoremap <expr> f AlphaGoto('f')
+xnoremap <expr> F AlphaGoto('F')
+xnoremap <expr> t AlphaGoto('t')
+xnoremap <expr> T AlphaGoto('T')
+
+
+let g:after_alpha_goto_do = 0
+
+aug AlphaGoto
+    au!
+    au CursorMoved *
+                \   if g:after_alpha_goto_do == 2
+                \           && reltimefloat(reltime())
+                \               - g:after_alpha_goto_time
+                \               > 0.3 " 没有成功移动的情况下用超时判定
+                \ |     let g:after_alpha_goto_do = 0
+                \ | el
+                \ |     let g:after_alpha_goto_do -= g:after_alpha_goto_do > 0
+                \ | en
+aug end
+
+function! AlphaGoto(cmd)
+    let g:after_alpha_goto_do = 2
+    let g:after_alpha_goto_time = reltimefloat(reltime())
+    return a:cmd
+endfunction
+function! AlphaGotoNext(cmd)
+    if !get(g:, 'after_alpha_goto_do')
+        return ':'
+    endif
+
+    let g:after_alpha_goto_do = 2
+    let g:after_alpha_goto_time = reltimefloat(reltime())
+    return a:cmd
+endfunction
+" }}}
+
 " 范围选择 {{{1
 function! RangeMapDefine(key, str) " {{{
     execute 'onoremap <silent> a' .. a:key .. ' a' .. a:str
