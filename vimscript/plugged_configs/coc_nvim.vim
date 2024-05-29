@@ -10,20 +10,7 @@ scriptencoding utf-8
 
 " 可能用到的软件包: vint shellcheck shfmt ...
 
-" Color
-" fg: 前景, bg: 背景
-" Coc 扩展菜单项
-hi CocFloating ctermfg=15 ctermbg=8
-" Coc 搜索匹配项
-hi CocPumSearch ctermfg=10
-" 警告侧标
-hi CocWarningSign ctermfg=0 ctermbg=11
-" 行内嵌入类型提示
-hi CocInlayHint cterm=none ctermfg=4 ctermbg=7
-
-
 " maps
-
 
 " rename
 nmap <silent> <F2> <Plug>(coc-rename)

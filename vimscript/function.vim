@@ -242,12 +242,12 @@ function! SetUserColors() " {{{1
     hi! CursorLine term=none cterm=none ctermbg=235
 
     " 语法隐藏颜色
-    hi! Conceal ctermfg=239 ctermbg=NONE guifg=Grey30 guibg=NONE
+    hi! Conceal ctermfg=244 ctermbg=NONE guifg=Grey30 guibg=NONE
 
-    hi! User1 cterm=none ctermfg=15 ctermbg=4
+    hi! User1 cterm=none ctermfg=15 ctermbg=29
 
     " 背景
-    hi! Normal term=none cterm=none gui=none ctermfg=15 ctermbg=none guifg=White guibg=Black
+    "hi! Normal term=none cterm=none gui=none ctermfg=15 ctermbg=none guifg=White guibg=Black
 
     hi! NonText term=bold cterm=none gui=bold ctermfg=12 ctermbg=none guifg=Blue guibg=Black
 
@@ -257,13 +257,21 @@ function! SetUserColors() " {{{1
     hi! SignColumn term=standout cterm=none gui=bold
                 \ ctermfg=14 ctermbg=242 guifg=Cyan guibg=Grey
 
+    hi! CocInlayHint cterm=none ctermfg=252 ctermbg=237
+
+    hi! CocFloating ctermbg=237
+    " Coc 搜索匹配项
+    hi! CocPumSearch ctermfg=35
+    " 警告侧标
+    hi! CocWarningSign ctermfg=0 ctermbg=3
+
     " 行号颜色
-    hi! LineNr term=bold cterm=none gui=none
-                \ ctermfg=11 ctermbg=none guifg=Yellow guibg=Black
+    "hi! LineNr term=bold cterm=none gui=none
+    "            \ ctermfg=11 ctermbg=none guifg=Yellow guibg=Black
 
     " 光标所在行行号颜色
-    hi! CursorLineNr term=underline cterm=underline gui=underline
-                \ ctermfg=11 ctermbg=none guifg=Yellow guibg=Black
+    "hi! CursorLineNr term=underline cterm=underline gui=underline
+    "            \ ctermfg=11 ctermbg=none guifg=Yellow guibg=Black
 
     hi def EOLWhiteSpace ctermfg=NONE ctermbg=239 guifg=NONE guibg=#3A3A3A
 
@@ -271,7 +279,7 @@ function! SetUserColors() " {{{1
     augroup UserMatches
         autocmd!
         autocmd OptionSet shiftwidth,tabstop call UpdateUserMatches()
-        autocmd BufRead,BufNewFile,ColorScheme,WinEnter,Syntax * call UpdateUserMatches()
+        autocmd BufRead,BufNewFile,WinEnter,Syntax * call UpdateUserMatches()
     augroup end
     doautocmd UserMatches Syntax
 endfunction
