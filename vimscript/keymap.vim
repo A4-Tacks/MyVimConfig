@@ -188,10 +188,10 @@ nnoremap <silent> <leader>B :ls!\|call <SID>goto_selected_buffer()<cr>
 
 " 在非fFtT情况下, 分号可以表示冒号 {{{
 nnoremap <expr> ; AlphaGotoNext(';')
-nnoremap <expr> , AlphaGotoNext(',')
+nnoremap <expr> , AlphaGotoNext(',', 1)
 
 xnoremap <expr> ; AlphaGotoNext(';')
-xnoremap <expr> , AlphaGotoNext(',')
+xnoremap <expr> , AlphaGotoNext(',', 1)
 
 
 nnoremap <expr> f AlphaGoto('f')
@@ -234,8 +234,8 @@ function! AlphaGoto(cmd)
     let g:after_alpha_goto_time = reltimefloat(reltime())
     return a:cmd .. ch
 endfunction
-function! AlphaGotoNext(cmd)
-    if !get(g:, 'after_alpha_goto_do')
+function! AlphaGotoNext(cmd, always = 0)
+    if !get(g:, 'after_alpha_goto_do') && !a:always
         return ':'
     endif
 
