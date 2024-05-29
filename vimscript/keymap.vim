@@ -221,7 +221,15 @@ aug AlphaGoto
 aug end
 
 function! AlphaGoto(cmd)
-    let ch = getcharstr()
+    while v:true
+        redraw
+        echon "\r" . a:cmd . '> '
+        let ch = getcharstr()
+        if ch != "\<CursorHold>"
+            break
+        endif
+    endwhile
+    echon ch
     let g:after_alpha_goto_do = 2
     let g:after_alpha_goto_time = reltimefloat(reltime())
     return a:cmd .. ch
