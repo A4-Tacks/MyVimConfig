@@ -221,9 +221,10 @@ aug AlphaGoto
 aug end
 
 function! AlphaGoto(cmd)
+    let ch = getcharstr()
     let g:after_alpha_goto_do = 2
     let g:after_alpha_goto_time = reltimefloat(reltime())
-    return a:cmd
+    return a:cmd .. ch
 endfunction
 function! AlphaGotoNext(cmd)
     if !get(g:, 'after_alpha_goto_do')
