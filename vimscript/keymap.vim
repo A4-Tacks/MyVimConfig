@@ -309,9 +309,9 @@ nnoremap <expr> N strlen(@/) > 0 ? "N" : execute('let@/=get(g:,"prev_search","")
 " Leader maps {{{1
 
 " open terminal or update NERDTree
-nnoremap <leader>t :if&ft!=#'nerdtree'\|exe'terminal'\|el\|NERDTreeRefreshRoot\|en<cr>
+nnoremap <leader>t :if&ft!=#'nerdtree'\|exe'terminal'\|el\|exe'NERDTreeRefreshRoot'\|en<cr>
 " NERDTree Toggle
-nnoremap <leader>T :if&ft!=#'nerdtree'\|NERDTreeCWD\|el\|NERDTreeToggle\|en<cr>
+nnoremap <leader>T :if&ft!=#'nerdtree'\|NERDTreeCWD\|el\|exe'NERDTreeToggle'\|en<cr>
 
 " Old Window control {{{1
 nnoremap <silent> <leader><leader> <C-w><C-w>
