@@ -137,13 +137,16 @@ nnoremap <silent> gb :BufferNext<Cr>
 nnoremap <silent> gB :BufferPrev<Cr>
 " }}}
 
-" 在命令模式下, 也就是`normal_:`下, 输入当前文件的目录
+" 在底行模式下, 也就是`normal_:`下, 输入当前文件的目录
 cnoremap <C-s> <C-r>=fnameescape(expand("%:h"))<CR>/
 cnoremap <C-a> <Home>
 cnoremap <C-b> <Left>
 cnoremap <C-f> <Right>
 cnoremap <C-p> <Up>
 cnoremap <C-n> <Down>
+
+" 可视模式下快捷搜索
+xnoremap g/ y/<c-r>"
 
 " 缓冲区信息键强化 {{{
 function! ShowBufferInfo()
