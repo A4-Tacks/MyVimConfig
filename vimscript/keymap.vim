@@ -510,48 +510,35 @@ xnoremap <C-F8> :%!baidu_fanyi -t en -m \%1s\%n\%0s\%n -<Cr>
 xnoremap <A-F8> :%!baidu_fanyi -t en -m \%0s\%n -\|baidu_fanyi -t zh -m \%1s\%n\%0s\%n -<Cr>
 
 " Tab map {{{1
-function TabGoTu() " {{{2
-    if foldclosed(line(".")) != -1
-        return "\<C-o>zo"
-    endif
-    let text=getline(".")[col(".")-1]
-    let column=col(".")
-    return "\<Tab>"
-endfunction
-function! Completion_start() " {{{2
-    let result = 0
-    try
-        let result = result || coc#pum#visible()
-    catch /.*/
-    endtry
-    return pumvisible() || result
-endfunction " }}}2
 
 noremap! #<Tab> <Tab>
 
-" from coc
-"imap <expr><silent> <Tab> Completion_start() ? "\<C-n>" : TabGoTu()
-"imap <expr><silent> <S-Tab> Completion_start() ? "\<C-p>" : "\<Tab>"
-"imap <expr><silent> <Up> Completion_start() ? "\<C-p>" : "\<Up>"
-"imap <expr><silent> <Down> Completion_start() ? "\<C-n>" : "\<Down>"
+" 如果启用了coc, 那这个应该会被覆盖
+inoremap <expr><silent> <Tab> pumvisible() ? "\<C-n>"
+            \ : match(getline('.')[max([col('.')-2, 0]):], '^\s') != -1
+            \     ? "\<tab>"
+            \     : match(getline('.')[max([col('.')-2, 0]):], '^.\>') != -1
+            \         ? "\<c-n>"
+            \         : "\<tab>"
+inoremap <expr><silent> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
 
 " Enter map {{{1
 " Insert mode Enter {{{2
 function! EnterInsert()
-    if Completion_start()
+    if pumvisible()
         " 补全菜单展开则直接选择
         return "\<C-p>\<C-n>\<Esc>a"
     endif
     let l:COL = col(".")
     let l:LINE = getline(".")
     if index(["()", "[]", "{}"], l:LINE[l:COL-2:l:COL-1]) != -1
-        " 展开括号
-        return "\<Cr>\<C-o>%\<C-o>o"
+        " 展开括号, 利用提前的填充字符适应大部分中间没东西就不回缩进的缩进函数
+        return "o\<left>\<cr>\<right>\<cr>\<c-o>%\<esc>jS"
     endif
     return "\<Cr>"
 endfunction
 inoremap #<Cr> <Cr>
-" imap <expr> <Cr> EnterInsert()
+inoremap <expr> <Cr> EnterInsert()
 
 " Normal Enter open fold " {{{2
 function! NEnterInsert()
