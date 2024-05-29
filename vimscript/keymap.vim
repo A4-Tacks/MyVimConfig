@@ -259,32 +259,24 @@ function! TextObjectIndentBlock(out) " {{{
     let eof = line('$')
     let Check = {n -> n >= 1 && n <= eof}
 
-    if !a:out
-        while Check(ed+1)
-            let n = ed+1
-            if getline(n) =~# '^\s*$'
-                let ed = n
-            elseif indent(n) > indent
-                let [ed, sed] = [n, n]
-            else | break | endif
-        endwhile
-    else
-        while Check(bg-1)
-            let n = bg-1
-            if getline(n) =~# '^\s*$'
-                let bg = n
-            elseif indent(n) >= indent
-                let [bg, sbg] = [n, n]
-            else | break | endif
-        endwhile
+    while Check(ed+1)
+        let n = ed+1
+        if getline(n) =~# '^\s*$'
+            let ed = n
+        elseif indent(n) > indent
+            let [ed, sed] = [n, n]
+        else | break | endif
+    endwhile
 
+    if a:out
         while Check(ed+1)
             let n = ed+1
             if getline(n) =~# '^\s*$'
                 let ed += 1
-            elseif indent(n) >= indent
+            elseif indent(n) <= indent
                 let [ed, sed] = [n, n]
-            else | break | endif
+                break
+            endif
         endwhile
     endif
 
