@@ -2,15 +2,15 @@
 " git to ~/.vim/MyVimConfig
 
 set nocompatible
-if ! has('python3')
+if ! has('python3') "{{{
     echoerr "vim is not has python3"
-    exit
-endif
+    finish
+endif "}}}
 
 function Log(...) " {{{1
     let l:msg = join(a:000)
     call add(g:loader_debug_log, l:msg)
-    if g:loader_debug
+    if get(g:, 'loader_debug')
         echomsg l:msg
     endif
 endfunction

@@ -103,30 +103,30 @@ nnoremap <silent> J  :SilentRelativeJoin<cr>
 nnoremap <silent> gJ :SilentRelativeJoin!<cr>
 " }}}
 
-" fix term keymap
+" fix term keymap{{{
 tnoremap <kHome> <Home>
 tnoremap <kEnd> <End>
 tnoremap <kPageUp> <PageUp>
 tnoremap <kPageDown> <PageDown>
-
+"}}}
 
 " del
 inoremap <C-l> <Del>
 " paste start
 noremap! <silent> #cf <C-o>:set paste eventignore=TextChangedI,TextChangedP,InsertChange,InsertCharPre<cr>
 
-" emacs
+" emacs{{{
 inoremap <C-a> <Home>
 inoremap <C-e> <End>
 inoremap <C-b> <Left>
 inoremap <C-f> <Right>
-
-" line end input
+"}}}
+" line end input{{{
 inoremap #; <End>;
 inoremap #: <End>;
 inoremap #, <End>,
 inoremap #. <End>,
-
+"}}}
 nnoremap & @@
 nnoremap #& &
 
@@ -136,18 +136,17 @@ command! -count -bar BufferPrev execute "bprevious " .. (<range> ? <line2>-<line
 nnoremap <silent> gb :BufferNext<Cr>
 nnoremap <silent> gB :BufferPrev<Cr>
 " }}}
-
-" 在底行模式下, 也就是`normal_:`下, 输入当前文件的目录
+" 在底行模式下, 也就是`normal_:`下, 输入当前文件的目录{{{
 cnoremap <C-s> <C-r>=fnameescape(expand("%:h"))<CR>/
 cnoremap <C-a> <Home>
 cnoremap <C-b> <Left>
 cnoremap <C-f> <Right>
 cnoremap <C-p> <Up>
 cnoremap <C-n> <Down>
-
-" 可视模式下快捷搜索
+"}}}
+" 可视模式下快捷搜索{{{
 xnoremap g/ y/<c-r>"
-
+"}}}
 " 缓冲区信息键强化 {{{
 function! ShowBufferInfo()
     let fname = buffer_name()
@@ -175,7 +174,6 @@ function! ShowBufferInfo()
 endfunction
 nnoremap <C-g> :call ShowBufferInfo()<cr>
 " }}}
-
 " 快速buffer切换 {{{
 function! s:goto_selected_buffer()
     let id = input('input buffer id> ')
@@ -185,7 +183,6 @@ endfunction
 nnoremap <silent> <leader>b :ls \|call <SID>goto_selected_buffer()<cr>
 nnoremap <silent> <leader>B :ls!\|call <SID>goto_selected_buffer()<cr>
 " }}}
-
 " 在非fFtT情况下, 分号可以表示冒号 {{{
 nnoremap <expr> ; AlphaGotoNext(';')
 nnoremap <expr> , AlphaGotoNext(',', 1)
@@ -316,24 +313,24 @@ nnoremap <leader>T :if&ft!=#'nerdtree'\|NERDTreeCWD\|el\|exe'NERDTreeToggle'\|en
 " Old Window control {{{1
 nnoremap <silent> <leader><leader> <C-w><C-w>
 
-" moves
+" moves{{{
 nnoremap <silent> <leader>h <C-w>h
 nnoremap <silent> <leader>j <C-w>j
 nnoremap <silent> <leader>k <C-w>k
 nnoremap <silent> <leader>l <C-w>l
-
-" split
+"}}}
+" split{{{
 nnoremap <silent> <leader>s <C-w>s
 nnoremap <silent> <leader>v <C-w>v
-
-" windows control
+"}}}
+" windows control{{{
 nnoremap <silent> <leader>M :res\|vertical res<Cr>
 nnoremap <silent> <leader>= :res+3<Cr>
 nnoremap <silent> <leader>- :res-3<Cr>
 nnoremap <silent> <leader>_ :vertical res-6<Cr>
 nnoremap <silent> <leader>+ :vertical res+6<Cr>
 nnoremap <leader>m <C-w>=
-
+"}}}
 " windows control mode {{{
 nnoremap <silent> mm :call StartWindowControl()<cr>
 nnoremap <silent> <c-w>m :call StartWindowControl()<cr>
@@ -545,45 +542,5 @@ nnoremap <expr> <Cr> NEnterInsert()
 vnoremap <expr> <cr> foldclosed('.') != -1
             \ ? execute('foldopen!')
             \ : "\<cr>"
-" Commands {{{1
-let g:commands_list = [
-            \['noop', { -> ''}],
-            \['SelectLineNumber', funcref('SelectLineNumberDisplay')],
-            \['Wrap', { -> execute('set ' .. (&wrap ? 'no' : '') .. 'wrap')}],
-            \]
-nnoremap ## :call Commands()<Cr>
-function Commands(page = 0)
-    if a:page < 0
-        return
-    endif
-    redrawstatus " 重绘状态行来避免输出堆积到一起
-    let fmtter = '{}: {}'
-    let page_max = 10
-    let page_count = len(g:commands_list) / page_max
-    let start = page_max * a:page
-    let end = start + (page_max - 1) " last some idx
-    let line_buf = ["page: " .. a:page]
-    let idx = 0
-    for item in g:commands_list[start:end]
-        call add(line_buf, StrFmt(fmtter, idx - start, item[0]))
-        let idx += 1
-    endfor
-    let [pgup_idx, pgdn_idx, pggoto_idx] = [idx + 0, idx + 1, idx + 2]
-    call add(line_buf, StrFmt(fmtter, pgup_idx, 'page up'))
-    call add(line_buf, StrFmt(fmtter, pgdn_idx, 'page down'))
-    call add(line_buf, StrFmt(fmtter, pggoto_idx, 'page goto'))
-    echon join(line_buf, "\n")
-    let input_number = InputRangeNumber("select number> ", 0, pggoto_idx)
-    echon "\n"
-    if input_number == pgup_idx
-        call Commands(a:page - 1)
-    elseif input_number == pgdn_idx
-        call Commands(a:page + 1)
-    elseif input_number == pggoto_idx
-        call Commands(InputRangeNumber("goto page> ", 0, page_count))
-    else
-        call g:commands_list[input_number + start][1]()
-    endif
-endfunction
 " End {{{1
 " }}}
