@@ -302,10 +302,10 @@ function! TextObjectIndentBlock(out, rev = v:false)
                 let n = ed+1
                 if getline(n) =~# '^\s*$'
                     let ed += 1
-                elseif indent(n) <= indent
+                elseif indent(n) == indent
                     let [ed, sed] = [n, n]
-                    break
                 endif
+                break
             endwhile
         endif
     else
@@ -314,10 +314,10 @@ function! TextObjectIndentBlock(out, rev = v:false)
                 let n = bg-1
                 if getline(n) =~# '^\s*$'
                     let bg -= 1
-                elseif indent(n) <= indent
+                elseif indent(n) == indent
                     let [bg, sbg] = [n, n]
-                    break
                 endif
+                break
             endwhile
         endif
     endif
