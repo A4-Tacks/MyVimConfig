@@ -278,51 +278,53 @@ function! TextObjectIndentBlock(out, rev = v:false)
     let eof = line('$')
     let Check = {n -> n >= 1 && n <= eof}
 
-    if !a:rev
-        while Check(ed+1)
-            let n = ed+1
-            if getline(n) =~# '^\s*$'
-                let ed = n
-            elseif indent(n) > indent
-                let [ed, sed] = [n, n]
-            else | break | endif
-        endwhile
-    else
-        while Check(bg-1)
-            let n = bg-1
-            if getline(n) =~# '^\s*$'
-                let bg = n
-            elseif indent(n) > indent
-                let [bg, sbg] = [n, n]
-            else | break | endif
-        endwhile
-    endif
-
-    if !a:rev
-        if a:out
+    for _ in range(v:count1)
+        if !a:rev
             while Check(ed+1)
                 let n = ed+1
                 if getline(n) =~# '^\s*$'
-                    let ed += 1
-                elseif indent(n) == indent
+                    let ed = n
+                elseif indent(n) > indent
                     let [ed, sed] = [n, n]
-                endif
-                break
+                else | break | endif
             endwhile
-        endif
-    else
-        if a:out
+        else
             while Check(bg-1)
                 let n = bg-1
                 if getline(n) =~# '^\s*$'
-                    let bg -= 1
-                elseif indent(n) == indent
+                    let bg = n
+                elseif indent(n) > indent
                     let [bg, sbg] = [n, n]
-                endif
-                break
+                else | break | endif
             endwhile
         endif
-    endif
+
+        if !a:rev
+            if a:out
+                while Check(ed+1)
+                    let n = ed+1
+                    if getline(n) =~# '^\s*$'
+                        let ed += 1
+                    elseif indent(n) == indent
+                        let [ed, sed] = [n, n]
+                    endif
+                    break
+                endwhile
+            endif
+        else
+            if a:out
+                while Check(bg-1)
+                    let n = bg-1
+                    if getline(n) =~# '^\s*$'
+                        let bg -= 1
+                    elseif indent(n) == indent
+                        let [bg, sbg] = [n, n]
+                    endif
+                    break
+                endwhile
+            endif
+        endif
+    endfor
 
     return ":\<C-u>norm! V".Mov(sbg).'o'.Mov(sed)
                 \.(tail?'g_':'g_o')."\<CR>"
