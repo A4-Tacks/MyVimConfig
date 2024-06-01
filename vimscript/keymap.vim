@@ -269,7 +269,9 @@ onoremap <silent> av :<C-u>norm! v0og_<CR>
 " 缩进文本对象 {{{
 function! TextObjectIndentBlock(out, rev = v:false)
     let Mov = {n -> n..'G'}
-    let [bg, ed, sbg, sed] = [line('.'), line('v')]->sort()->repeat(2)
+    let [bg, ed, sbg, sed] = [line('.'), line('v')]
+                \ ->sort({a, b -> a-b})
+                \ ->repeat(2)
     let meta = a:rev ? ed : bg
     let tail = (line('.') != meta) != a:rev
     let indent = indent(meta)
