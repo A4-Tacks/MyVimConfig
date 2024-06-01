@@ -249,37 +249,7 @@ function! RangeMapDefine(key, str) " {{{
     execute 'onoremap <silent> i' .. a:key .. ' i' .. a:str
     execute 'xnoremap <silent> i' .. a:key .. ' i' .. a:str
 endfunction " }}}
-function! TextObjectIndentBlock(out) " {{{
-    let Mov = {n -> n..'G'}
-    let indent = indent('.')
-    let [bg, ed, sbg, sed] = [line('.')]->repeat(4)
-    let eof = line('$')
-    let Check = {n -> n >= 1 && n <= eof}
-
-    while Check(ed+1)
-        let n = ed+1
-        if getline(n) =~# '^\s*$'
-            let ed = n
-        elseif indent(n) > indent
-            let [ed, sed] = [n, n]
-        else | break | endif
-    endwhile
-
-    if a:out
-        while Check(ed+1)
-            let n = ed+1
-            if getline(n) =~# '^\s*$'
-                let ed += 1
-            elseif indent(n) <= indent
-                let [ed, sed] = [n, n]
-                break
-            endif
-        endwhile
-    endif
-
-    return ":\<C-u>norm! V".Mov(sbg).'o'.Mov(sed).'g_o'."\<CR>"
-endfunction " }}}
-
+" 一些快捷习惯性映射{{{
 call RangeMapDefine('k', '(')
 call RangeMapDefine('q', '[')
 call RangeMapDefine('w', '{')
@@ -289,17 +259,81 @@ call RangeMapDefine('o', "'")
 call RangeMapDefine('m', '`')
 call RangeMapDefine('Q', 'W') " 原本的WORD
 call RangeMapDefine('E', 'w')
-
+"}}}
+" 软行文本对象 {{{
 xnoremap <silent> iv :<C-u>norm! v_og_<CR>
 onoremap <silent> iv :<C-u>norm! v_og_<CR>
 xnoremap <silent> av :<C-u>norm! v0og_<CR>
 onoremap <silent> av :<C-u>norm! v0og_<CR>
+"}}}
+" 缩进文本对象 {{{
+function! TextObjectIndentBlock(out, rev = v:false)
+    let Mov = {n -> n..'G'}
+    let [bg, ed, sbg, sed] = [line('.'), line('v')]->sort()->repeat(2)
+    let meta = a:rev ? ed : bg
+    let tail = (line('.') != meta) != a:rev
+    let indent = indent(meta)
+    let eof = line('$')
+    let Check = {n -> n >= 1 && n <= eof}
 
+    if !a:rev
+        while Check(ed+1)
+            let n = ed+1
+            if getline(n) =~# '^\s*$'
+                let ed = n
+            elseif indent(n) > indent
+                let [ed, sed] = [n, n]
+            else | break | endif
+        endwhile
+    else
+        while Check(bg-1)
+            let n = bg-1
+            if getline(n) =~# '^\s*$'
+                let bg = n
+            elseif indent(n) > indent
+                let [bg, sbg] = [n, n]
+            else | break | endif
+        endwhile
+    endif
+
+    if !a:rev
+        if a:out
+            while Check(ed+1)
+                let n = ed+1
+                if getline(n) =~# '^\s*$'
+                    let ed += 1
+                elseif indent(n) <= indent
+                    let [ed, sed] = [n, n]
+                    break
+                endif
+            endwhile
+        endif
+    else
+        if a:out
+            while Check(bg-1)
+                let n = bg-1
+                if getline(n) =~# '^\s*$'
+                    let bg -= 1
+                elseif indent(n) <= indent
+                    let [bg, sbg] = [n, n]
+                    break
+                endif
+            endwhile
+        endif
+    endif
+
+    return ":\<C-u>norm! V".Mov(sbg).'o'.Mov(sed)
+                \.(tail?'g_':'g_o')."\<CR>"
+endfunction
 xnoremap <silent><expr> in TextObjectIndentBlock(v:false)
 onoremap <silent><expr> in TextObjectIndentBlock(v:false)
 xnoremap <silent><expr> an TextObjectIndentBlock(v:true)
 onoremap <silent><expr> an TextObjectIndentBlock(v:true)
-
+xnoremap <silent><expr> im TextObjectIndentBlock(v:false, v:true)
+onoremap <silent><expr> im TextObjectIndentBlock(v:false, v:true)
+xnoremap <silent><expr> am TextObjectIndentBlock(v:true , v:true)
+onoremap <silent><expr> am TextObjectIndentBlock(v:true , v:true)
+"}}}
 " Disable Empty Search And Prev Search {{{1
 nnoremap <expr> n strlen(@/) > 0 ? "n" : execute('let@/=get(g:,"prev_search","")').(@/->strlen()?'n':'')
 nnoremap <expr> N strlen(@/) > 0 ? "N" : execute('let@/=get(g:,"prev_search","")').(@/->strlen()?'N':'')
