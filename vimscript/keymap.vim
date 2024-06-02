@@ -542,25 +542,31 @@ noremap! #<Tab> <Tab>
 
 " 如果启用了coc, 那这个应该会被覆盖
 inoremap <expr><silent> <Tab> pumvisible() ? "\<C-n>"
-            \ : match(getline('.')[max([col('.')-2, 0]):], '^\s') != -1
+            \ : col('.') == 1 \|\| match(getline('.')[col('.')-2:], '^\s') != -1
             \     ? "\<tab>"
-            \     : match(getline('.')[max([col('.')-2, 0]):], '^.\>') != -1
-            \         ? "\<c-n>"
-            \         : "\<tab>"
+            \     : getline('.')
+            \           ->strcharpart(charcol('.')-2, 1)
+            \           ->match('^\<.\>') != -1
+            \             ? "\<c-n>"
+            \             : "\<tab>"
 inoremap <expr><silent> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
 
 " Enter map {{{1
 " Insert mode Enter {{{2
 function! EnterInsert()
     if pumvisible()
+        if complete_info().selected == -1
+            " 没有选中项目时, 直接选择首个项目
+            return "\<c-n>\<esc>a"
+        endif
         " 补全菜单展开则直接选择
-        return "\<C-p>\<C-n>\<Esc>a"
+        return "\<c-p>\<c-n>\<esc>a"
     endif
     let l:COL = col(".")
     let l:LINE = getline(".")
     if index(["()", "[]", "{}"], l:LINE[l:COL-2:l:COL-1]) != -1
-        " 展开括号, 利用提前的填充字符适应大部分中间没东西就不回缩进的缩进函数
-        return "o\<left>\<cr>\<right>\<cr>\<c-o>%\<esc>jS"
+        " 展开括号
+        return "\<cr>\<esc>==ko"
     endif
     return "\<Cr>"
 endfunction
