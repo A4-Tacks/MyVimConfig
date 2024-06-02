@@ -227,6 +227,25 @@ function SetDefaultFileTypeOptions()
 endfunction
 " TabAutoToEnd {{{1
 autocmd TabNew * tabmove $
+" Auto input completion {{{1
+" 这将可以在启用时有多个补全结果时自动展开补全菜单, 没用coc等的时候用
+" 美中不足的是输入过快因为使用的timer实时性不够可能出现问题
+if exists('enable_builtin_completion_auto_popup')
+    function s:complete_first(char, col, timer)
+        let info = complete_info()
+        if info.pum_visible || info.items->len() != 1
+            if info.pum_visible && info.selected == -1
+                call feedkeys("\<down>")
+            en
+            return
+        en
+        call complete(col('.')-strlen(a:char), [a:char, info.items[0].word])
+    endfunction
+    au InsertCharPre *  if !pumvisible() && v:char =~# '\<.\>'
+                    \ |     call feedkeys("\<c-n>\<c-p>")
+                    \ |     call timer_start(0, function('s:complete_first', [v:char, col('.')]))
+                    \ | en
+endif
 " 语法文件注册 {{{1
 augroup filetypedetect
     autocmd BufNewFile,BufRead *.mdtlbl setfiletype mdtlbl
