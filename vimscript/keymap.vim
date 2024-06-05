@@ -274,9 +274,16 @@ function! TextObjectIndentBlock(out, rev = v:false)
                 \ ->repeat(2)
     let meta = a:rev ? ed : bg
     let tail = (line('.') != meta) != a:rev
-    let indent = indent(meta)
     let eof = line('$')
     let Check = {n -> n >= 1 && n <= eof}
+
+    if !a:rev
+        let indent = indent(nextnonblank(bg))
+        if bg == ed | let ed = nextnonblank(ed) | endif
+    else
+        let indent = indent(prevnonblank(ed))
+        if bg == ed | let bg = prevnonblank(bg) | endif
+    endif
 
     for _ in range(v:count1)
         if !a:rev
