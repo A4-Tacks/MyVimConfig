@@ -256,7 +256,7 @@ call RangeMapDefine('w', '{')
 call RangeMapDefine('e', '<')
 call RangeMapDefine('i', '"')
 call RangeMapDefine('o', "'")
-call RangeMapDefine('m', '`')
+call RangeMapDefine('M', '`')
 call RangeMapDefine('Q', 'W') " 原本的WORD
 call RangeMapDefine('E', 'w')
 "}}}
