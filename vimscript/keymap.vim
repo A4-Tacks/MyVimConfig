@@ -184,22 +184,22 @@ nnoremap <silent> <leader>b :ls \|call <SID>goto_selected_buffer()<cr>
 nnoremap <silent> <leader>B :ls!\|call <SID>goto_selected_buffer()<cr>
 " }}}
 " 在非fFtT情况下, 分号可以表示冒号 {{{
-nnoremap <expr> ; AlphaGotoNext(';')
-nnoremap <expr> , AlphaGotoNext(',', 1)
-
-xnoremap <expr> ; AlphaGotoNext(';')
-xnoremap <expr> , AlphaGotoNext(',', 1)
-
-
-nnoremap <expr> f AlphaGoto('f')
-nnoremap <expr> F AlphaGoto('F')
-nnoremap <expr> t AlphaGoto('t')
-nnoremap <expr> T AlphaGoto('T')
-
-xnoremap <expr> f AlphaGoto('f')
-xnoremap <expr> F AlphaGoto('F')
-xnoremap <expr> t AlphaGoto('t')
-xnoremap <expr> T AlphaGoto('T')
+"nnoremap <expr> ; AlphaGotoNext(';')
+"nnoremap <expr> , AlphaGotoNext(',', 1)
+"
+"xnoremap <expr> ; AlphaGotoNext(';')
+"xnoremap <expr> , AlphaGotoNext(',', 1)
+"
+"
+"nnoremap <expr> f AlphaGoto('f')
+"nnoremap <expr> F AlphaGoto('F')
+"nnoremap <expr> t AlphaGoto('t')
+"nnoremap <expr> T AlphaGoto('T')
+"
+"xnoremap <expr> f AlphaGoto('f')
+"xnoremap <expr> F AlphaGoto('F')
+"xnoremap <expr> t AlphaGoto('t')
+"xnoremap <expr> T AlphaGoto('T')
 
 
 let g:after_alpha_goto_do = 0
@@ -256,6 +256,7 @@ call RangeMapDefine('w', '{')
 call RangeMapDefine('e', '<')
 call RangeMapDefine('i', '"')
 call RangeMapDefine('o', "'")
+call RangeMapDefine('m', '`')
 call RangeMapDefine('M', '`')
 call RangeMapDefine('Q', 'W') " 原本的WORD
 call RangeMapDefine('E', 'w')
