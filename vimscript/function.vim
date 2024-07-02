@@ -257,7 +257,7 @@ function! SetUserColors() " {{{1
     hi! SignColumn term=standout cterm=none gui=bold
                 \ ctermfg=14 ctermbg=242 guifg=Cyan guibg=Grey
 
-    hi! CocInlayHint cterm=none ctermfg=252 ctermbg=237
+    hi! CocInlayHint cterm=none ctermfg=252 ctermbg=236
 
     hi! CocFloating ctermbg=237
     " Coc 搜索匹配项
