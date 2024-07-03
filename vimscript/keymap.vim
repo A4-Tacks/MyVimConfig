@@ -356,7 +356,7 @@ nnoremap <leader>t :if&ft!=#'nerdtree'\|exe'terminal'\|el\|exe'NERDTreeRefreshRo
 " NERDTree Toggle
 nnoremap <leader>T :if&ft!=#'nerdtree'\|NERDTreeCWD\|el\|exe'NERDTreeToggle'\|en<cr>
 
-" Old Window control {{{1
+" Windows control {{{1
 nnoremap <silent> <leader><leader> <C-w><C-w>
 
 " moves{{{
@@ -369,22 +369,25 @@ nnoremap <silent> <leader>l <C-w>l
 nnoremap <silent> <leader>s <C-w>s
 nnoremap <silent> <leader>v <C-w>v
 "}}}
-" windows control{{{
-nnoremap <silent> <leader>M :res\|vertical res<Cr>
-nnoremap <silent> <leader>= :res+3<Cr>
-nnoremap <silent> <leader>- :res-3<Cr>
-nnoremap <silent> <leader>_ :vertical res-6<Cr>
-nnoremap <silent> <leader>+ :vertical res+6<Cr>
-nnoremap <leader>m <C-w>=
+" Old windows control {{{
+nnoremap <silent> <leader>M <c-w>_<c-w>\|
+nnoremap <silent> <leader>m <c-w>=
+nnoremap <silent> <leader>= <c-w>3+
+nnoremap <silent> <leader>- <c-w>3-
+nnoremap <silent> <leader>+ <c-w>6>
+nnoremap <silent> <leader>_ <c-w>6<
 "}}}
 " windows control mode {{{
-nnoremap <silent> mm :call StartWindowControl()<cr>
+nnoremap #m m
+nnoremap <silent> m :call StartWindowControl()<cr>
 nnoremap <silent> <c-w>m :call StartWindowControl()<cr>
 nnoremap <silent> <c-w><c-m> :call StartWindowControl()<cr>
 function! StartWindowControl()
     let extra_cmd = {
-                \ 'M': 'res|vert res',
-                \ 'm': 'norm!'."\<c-w>=",
+                \ 'M': "norm!\<c-w>_\<c-w>|",
+                \ 'm': "norm!\<c-w>=",
+                \ "'": 'exe"norm!m".getcharstr()',
+                \ ':': 'cal feedkeys(" :")',
                 \ 'gb': 'bn',
                 \ 'gB': 'bp',
                 \ }
