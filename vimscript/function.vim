@@ -306,5 +306,19 @@ function! SizeFmt(num, suffix,)
     endif
     return (float2nr(num*10)/10.0)->string().t.(t->strlen()?'i':'').a:suffix
 endfunction
+function! HeadLineIndentFunction(lnum) " {{{1
+    let next = nextnonblank(a:lnum+1)
+    let [cind, nind] = [
+                \   indent(a:lnum) / &shiftwidth,
+                 \   indent(next) / &shiftwidth,
+                  \]
+
+    if getline(a:lnum) =~# '^[[:blank:]]*$'
+        return nind
+    elseif nind > cind
+        return '>'.nind
+    endif
+    return cind
+endfunction
 " End {{{1
 " }}}1

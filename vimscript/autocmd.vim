@@ -145,7 +145,8 @@ function SetDefaultFileTypeOptions()
     " 设置映射 属性 参数 及启动插件
     let l:type = &filetype
     if l:type == 'python'
-        setlocal foldmethod=indent
+        setlocal foldmethod=expr
+        setlocal foldexpr=HeadLineIndentFunction(v:lnum)
 
     elseif l:type == 'rust'
         setlocal foldmethod=syntax
