@@ -320,5 +320,13 @@ function! HeadLineIndentFunction(lnum) " {{{1
     endif
     return cind
 endfunction
+function! FunExists(name) " {{{1
+    try
+        call funcref(a:name)
+        return v:true
+    catch /^Vim\%((\a\+)\)\=:E700:/
+        return v:false
+    endtry
+endfunction
 " End {{{1
 " }}}1

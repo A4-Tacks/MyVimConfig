@@ -597,5 +597,37 @@ nnoremap <expr> <Cr> NEnterInsert()
 vnoremap <expr> <cr> foldclosed('.') != -1
             \ ? execute('foldopen!')
             \ : "\<cr>"
+
+" snippets jump and skip out of braces {{{1
+let s:braces = ['^.\{-}[([{<"'']',
+            \   '^.\{-}[)\]}>"'']']
+
+function! s:snippet_jump(is_next, raw, enter)
+    if FunExists('coc#jumpable') && coc#jumpable()
+        let c = a:is_next ? a:enter."coc#snippet#jump(1,0)\<CR>"
+                        \ : a:enter."coc#snippet#jump(0,0)\<CR>"
+        return c
+    endif
+
+    if a:is_next
+        let str = matchstr(getline('.'), s:braces[1], col('.')-1)
+        if !empty(str)
+            return repeat("\<Right>", strcharlen(str))
+        endif
+    else
+        let str = strcharpart(getline('.'), 0, charcol('.')-1)
+        let str = matchstr(reverse(str), s:braces[0])
+        if !empty(str)
+            return repeat("\<Left>", strcharlen(str))
+        endif
+    endif
+
+    return a:raw()
+endfunction
+inoremap <nowait><silent><expr><C-k> <SID>snippet_jump(v:false,{-> ''}, "\<lt>C-r>=")
+inoremap <nowait><silent><expr><C-j> <SID>snippet_jump(v:true, {-> ''}, "\<lt>C-r>=")
+snoremap <nowait><silent><expr><C-k> <SID>snippet_jump(v:false,{-> ''}, "\<lt>esc>")
+snoremap <nowait><silent><expr><C-j> <SID>snippet_jump(v:true, {-> ''}, "\<lt>esc>")
+
 " End {{{1
 " }}}
