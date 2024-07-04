@@ -117,19 +117,18 @@ function AutoLightWordTimer(time)
         endif
         let g:cursor_word = l:word
         let g:cursor_word_str = type(l:word) == v:t_list ? l:word[0] : l:word
-        let g:cursor_word_regex = '//'
+        let g:cursor_word_regex = ''
         if type(l:word) == v:t_list
             if l:word[0]->match('^\s*$') == -1
-                let g:cursor_word_regex = '/\V'
+                let g:cursor_word_regex = '\V'
                             \ . l:word[0]->substitute('[/\\]', '\\\0', 'g')
-                            \ . '/'
             endif
         elseif strlen(l:word)
-            let g:cursor_word_regex = '/\V\<'
+            let g:cursor_word_regex = '\V\<'
                         \ . l:word->substitute('[/\\]', '\\\0', 'g')
-                        \ . '\>/'
+                        \ . '\>'
         endif
-        execute 'match WordLight ' . g:cursor_word_regex
+        execute 'match WordLight /' . g:cursor_word_regex . '/'
     endfunction
 
     call timer_start(a:time, 'AutoLightWordTimerF', {'repeat': -1})

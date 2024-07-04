@@ -30,16 +30,6 @@ noremap! 》 >
 noremap! ？ ?
 noremap! ！ !
 " 括号类 {{{1
-noremap #kq [
-noremap #kw {
-noremap #ke <
-noremap #zk {
-
-noremap #lq ]
-noremap #lw }
-noremap #le >
-noremap #zl }
-
 noremap! #kq [
 noremap! #kw {
 noremap! #ke <
@@ -128,7 +118,6 @@ inoremap #, <End>,
 inoremap #. <End>,
 "}}}
 nnoremap & @@
-nnoremap #& &
 
 " next or prev buffer {{{
 command! -count -bar BufferNext execute "bnext " .. (<range> ? <line2>-<line1> + 1 : "")
@@ -240,6 +229,18 @@ function! AlphaGotoNext(cmd, always = 0)
     let g:after_alpha_goto_time = reltimefloat(reltime())
     return a:cmd
 endfunction
+" }}}
+" 代替原本的井号星号配合高亮搜索 {{{
+function! s:search_cursor(next, to_norm = '')
+    if !exists('g:cursor_word_regex') | return a:next ? '*' : '#' | endif
+    let @/ = g:cursor_word_regex
+    return empty(@/) ? '' : a:to_norm.(a:next ? '/' : '?')."\<cr>"
+endfunction
+
+nnoremap <expr> # <SID>search_cursor(v:false)
+nnoremap <expr> * <SID>search_cursor(v:true)
+xnoremap <expr> # <SID>search_cursor(v:false,"\<lt>esc>")
+xnoremap <expr> * <SID>search_cursor(v:true,"\<lt>esc>")
 " }}}
 
 " 范围选择 {{{1
@@ -378,7 +379,6 @@ nnoremap <silent> <leader>+ <c-w>6>
 nnoremap <silent> <leader>_ <c-w>6<
 "}}}
 " windows control mode {{{
-nnoremap #m m
 nnoremap <silent> m :call StartWindowControl()<cr>
 nnoremap <silent> <c-w>m :call StartWindowControl()<cr>
 nnoremap <silent> <c-w><c-m> :call StartWindowControl()<cr>
