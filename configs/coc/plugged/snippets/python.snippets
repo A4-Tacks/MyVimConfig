@@ -1,29 +1,13 @@
 # python snippets
 snippet fn "define function" b
 def $1($2)${3: -> ${4:None}}:
-	"""${5:$1}
-	"""
 	${0:pass}
 endsnippet
 snippet fm "define method" b
 def $1(self, $2)${3: -> ${4:None}}:
-	"""${5:$1}
-	"""
 	${0:pass}
 endsnippet
-snippet def "define function" b
-def $1($2)${3: -> ${4:None}}:
-	"""${5:$1}
-	"""
-	${0:pass}
-endsnippet
-snippet defm "define method" b
-def $1(self, $2)${3: -> ${4:None}}:
-	"""${5:$1}
-	"""
-	${0:pass}
-endsnippet
-snippet main "main block" b
+snippet __main "main block" b
 if __name__ == '__main__':
 	${0:pass}
 endsnippet
@@ -44,27 +28,27 @@ with ${1:open(${2:path})} as ${3:file}:
 	${0:pass}
 endsnippet
 snippet if "if" b
-if ${1:True}:
+if $1:
 	${0:pass}
 endsnippet
 snippet elif "elif" b
-elif ${1:True}:
+elif $1:
 	${0:pass}
 endsnippet
 snippet else "else" b
 else:
-	${0:pass}
+	$0
 endsnippet
 snippet while "while" b
-while ${1:True}:
+while $1:
 	${0:pass}
 endsnippet
 snippet until "until" b
-while not ${1:False}:
+while not $1:
 	${0:pass}
 endsnippet
 snippet for "for in" b
-for ${1:i} in ${2:range(${3:n})}:
+for ${1:i} in ${2:range($3)}:
 	${0:pass}
 endsnippet
 snippet match "match" b
@@ -76,11 +60,8 @@ case ${1:_}:
 	${0:pass}
 endsnippet
 snippet class "new class" b
-class $1(${2:object}):
-	"""${3:doc}
-	"""
-	def __init__(self${4}):
-		${0:pass}
+class $1:
+	${0:pass}
 endsnippet
 snippet from "from ... import ..." b
 from $1 import $0
@@ -89,11 +70,10 @@ snippet dbg "print(f'{var=}')" b
 print(f"\{$1=\}")$0
 endsnippet
 snippet comprehensions "comprehensions" i
-${1:i}$0 for $1 in ${2:range(${3:n})}
+$0 for $1 in ${2:range($3)}
 endsnippet
 snippet fdecorf "func decor func" b
 def $1(target):
-	"""function decortor, target: function"""
 	def ${2:inner}(*args, **kwargs):
 		result = target(*args, **kwargs)$0
 		return result
@@ -101,6 +81,5 @@ def $1(target):
 endsnippet
 snippet fdecors "func decor self" b
 def $1(self: object):
-	"""function decortor, target: self"""
 	return self
 endsnippet
