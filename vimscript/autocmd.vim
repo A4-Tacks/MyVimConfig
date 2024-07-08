@@ -249,7 +249,7 @@ if exists('enable_builtin_completion_auto_popup')
                     \ |     call timer_start(0, funcref(
                     \           's:complete_first',
                     \           [
-                    \               (getline('.')[:col('.')-1].v:char)->matchstr('\<\%(.\<\@!\)\+$'),
+                    \               (getline('.')[:col('.')-2].v:char)->matchstr('\<\%(.\<\@!\)\+$'),
                     \           ],
                     \       ))
                     \ | en
