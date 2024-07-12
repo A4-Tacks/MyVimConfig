@@ -232,6 +232,9 @@ autocmd TabNew * tabmove $
 " 美中不足的是输入过快因为使用的timer实时性不够可能出现问题
 if exists('enable_builtin_completion_auto_popup')
     function s:complete_first(word, timer)
+        if !empty(reg_recording()) || !empty(reg_executing())
+            return
+        endif
         if !s:complete_first_wait | return | endif
         let s:complete_first_wait = v:false
         let info = complete_info()
@@ -243,7 +246,8 @@ if exists('enable_builtin_completion_auto_popup')
         en
         call complete(col('.')-strlen(a:word), [a:word, info.items[0].word])
     endfunction
-    au InsertCharPre *  if !pumvisible() && v:char =~# '\<.\>'
+    au InsertCharPre *  if empty(reg_recording()) && empty(reg_executing())
+                    \           && !pumvisible() && v:char =~# '\<.\>'
                     \ |     call feedkeys("\<c-n>\<c-p>")
                     \ |     let s:complete_first_wait = v:true
                     \ |     call timer_start(0, funcref(
