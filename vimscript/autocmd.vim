@@ -89,7 +89,12 @@ function! BigWin(open)
 endfunction
 call BigWin(v:false)
 " InsertEnter Clear search info {{{1
-autocmd InsertEnter * if !empty(@/) | let g:prev_search = @/ | en | let @/ = ""
+autocmd InsertEnter *
+            \   if !empty(@/)
+            \ |     let g:prev_search = @/
+            \ |     let g:prev_search_forward = v:searchforward
+            \ | en
+            \ | let @/ = ""
 " Clear search buffer {{{1
 autocmd VimEnter * let @/ = ""
 " In cmd line tag variable {{{1

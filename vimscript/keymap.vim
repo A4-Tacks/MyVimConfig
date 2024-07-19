@@ -348,8 +348,8 @@ xnoremap <silent><expr> am TextObjectIndentBlock(v:true , v:true)
 onoremap <silent><expr> am TextObjectIndentBlock(v:true , v:true)
 "}}}
 " Disable Empty Search And Prev Search {{{1
-nnoremap <expr> n strlen(@/) > 0 ? "n" : execute('let@/=get(g:,"prev_search","")').(@/->strlen()?'n':'')
-nnoremap <expr> N strlen(@/) > 0 ? "N" : execute('let@/=get(g:,"prev_search","")').(@/->strlen()?'N':'')
+nnoremap <expr> n strlen(@/) > 0 ? "n" : execute('let@/=get(g:,"prev_search","")\|let v:searchforward=get(g:,"prev_search_forward",1)').(@/->strlen()?'n':'')
+nnoremap <expr> N strlen(@/) > 0 ? "N" : execute('let@/=get(g:,"prev_search","")\|let v:searchforward=get(g:,"prev_search_forward",1)').(@/->strlen()?'N':'')
 " Leader maps {{{1
 
 " open terminal or update NERDTree
