@@ -119,6 +119,10 @@ inoremap #. <End>,
 "}}}
 nnoremap & @@
 
+" 省的每次列插入还要按一下块选择
+xnoremap <expr> I (mode()=~#'V' ? '0' : '').(mode()!~#'<c-v>' ? '<c-v>I' : 'I')
+xnoremap <expr> A (mode()=~#'V' ? '$' : '').(mode()!~#'<c-v>' ? '<c-v>A' : 'A')
+
 " next or prev buffer {{{
 command! -count -bar BufferNext execute "bnext " .. (<range> ? <line2>-<line1> + 1 : "")
 command! -count -bar BufferPrev execute "bprevious " .. (<range> ? <line2>-<line1> + 1 : "")
