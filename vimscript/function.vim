@@ -112,27 +112,13 @@ function! ToSnake(name, big_start = v:true) " {{{1
     endfor
     return l:res
 endfunction
-function! SplitLevelsArgs(level, args) " -> list[list[str]] {{{1
-    " level > 0
-    " res.len == level
-    if a:level <= 0
-        return []
+function! SplitLevelsArgs(args) " -> list[list[str]; 2] {{{1
+    " 切分两段参数, 如果没有给出段分割符`--`则默认最后一段
+    let idx = index(a:args, "--")
+    if idx == -1
+        return [[], copy(a:args)]
     endif
-    let res = [[]]
-    for _ in range(a:level)
-        let res += []
-    endfor
-    for arg in a:args
-        if len(res) < a:level && arg == '--'
-            call add(res, [])
-        else
-            call add(res[-1], arg)
-        endif
-    endfor
-    for _ in range(a:level - len(res))
-        call add(res, [])
-    endfor
-    return res
+    return [slice(a:args, 0, idx), a:args[idx+1:]]
 endfunction
 function! StrFmt(fmtter, ...) " {{{1
     return py3eval('str(vim.eval("a:fmtter")).format(*vim.eval("a:000"))')
@@ -327,6 +313,47 @@ function! FunExists(name) " {{{1
     catch /^Vim\%((\a\+)\)\=:E700:/
         return v:false
     endtry
+endfunction
+function! MatchAll(expr, pat) " {{{1
+    let rem = a:expr
+    let res = []
+    while v:true
+        let [str, _, end] = matchstrpos(rem, a:pat)
+        if end == -1 | break | endif
+        call add(res, str)
+        let rem = rem[end:]
+    endwhile
+    return res
+endfunction
+function! ShCmdFmt(format, ...) " {{{1
+    let cmd = ''
+    let i = 0
+    let list = MatchAll(a:format, '\v[^%]+|\%.')
+    let actions = #{
+                \s: {s -> s},
+                \f: function('FileNameToShell'),
+                \S: {args -> join(args)},
+                \F: {args -> join(map(args, {_, s -> FileNameToShell(s)}))},
+                \}
+    let hards = {
+                \'%': {-> '%'},
+                \'p': {-> FileNameToShell(expand('%:p'))},
+                \}
+    for arg in list
+        if arg =~# '^%'
+            let F = get(hards, arg[1:], v:none)
+            if !empty(F)
+                let cmd .= F()
+            else
+                let F = actions[arg[1:]]
+                let cmd .= F(a:000[i])
+                let i += 1
+            endif
+        else
+            let cmd .= arg
+        endif
+    endfor
+    return cmd
 endfunction
 " End {{{1
 " }}}1

@@ -450,59 +450,48 @@ inoremap <expr> #@ Clipboard() .. "\<Esc>"
 " Running or save source code {{{1
 function! Runer() " -> dict
     function! s:python(args) dict " -> str {{{2
-        return "time python3 " .. FileNameToShell(expand("%:p")) .. " " .. join(a:args)
+        return ['time python3 %p %S', a:args]
     endfunction
     function! s:clang(args) dict " -> str {{{2
-        let args = SplitLevelsArgs(2, a:args)
-        let outf = FileNameToShell(expand("%:p:r") .. ".out")
-        return "time gcc " .. FileNameToShell(expand("%:p")) .. " -o "
-                    \.. outf .. " " .. join(args[0])
-                    \.. "&& time " .. outf .. " " .. join(args[1])
+        let [a, b] = SplitLevelsArgs(a:args)
+        let outf = expand("%:p:r") .. ".out"
+        return ['time gcc %p -o %f %F && time %f %F', outf, a, outf, b]
     endfunction
     function! s:sh(args) dict " -> str {{{2
-        let args = SplitLevelsArgs(2, a:args)
-        return "time bash " .. join(args[0])
-                    \.. " -- " .. expand("%:p") .. " " .. join(args[1])
+        let [a, b] = SplitLevelsArgs(a:args)
+        return ['time bash %F %p %F', a, b]
     endfunction
     function! s:vim(args) dict " -> str {{{2
-        let args = SplitLevelsArgs(2, a:args)
-        return "time vim " .. join(args[0])
-                    \.. " -u " .. expand("%:p") .. " " .. join(args[1])
+        let [a, b] = SplitLevelsArgs(a:args)
+        return ['time vim %F -u %p %F', a, b]
     endfunction
     function! s:rust(args) dict " -> str {{{2
-        let args = SplitLevelsArgs(2, a:args)
-        if expand("%:t") == "main.rs"
-            return "time cargo run " .. join(args[0])
-                        \.. " -- " .. join(args[1])
+        let [a, b] = SplitLevelsArgs(a:args)
+        if expand("%:t") ==# "main.rs"
+            return ['time cargo run %F -- %F', a, b]
         else
-            return "time cargo test " .. join(args[0])
-                        \.. " -- " .. join(args[1])
+            return ['time cargo test %F -- %F', a, b]
         endif
     endfunction
     function! s:awk(args) dict " -> str {{{2
-        let args = SplitLevelsArgs(2, a:args)
-        return "time awk " .. join(args[0])
-                    \.. " -f " .. expand("%:p") .. " " .. join(args[1])
+        let [a, b] = SplitLevelsArgs(a:args)
+        return ['time awk %F -f %p %F', a, b]
     endfunction
     function! s:js(args) dict " -> str {{{2
-        let args = SplitLevelsArgs(2, a:args)
-        return "time node " .. join(args[0])
-                    \.. " " .. expand("%:p") .. " " .. join(args[1])
+        let [a, b] = SplitLevelsArgs(a:args)
+        return ['time node %F %p %F', a, b]
     endfunction
     function! s:ts(args) dict " -> str {{{2
-        let args = SplitLevelsArgs(2, a:args)
-        return "time ts-node " .. join(args[0])
-                    \.. " -- " .. expand("%:p") .. " " .. join(args[1])
+        let [a, b] = SplitLevelsArgs(a:args)
+        return ['time ts-node %F -- %p %F', a, b]
     endfunction
     function! s:lua(args) dict " -> str {{{2
-        let args = SplitLevelsArgs(2, a:args)
-        return "time lua " .. join(args[0])
-                    \.. " -- " .. expand("%:p") .. " " .. join(args[1])
+        let [a, b] = SplitLevelsArgs(a:args)
+        return ['time lua %F -- %p %F', a, b]
     endfunction
     function! s:fish(args) dict " -> str {{{2
-        let args = SplitLevelsArgs(2, a:args)
-        return "time fish " .. join(args[0])
-                    \.. " -- " .. expand("%:p") .. " " .. join(args[1])
+        let [a, b] = SplitLevelsArgs(a:args)
+        return ['time fish %F -- %p %F', a, b]
     endfunction
     " result dict functions {{{2
     return
@@ -520,7 +509,7 @@ function! Runer() " -> dict
                 \}
     " }}}2
 endfunction
-nnoremap <silent> <F5> :if &modified \| write \| else \| call CompileRun(input("args> ")) \| endif<CR>
+nnoremap <silent> <F5> :if &modified \|\| !filewritable(expand('%')) \| write \| else \| call CompileRun(input("args> ")) \| endif<CR>
 
 let g:runer = Runer()
 
@@ -529,12 +518,9 @@ function! CompileRun(args_text) " {{{
         echo &filetype .. " not in lang config. " .. string(keys(g:runer))
         return v:none
     endif
-    let args = map(ShlexSplit(a:args_text),
-                \{ _, x -> FileNameToShell(x) })
+    let args = ShlexSplit(a:args_text)
     execute "!set -x;" .. 'echo -ne "\e[0m\e[' .. &lines .. 'S\e[H";'
-                \.. g:runer[&filetype](args)
-    " execute "terminal bash -c " .. FileNameToShell("set -x;" .. 'echo -ne "\e[0m\e[' .. &lines .. 'S\e[H";'
-    "             \.. g:runer[&filetype](args))
+                \.. funcref('ShCmdFmt', g:runer[&filetype](args))()
 endfunction " }}}
 
 " Translate {{{1
