@@ -78,7 +78,8 @@ snoremap <silent> jk <Esc>
 
 " terminal
 " term 回 vim
-tnoremap jk <C-\><C-n>
+tnoremap <C-w>e <C-\><C-n>
+tnoremap <C-w><C-e> <C-\><C-n>
 
 " 按末尾相对行数而不是合并行数来计范围的行合并 {{{
 command -range -bang -bar SilentRelativeJoin
@@ -386,6 +387,8 @@ nnoremap <silent> <leader>_ <c-w>6<
 nnoremap <silent> m :call StartWindowControl()<cr>
 nnoremap <silent> <c-w>m :call StartWindowControl()<cr>
 nnoremap <silent> <c-w><c-m> :call StartWindowControl()<cr>
+tnoremap <silent> <c-w>m <cmd>call StartWindowControl()<cr>
+tnoremap <silent> <c-w><c-m> <cmd>call StartWindowControl()<cr>
 function! StartWindowControl()
     let extra_cmd = {
                 \ 'M': "norm!\<c-w>_\<c-w>|",
