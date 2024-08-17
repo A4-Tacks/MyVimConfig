@@ -133,6 +133,9 @@ function AutoLightWordTimer(time)
                         \ . l:word->substitute('[/\\]', '\\\0', 'g')
                         \ . '\>'
         endif
+        if g:cursor_word_regex->slice(-1) ==# "\n"
+            let g:cursor_word_regex = g:cursor_word_regex->slice(0, -1) . '\n'
+        endif
         execute 'match WordLight /' . g:cursor_word_regex . '/'
     endfunction
 

@@ -63,8 +63,10 @@ function! GetCursorWord() " {{{1
         else
             if vbgc > vedc | let [vedc, vbgc] = [vbgc, vedc] | endif
             let line = getline(vbgl)
-            let vedc = line[vedc-1:]->matchend('.') + vedc - 1
-            return [line[vbgc-1:vedc-1], 'v']
+            let chw = line[vedc-1:]->matchend('.')
+            let ed = chw == -1 ? "\n" : ''
+            let vedc = max([1, chw]) + vedc - 1
+            return [line[vbgc-1:vedc-1] . ed, 'v']
         endif
     endif
     let [ccol, line] = [charcol("."), line(".")]
