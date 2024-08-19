@@ -47,8 +47,11 @@
 
     "rust-analyzer.completion.callable.snippets": "fill_arguments",
     "rust-analyzer.updates.checkOnStartup": false,
-    "rust-analyzer.inlayHints.reborrowHints.enable": "never",
+    "rust-analyzer.inlayHints.reborrowHints.enable": "always",
+    "rust-analyzer.inlayHints.expressionAdjustmentHints.mode": "prefer_postfix",
+    "rust-analyzer.inlayHints.expressionAdjustmentHints.hideOutsideUnsafe": true,
     "rust-analyzer.inlayHints.lifetimeElisionHints.enable": "always",
+    "rust-analyzer.inlayHints.closureCaptureHints.enable": false,
 
     "typescript.inlayHints.parameterNames.enabled": "all",
     "typescript.inlayHints.functionLikeReturnTypes.enabled": true,
