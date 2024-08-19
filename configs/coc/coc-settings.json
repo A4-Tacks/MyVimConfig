@@ -45,8 +45,9 @@
     "codeLens.subseparator": "| ",
     "codeLens.separator": "¥",
 
-    "rust-analyzer.completion.callable.snippets": "fill_arguments",
     "rust-analyzer.updates.checkOnStartup": false,
+    "rust-analyzer.check.workspace": false,
+    "rust-analyzer.completion.callable.snippets": "fill_arguments",
     "rust-analyzer.inlayHints.reborrowHints.enable": "always",
     "rust-analyzer.inlayHints.expressionAdjustmentHints.mode": "prefer_postfix",
     "rust-analyzer.inlayHints.expressionAdjustmentHints.hideOutsideUnsafe": true,
