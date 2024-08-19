@@ -44,6 +44,10 @@
     "codeLens.position": "eol",
     "codeLens.subseparator": "| ",
     "codeLens.separator": "¥",
+    "tree.closedIcon": "▶",
+    "tree.openedIcon": "▼",
+    "tree.key.toggle": "o",
+    "tree.key.collapseAll": "u",
 
     "rust-analyzer.updates.checkOnStartup": false,
     "rust-analyzer.check.workspace": false,
