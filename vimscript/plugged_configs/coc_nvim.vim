@@ -28,7 +28,18 @@ nmap <C-F3>  <Plug>(coc-codeaction-source)
 nmap <F4> <Plug>(coc-fix-current)
 
 " 命令列表
-"nnoremap <C-x> :CocCommand<CR>
+nnoremap <leader>c :CocCommand<CR>
+
+" 大纲
+nnoremap <silent><nowait> <leader>o :call ToggleCocOutline()<CR>
+function! ToggleCocOutline() abort
+  let winid = coc#window#find('cocViewId', 'OUTLINE')
+  if winid == -1
+    call CocActionAsync('showOutline', 1)
+  else
+    call coc#window#close(winid)
+  endif
+endfunction
 
 " 错误跳转
 nmap <silent> <C-k> <Plug>(coc-diagnostic-prev)
@@ -168,7 +179,7 @@ xmap <silent> <leader>r  <Plug>(coc-codeaction-refactor-selected)
 nmap <silent> <leader>r  <Plug>(coc-codeaction-refactor-selected)
 
 " Run the Code Lens action on the current line
-nmap <leader>cl  <Plug>(coc-codelens-action)
+nmap <leader>e  <Plug>(coc-codelens-action)
 
 " Map function and class text objects
 " NOTE: Requires 'textDocument.documentSymbol' support from the language server
