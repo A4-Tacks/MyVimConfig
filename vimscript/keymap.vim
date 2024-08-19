@@ -592,7 +592,7 @@ vnoremap <expr> <cr> foldclosed('.') != -1
             \ : "\<cr>"
 
 " snippets jump and skip out of braces {{{1
-let s:braces = ['^.\{-}[([{<"'']',
+let s:braces = ['^.\{-}[([{<)\]}>"'']',
             \   '^.\{-}[)\]}>"'']']
 
 function! s:snippet_jump(is_next, raw, enter)
