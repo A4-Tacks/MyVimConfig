@@ -35,7 +35,7 @@ nnoremap <silent><nowait> <leader>o :call ToggleCocOutline()<CR>
 function! ToggleCocOutline() abort
   let winid = coc#window#find('cocViewId', 'OUTLINE')
   if winid == -1
-    call CocActionAsync('showOutline', 1)
+    call CocActionAsync('showOutline', 0)
   else
     call coc#window#close(winid)
   endif
