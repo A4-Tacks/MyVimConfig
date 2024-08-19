@@ -40,6 +40,10 @@
             "sh"
         ]
     },
+    "codeLens.enable": true,
+    "codeLens.position": "eol",
+    "codeLens.subseparator": "| ",
+    "codeLens.separator": "¥",
 
     "rust-analyzer.completion.callable.snippets": "fill_arguments",
     "rust-analyzer.updates.checkOnStartup": false,
