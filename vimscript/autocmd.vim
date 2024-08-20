@@ -148,28 +148,41 @@ call AutoLightWordTimer(135)
 autocmd TextChangedI * if foldclosed('.') != -1 | foldopen! | en
 " Load plugged {{{1
 autocmd Syntax * call SetDefaultFileTypeOptions()
+function! s:set(tbl)
+    for [k, v] in items(a:tbl)
+        execute 'setlocal '.k..'='.v
+        silent execute 'do OptionSet '.k
+    endfor
+endfunction
 function SetDefaultFileTypeOptions()
     " 设置映射 属性 参数 及启动插件
+
+    " define literals {{{
+    let expr = 'expr'
+    let syntax = 'syntax'
+    let marker = 'marker'
+    " }}}
+
     let l:type = &filetype
     if l:type == 'python'
-        setlocal foldmethod=expr
-        setlocal foldexpr=HeadLineIndentFunction(v:lnum)
+        call s:set(#{foldmethod: expr, foldexpr: 'HeadLineIndentFunction(v:lnum)'})
 
     elseif l:type == 'rust'
-        setlocal foldmethod=syntax
+        call s:set(#{foldmethod: syntax})
 
     elseif l:type == 'sh'
-        setlocal foldmethod=marker
+        call s:set(#{foldmethod: marker})
 
     elseif l:type == 'java'
     "    JCEnable
     "    CocEnable
     "    setlocal omnifunc=javacomplete#Complete
+    "    call s:set(#{omnifunc: 'javacomplete#Complete'})
     "    inoremap <buffer> <C-b> <C-x><C-o>
-        setlocal foldmethod=syntax
+        call s:set(#{foldmethod: syntax})
 
     elseif l:type == 'vim'
-        setlocal foldmethod=marker
+        call s:set(#{foldmethod: marker})
 
     elseif l:type == 'c'
         function! CEditType(str = '', select = 0)
@@ -217,20 +230,18 @@ function SetDefaultFileTypeOptions()
         endfunction
         xnoremap <buffer><silent> <F9> y:call CEditType(@@, 1)<Cr>
         nnoremap <buffer><silent> <F9> :call CEditType()<Cr>
-        setlocal foldmethod=syntax
+        call s:set(#{foldmethod: syntax})
 
     elseif l:type == 'ocaml'
-        setlocal shiftwidth=2
-        setlocal foldmethod=syntax
+        call s:set(#{foldmethod: syntax, shiftwidth: 2})
 
     elseif ['javascript', 'typescript']->index(l:type) != -1
-        setlocal shiftwidth=2
-        setlocal foldmethod=syntax
+        call s:set(#{foldmethod: syntax, shiftwidth: 2})
 
     endif
 
     if &foldmethod ==# 'manual'
-        setlocal foldmethod=syntax
+        call s:set(#{foldmethod: syntax})
     endif
 endfunction
 " TabAutoToEnd {{{1
