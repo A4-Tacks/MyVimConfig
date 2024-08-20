@@ -47,6 +47,7 @@
     "tree.closedIcon": "▶",
     "tree.openedIcon": "▼",
     "tree.key.toggle": "o",
+    "tree.key.close": "q",
     "tree.key.collapseAll": "u",
 
     "rust-analyzer.updates.checkOnStartup": false,
