@@ -592,8 +592,7 @@ vnoremap <expr> <cr> foldclosed('.') != -1
             \ : "\<cr>"
 
 " snippets jump and skip out of braces {{{1
-let s:braces = ['^.\{-}[([{<)\]}>"'']',
-            \   '^.\{-}[)\]}>"'']']
+let s:braces = #{next: '^.\{-}[)\]}>"'']', back: '^.\{-}[([{<)\]}>"'']'}
 
 function! s:snippet_jump(is_next, raw, enter)
     if FunExists('coc#jumpable') && coc#jumpable()
@@ -602,14 +601,16 @@ function! s:snippet_jump(is_next, raw, enter)
         return c
     endif
 
+    let vis = mode() =~? '^[vs]'
     if a:is_next
-        let str = matchstr(getline('.'), s:braces[1], col('.')-1)
+        let str = strcharpart(getline('.'), charcol('.')-1+vis)
+        let str = matchstr(str, s:braces.next)
         if !empty(str)
             return repeat("\<Right>", strcharlen(str))
         endif
     else
         let str = strcharpart(getline('.'), 0, charcol('.')-1)
-        let str = matchstr(reverse(str), s:braces[0])
+        let str = matchstr(reverse(str), s:braces.back)
         if !empty(str)
             return repeat("\<Left>", strcharlen(str))
         endif
@@ -621,6 +622,8 @@ inoremap <nowait><silent><expr><C-k> <SID>snippet_jump(v:false,{-> ''}, "\<lt>C-
 inoremap <nowait><silent><expr><C-j> <SID>snippet_jump(v:true, {-> ''}, "\<lt>C-r>=")
 snoremap <nowait><silent><expr><C-k> <SID>snippet_jump(v:false,{-> ''}, "\<lt>esc>")
 snoremap <nowait><silent><expr><C-j> <SID>snippet_jump(v:true, {-> ''}, "\<lt>esc>")
+xnoremap <nowait><silent><expr><C-k> <SID>snippet_jump(v:false,{-> ''}, "\<lt>esc>")
+xnoremap <nowait><silent><expr><C-j> <SID>snippet_jump(v:true, {-> ''}, "\<lt>esc>")
 
 " End {{{1
 " }}}
