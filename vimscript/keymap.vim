@@ -120,6 +120,8 @@ inoremap #. <End>,
 "}}}
 nnoremap & @@
 
+nnoremap <leader>g :registers<cr>
+
 " 省的每次列插入还要按一下块选择
 xnoremap <expr> I (mode()=~#'V' ? '0' : '').(mode()!~#'<c-v>' ? '<c-v>I' : 'I')
 xnoremap <expr> A (mode()=~#'V' ? '$' : '').(mode()!~#'<c-v>' ? '<c-v>A' : 'A')
