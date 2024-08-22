@@ -15,7 +15,7 @@ set relativenumber
 set colorcolumn=79
 
 " color
-set t_Co=16
+set t_Co=256
 
 " 高亮当前行
 set cursorline
