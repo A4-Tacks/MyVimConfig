@@ -206,6 +206,8 @@ function! UpdateIndentLine() " {{{1
     endfor
 endfunction
 function! UpdateUserMatches() " {{{1
+    call UpdateIndentLine()
+
     let g:eol_ws_light_id = get(g:, 'eol_ws_light_id', -1)
     if g:eol_ws_light_id != -1
         try
@@ -214,9 +216,6 @@ function! UpdateUserMatches() " {{{1
         endtry
     endif
     let g:eol_ws_light_id = matchadd('EOLWhiteSpace', '\s\+$', 0, -1)
-
-
-    call UpdateIndentLine()
 endfunction
 function! SetUserColors() " {{{1
     " Vim 原生补全菜单
