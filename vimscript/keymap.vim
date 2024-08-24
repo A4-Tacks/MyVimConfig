@@ -3,6 +3,8 @@ noremap! #x \
 noremap! #& \|
 noremap! #h \|
 noremap! #a \|\|
+noremap! #H \|
+noremap! #A \|\|
 inoremap #' ''<Left>
 inoremap #_ ~
 inoremap #" `
@@ -68,10 +70,24 @@ noremap! #m ``<Left>
 noremap! #M ``<Left>
 noremap! #n +
 noremap! #u =
+noremap! #I ""<Left>
+noremap! #I ""<Left>
+noremap! #O ''<Left>
+noremap! #O ''<Left>
+noremap! #M ``<Left>
+noremap! #M ``<Left>
+noremap! #N +
+noremap! #U =
 
 " Fold
 inoremap #zk {{{
 inoremap #zl }}}
+inoremap #Zk {{{
+inoremap #Zl }}}
+inoremap #zK {{{
+inoremap #zL }}}
+inoremap #ZK {{{
+inoremap #ZL }}}
 " 辅助按键 {{{1
 inoremap <silent> jk <Esc>
 snoremap <silent> jk <Esc>
