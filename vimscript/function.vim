@@ -215,7 +215,7 @@ function! UpdateUserMatches() " {{{1
         catch /^Vim\%((\a\+)\)\=:E80[23]/
         endtry
     endif
-    let g:eol_ws_light_id = matchadd('EOLWhiteSpace', '\s\+$', 0, -1)
+    let g:eol_ws_light_id = matchadd('EOLWhiteSpace', '\v\s+$|\S\zs\s{50,}\ze\S', 0, -1)
 endfunction
 function! SetUserColors() " {{{1
     " Vim 原生补全菜单
