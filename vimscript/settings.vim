@@ -61,7 +61,7 @@ set incsearch
 set noignorecase
 
 " vim 命令自动补全
-set wildmenu
+set wildmenu wildoptions=fuzzy
 
 " 文件自动更新
 set autoread
@@ -73,10 +73,10 @@ set guicursor=a:block-blinkon0
 set hlsearch
 
 " Split line
-set wrap
+set nowrap
 
 " 不在单词内部换行
-set linebreak
+set showbreak=>\  linebreak
 
 " 垂直滚动阈值
 set scrolloff=3
