@@ -73,7 +73,7 @@ set guicursor=a:block-blinkon0
 set hlsearch
 
 " Split line
-set nowrap
+set wrap
 
 " 不在单词内部换行
 set showbreak=>\  linebreak
