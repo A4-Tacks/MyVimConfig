@@ -262,7 +262,7 @@ function! SetUserColors() " {{{1
     "hi! CursorLineNr term=underline cterm=underline gui=underline
     "            \ ctermfg=11 ctermbg=none guifg=Yellow guibg=Black
 
-    hi def EOLWhiteSpace ctermfg=NONE ctermbg=239 guifg=NONE guibg=#3A3A3A
+    hi def EOLWhiteSpace ctermfg=NONE ctermbg=238 guifg=NONE guibg=#3A3A3A
 
     let g:indentLine_char = '│'
     augroup UserMatches
