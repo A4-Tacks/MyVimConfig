@@ -65,6 +65,14 @@
     "rust-analyzer.lens.references.trait.enable": true,
     //"rust-analyzer.lens.references.method.enable": true,
     "rust-analyzer.lens.implementations.enable": true,
+    "rust-analyzer.completion.snippets.custom": {
+        "let-else": {
+            "postfix": "else",
+            "body": "let $1 = ${receiver} else {\n\t${2:return};\n};",
+            "description": "Expand to let-else",
+            "scope": "expr"
+        }
+    },
 
     "typescript.inlayHints.parameterNames.enabled": "all",
     "typescript.inlayHints.functionLikeReturnTypes.enabled": true,
