@@ -76,7 +76,7 @@ set hlsearch
 set wrap
 
 " 不在单词内部换行
-set showbreak=>\  linebreak
+set showbreak=> linebreak
 
 " 垂直滚动阈值
 set scrolloff=3
