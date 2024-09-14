@@ -21,6 +21,7 @@ function SetTitle()
         #!/usr/bin/bash
         set -o nounset
         set -o errtrace
+        #set -o pipefail
         function CATCH_ERROR {
             local __LEC=$? __i
             echo "Traceback (most recent call last):" >&2
