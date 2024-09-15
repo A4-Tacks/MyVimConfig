@@ -215,12 +215,7 @@ function! UpdateUserMatches() " {{{1
         catch /^Vim\%((\a\+)\)\=:E80[23]/
         endtry
     endif
-    let ws = " \u00a0\u1680\u2000-\u200a\u202f\u205f\u3000"
-    let pat = '\v\s+$|\S\zs\s{50,}\ze\S'
-    let pat = substitute(pat, '\\\([sS\\]\)', {s -> s[1] ==# '\' ? '\' :
-                \ s[1] ==# 's' ? '['.ws.']' :
-                \ s[1] ==# 'S' ? '[^'.ws.']' : execute('throw "unreachable"')}, 'g')
-    let g:eol_ws_light_id = matchadd('EOLWhiteSpace', pat, 0, -1)
+    let g:eol_ws_light_id = matchadd('EOLWhiteSpace', '\v\s+$|\S\zs\s{50,}\ze\S', 0, -1)
 endfunction
 function! SetUserColors() " {{{1
     " Vim 原生补全菜单
