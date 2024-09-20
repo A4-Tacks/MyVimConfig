@@ -420,7 +420,7 @@ function! StartWindowControl()
     let oprefix = ''
     while v:true
         let ch = getcharstr()
-        if ch =~# "[\<C-w>\<esc>\<c-m> a]"
+        if ch =~# "[\<C-w>\<esc>\<c-m> ia]"
             return
         elseif num != '' && ch =~# '\d'
             let num *= 10
