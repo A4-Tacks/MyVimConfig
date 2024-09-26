@@ -292,7 +292,7 @@ xnoremap <silent> av :<C-u>norm! v0og_<CR>
 onoremap <silent> av :<C-u>norm! v0og_<CR>
 "}}}
 " 缩进文本对象 {{{
-function! TextObjectIndentBlock(out, rev = v:false)
+function! TextObjectIndentBlock(out, rev=v:false, goto=v:false)
     let Mov = {n -> n..'G'}
     let [bg, ed, sbg, sed] = [line('.'), line('v')]
                 \ ->sort({a, b -> a-b})
@@ -358,6 +358,11 @@ function! TextObjectIndentBlock(out, rev = v:false)
         endif
     endfor
 
+    if a:goto
+        return ":\<C-u>norm!"
+                    \ . (a:rev ? Mov(sbg) . '_' : Mov(sed) . 'g_')
+                    \ . "\<CR>"
+    endif
     return ":\<C-u>norm! V".Mov(sbg).'o'.Mov(sed)
                 \.(tail?'g_':'g_o')."\<CR>"
 endfunction
@@ -369,6 +374,10 @@ xnoremap <silent><expr> im TextObjectIndentBlock(v:false, v:true)
 onoremap <silent><expr> im TextObjectIndentBlock(v:false, v:true)
 xnoremap <silent><expr> am TextObjectIndentBlock(v:true , v:true)
 onoremap <silent><expr> am TextObjectIndentBlock(v:true , v:true)
+nnoremap <silent><expr> gin TextObjectIndentBlock(v:false, v:false, v:true)
+nnoremap <silent><expr> gan TextObjectIndentBlock(v:true , v:false, v:true)
+nnoremap <silent><expr> gim TextObjectIndentBlock(v:false, v:true , v:true)
+nnoremap <silent><expr> gam TextObjectIndentBlock(v:true , v:true , v:true)
 "}}}
 " Disable Empty Search And Prev Search {{{1
 nnoremap <expr> n strlen(@/) > 0 ? "n" : execute('let@/=get(g:,"prev_search","")\|let v:searchforward=get(g:,"prev_search_forward",1)').(@/->strlen()?'n':'')
