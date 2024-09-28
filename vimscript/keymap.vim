@@ -378,6 +378,20 @@ nnoremap <silent><expr> gin TextObjectIndentBlock(v:false, v:false, v:true)
 nnoremap <silent><expr> gan TextObjectIndentBlock(v:true , v:false, v:true)
 nnoremap <silent><expr> gim TextObjectIndentBlock(v:false, v:true , v:true)
 nnoremap <silent><expr> gam TextObjectIndentBlock(v:true , v:true , v:true)
+nmap <silent> g2in 2gin
+nmap <silent> g2an 2gan
+nmap <silent> g2im 2gim
+nmap <silent> g2am 2gam
+
+nmap <silent> g3in 3gin
+nmap <silent> g3an 3gan
+nmap <silent> g3im 3gim
+nmap <silent> g3am 3gam
+
+nmap <silent> g4in 4gin
+nmap <silent> g4an 4gan
+nmap <silent> g4im 4gim
+nmap <silent> g4am 4gam
 "}}}
 " Disable Empty Search And Prev Search {{{1
 nnoremap <expr> n strlen(@/) > 0 ? "n" : execute('let@/=get(g:,"prev_search","")\|let v:searchforward=get(g:,"prev_search_forward",1)').(@/->strlen()?'n':'')
