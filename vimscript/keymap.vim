@@ -302,12 +302,13 @@ function! TextObjectIndentBlock(out, rev=v:false, goto=v:false)
     let eof = line('$')
     let Check = {n -> n >= 1 && n <= eof}
 
+    let ranged = bg != ed
     if !a:rev
         let indent = indent(nextnonblank(bg))
-        if bg == ed | let ed = nextnonblank(ed) | endif
+        let ed = nextnonblank(ed + ranged)
     else
         let indent = indent(prevnonblank(ed))
-        if bg == ed | let bg = prevnonblank(bg) | endif
+        let bg = prevnonblank(bg - ranged)
     endif
 
     for _ in range(v:count1)
@@ -332,29 +333,27 @@ function! TextObjectIndentBlock(out, rev=v:false, goto=v:false)
         endif
 
         if !a:rev
-            if a:out
-                while Check(ed+1)
-                    let n = ed+1
-                    if getline(n) =~# '^\s*$'
-                        let ed += 1
-                    elseif indent(n) == indent
-                        let [ed, sed] = [n, n]
-                    endif
-                    break
-                endwhile
-            endif
+            while Check(ed+1)
+                let n = ed+1
+                if getline(n) =~# '^\s*$'
+                    let ed += 1
+                elseif indent(n) == indent
+                    let ed = n
+                    if a:out | let sed = n | endif
+                endif
+                break
+            endwhile
         else
-            if a:out
-                while Check(bg-1)
-                    let n = bg-1
-                    if getline(n) =~# '^\s*$'
-                        let bg -= 1
-                    elseif indent(n) == indent
-                        let [bg, sbg] = [n, n]
-                    endif
-                    break
-                endwhile
-            endif
+            while Check(bg-1)
+                let n = bg-1
+                if getline(n) =~# '^\s*$'
+                    let bg -= 1
+                elseif indent(n) == indent
+                    let bg = n
+                    if a:out | let sbg = n | endif
+                endif
+                break
+            endwhile
         endif
     endfor
 
