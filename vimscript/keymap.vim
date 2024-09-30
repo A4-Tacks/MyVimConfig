@@ -302,7 +302,7 @@ function! TextObjectIndentBlock(out, rev=v:false, goto=v:false)
     let eof = line('$')
     let Check = {n -> n >= 1 && n <= eof}
 
-    let ranged = bg != ed
+    let ranged = bg != ed && !a:out
     if !a:rev
         let indent = indent(nextnonblank(bg))
         let ed = nextnonblank(ed + ranged)
