@@ -292,8 +292,13 @@ xnoremap <silent> av :<C-u>norm! v0og_<CR>
 onoremap <silent> av :<C-u>norm! v0og_<CR>
 "}}}
 " 缩进文本对象 {{{
+function! s:Mov(n, swp=v:false)
+    let curline = line(a:swp ? 'v' : '.')
+    let diff = a:n - curline
+
+    return diff > 0 ? diff.'j' : diff < 0 ? (-diff).'k' : ''
+endfunction
 function! TextObjectIndentBlock(out, rev=v:false, goto=v:false)
-    let Mov = {n -> n..'G'}
     let [bg, ed, sbg, sed] = [line('.'), line('v')]
                 \ ->sort({a, b -> a-b})
                 \ ->repeat(2)
@@ -359,10 +364,10 @@ function! TextObjectIndentBlock(out, rev=v:false, goto=v:false)
 
     if a:goto
         return ":\<C-u>norm!"
-                    \ . (a:rev ? Mov(sbg) . '_' : Mov(sed) . 'g_')
+                    \ . (a:rev ? s:Mov(sbg) . '_' : s:Mov(sed) . 'g_')
                     \ . "\<CR>"
     endif
-    return ":\<C-u>norm! V".Mov(sbg).'o'.Mov(sed)
+    return ":\<C-u>norm! V".s:Mov(sbg, tail).'o'.s:Mov(sed, tail)
                 \.(tail?'g_':'g_o')."\<CR>"
 endfunction
 xnoremap <silent><expr> in TextObjectIndentBlock(v:false)
