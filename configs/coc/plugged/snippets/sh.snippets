@@ -150,7 +150,7 @@ endsnippet
 snippet return "return" i
 return
 endsnippet
-snippet exit "exit" b
+snippet exit "exit" i
 exit
 endsnippet
 snippet true "true" i
@@ -159,19 +159,19 @@ endsnippet
 snippet false "false" i
 false
 endsnippet
-snippet command "command" b
+snippet command "command" i
 command $0
 endsnippet
-snippet builtin "builtin" b
+snippet builtin "builtin" i
 builtin $0
 endsnippet
-snippet wait "wait" b
+snippet wait "wait" i
 wait
 endsnippet
-snippet echo "echo" b
+snippet echo "echo" i
 echo $0
 endsnippet
-snippet printf "printf" b
+snippet printf "printf" i
 printf '$1' $0
 endsnippet
 snippet eval "eval" b
@@ -204,7 +204,7 @@ endsnippet
 snippet vli "list var in string" i
 \$\{$1[${2:@}]\}$0
 endsnippet
-snippet expr "((expr))" b
+snippet expr "((expr))" i
 ((${1:n = 0}))$0
 endsnippet
 snippet case "case...esac" i
@@ -212,9 +212,8 @@ case "\$\{$1\}" in
 	$2) $0;;
 esac
 endsnippet
-snippet select "select x in ..." b
-PS3="${1:#?> }"
-select ${2:item} in ${3:"\$\{${4}[@]\}"}; do
+snippet select "select x in ..." i
+PS3="${1:#?> }"; select ${2:item} in ${3:"\$\{${4}[@]\}"}; do
 	$0
 done
 endsnippet
