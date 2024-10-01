@@ -367,7 +367,7 @@ function! TextObjectIndentBlock(out, rev=v:false, goto=v:false)
                     \ . (a:rev ? s:Mov(sbg) . '_' : s:Mov(sed) . 'g_')
                     \ . "\<CR>"
     endif
-    return ":\<C-u>norm! V".s:Mov(sbg, tail).'o'.s:Mov(sed, tail)
+    return ":\<C-u>norm! V_".s:Mov(sbg, tail).'o'.s:Mov(sed, tail)
                 \.(tail?'g_':'g_o')."\<CR>"
 endfunction
 xnoremap <silent><expr> in TextObjectIndentBlock(v:false)
