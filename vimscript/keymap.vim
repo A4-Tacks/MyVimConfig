@@ -415,6 +415,7 @@ nnoremap <silent> <leader>h <C-w>h
 nnoremap <silent> <leader>j <C-w>j
 nnoremap <silent> <leader>k <C-w>k
 nnoremap <silent> <leader>l <C-w>l
+nnoremap <silent> <leader>p <C-w>p
 "}}}
 " split{{{
 nnoremap <silent> <leader>s <C-w>s
