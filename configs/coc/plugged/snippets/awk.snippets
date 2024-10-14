@@ -49,7 +49,7 @@ if ($1) {
 	$0
 }
 endsnippet
-snippet else "else" b
+snippet else "else" i
 else {
 	$0
 }
@@ -74,13 +74,13 @@ for (${1:i} in $2) {
 	$0
 }
 endsnippet
-snippet break "break" b
+snippet break "break" i
 break
 endsnippet
-snippet continue "continue" b
+snippet continue "continue" i
 continue
 endsnippet
-snippet return "return" b
+snippet return "return" i
 return $0
 endsnippet
 snippet delarri "delete array[index]" b
@@ -89,7 +89,7 @@ endsnippet
 snippet delarr "delete array" b
 delete $0
 endsnippet
-snippet exit "exit [ expression ]" b
+snippet exit "exit [ expression ]" i
 exit $0
 endsnippet
 snippet switch "switch (expression) cases..." b
@@ -126,10 +126,10 @@ endsnippet
 snippet getline "getline" w
 getline $1${2:< $3}$0
 endsnippet
-snippet next "next" b
+snippet next "next" i
 next
 endsnippet
-snippet nextfile "nextfile" b
+snippet nextfile "nextfile" i
 nextfile
 endsnippet
 snippet print "print" b
