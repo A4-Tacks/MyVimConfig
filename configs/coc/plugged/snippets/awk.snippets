@@ -110,6 +110,9 @@ endsnippet
 snippet initval "if variable is undefined, init it" b
 if (typeof($1) == "untyped") $1 = $2;
 endsnippet
+snippet initvarr "if array variable is undefined, init it" b
+if (typeof($1) == "untyped") for ($2 in $3) $1[$2] = $3[$2];
+endsnippet
 
 # Expression
 snippet callref "call function name reference" w
