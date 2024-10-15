@@ -265,6 +265,9 @@ nnoremap <expr> * <SID>search_cursor(v:true)
 xnoremap <expr> # <SID>search_cursor(v:false,"\<lt>esc>")
 xnoremap <expr> * <SID>search_cursor(v:true,"\<lt>esc>")
 " }}}
+" 扩展z系列键 {{{
+nnoremap z; zzg_
+" }}}
 
 " 范围选择 {{{1
 function! RangeMapDefine(key, str) " {{{
@@ -290,6 +293,9 @@ xnoremap <silent> iv :<C-u>norm! v_og_<CR>
 onoremap <silent> iv :<C-u>norm! v_og_<CR>
 xnoremap <silent> av :<C-u>norm! v0og_<CR>
 onoremap <silent> av :<C-u>norm! v0og_<CR>
+
+onoremap z. ^
+onoremap z; g_
 "}}}
 " 缩进文本对象 {{{
 function! TextObjectIndentBlock(out, rev=v:false, goto=v:false)
