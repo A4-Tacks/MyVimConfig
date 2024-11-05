@@ -139,8 +139,8 @@ nnoremap & @@
 nnoremap <leader>g :registers<cr>
 
 " 省的每次列插入还要按一下块选择
-xnoremap <expr> I (mode()=~#'V' ? '0' : '').(mode()!~#'<c-v>' ? '<c-v>I' : 'I')
-xnoremap <expr> A (mode()=~#'V' ? '$' : '').(mode()!~#'<c-v>' ? '<c-v>A' : 'A')
+xnoremap <expr> I mode()!~#'<c-v>' ? '<c-v>I' : 'I'
+xnoremap <expr> A mode()!~#'<c-v>' ? '<c-v>A' : 'A'
 
 " next or prev buffer {{{
 command! -count -bar BufferNext execute "bnext " .. (<range> ? <line2>-<line1> + 1 : "")
