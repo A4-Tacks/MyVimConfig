@@ -54,7 +54,7 @@
     "rust-analyzer.check.workspace": false,
     "rust-analyzer.completion.callable.snippets": "fill_arguments",
     "rust-analyzer.inlayHints.reborrowHints.enable": "always",
-    "rust-analyzer.inlayHints.expressionAdjustmentHints.mode": "prefer_postfix",
+    "rust-analyzer.inlayHints.expressionAdjustmentHints.mode": "prefer_prefix",
     "rust-analyzer.inlayHints.expressionAdjustmentHints.hideOutsideUnsafe": true,
     "rust-analyzer.inlayHints.lifetimeElisionHints.enable": "always",
     "rust-analyzer.inlayHints.closureCaptureHints.enable": false,
