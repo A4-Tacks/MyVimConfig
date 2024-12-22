@@ -2,8 +2,10 @@
 command! -bar -bang Bd bp|bd<bang> #
 
 command! Vimrc :sp ~/.vimrc
+command! -bar -bang -complete=file -nargs=* W  w<bang> <args>
 command! -bar -bang -complete=file -nargs=* Wq wq<bang> <args>
 command! -bar -bang -complete=file -nargs=* WQ wq<bang> <args>
+command! -bar -bang Q  q<bang>
 command! -bar -bang Qa qa<bang>
 command! -bar -bang QA qa<bang>
 
