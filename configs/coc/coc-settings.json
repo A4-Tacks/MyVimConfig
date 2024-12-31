@@ -6,7 +6,6 @@
             "filetypes": [
                 "vim",
                 "eruby",
-                "markdown",
                 "yaml"
             ]
         },
@@ -14,6 +13,11 @@
             "command": "opam",
             "args": ["exec", "--", "ocamllsp"],
             "filetypes": ["ocaml", "reason"]
+        },
+        "markdown": {
+            "command": "marksman",
+            "args": [],
+            "filetypes": ["markdown"]
         }
         //"bashls": {
         //    "command": "~/.vim/MyVimConfig/virtual_cmd/bash-language-server/main",
