@@ -135,6 +135,7 @@ inoremap #, <End>,
 inoremap #. <End>,
 "}}}
 nnoremap & @@
+xnoremap & @@
 
 nnoremap <leader>g :registers<cr>
 
