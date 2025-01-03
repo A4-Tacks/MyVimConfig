@@ -75,6 +75,12 @@
     "typescript.inlayHints.parameterNames.enabled": "all",
     "typescript.inlayHints.functionLikeReturnTypes.enabled": true,
 
+    "Lua.completion.callSnippet": "Replace",
+    "Lua.hint.enable": true,
+    "Lua.hint.paramName": "Literal",
+    "Lua.hint.setType": true,
+    "Lua.codeLens.enable": true,
+
     "jedi.enable": true,
     "jedi.trace.server": "messages",
     "jedi.diagnostics.enable": false,

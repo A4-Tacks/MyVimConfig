@@ -1,61 +1,61 @@
-snippet while "while loop" b
+snippet while "while loop" i
 while $1 do
 	$0
 end
 endsnippet
-snippet until "until loop" b
+snippet until "until loop" i
 repeat
 	$0
 until $1
 endsnippet
-snippet forloop "for loop" b
+snippet forloop "for loop" i
 for $1 = $2, $3 do
 	$0
 end
 endsnippet
-snippet for "for in" b
+snippet for "for in" i
 for $1 in $2 do
 	$0
 end
 endsnippet
-snippet break "break" b
+snippet break "break" i
 break
 endsnippet
-snippet block "block" b
+snippet block "block" i
 do
 	$1
 end$0
 endsnippet
-snippet blocki "inline block" b
+snippet blocki "inline block" i
 do $1 end$0
 endsnippet
-snippet if "if" b
+snippet if "if" i
 if $1 then
 	$0
 end
 endsnippet
-snippet elif "elseif" b
+snippet elif "elseif" i
 elseif $1 then
 	$0
 endsnippet
-snippet else "else" b
+snippet else "else" i
 else
 	$0
 endsnippet
-snippet goto "goto" b
+snippet goto "goto" i
 goto $0
 endsnippet
-snippet label "label" b
+snippet label "label" i
 ::$1::$0
 endsnippet
-snippet local "local declare" b
+snippet local "local declare" i
 local $0
 endsnippet
 snippet const "const attribute" w
-<const> $0
+$1 <const> $0
 endsnippet
 snippet close "close attribute" w
-<close> $0
+$1 <close> $0
 endsnippet
 snippet nil "nil" w
 nil
@@ -74,11 +74,6 @@ and $0
 endsnippet
 snippet ne "not equal" w
 ~= $0
-endsnippet
-snippet function "function define" w
-function$1($2)
-	$0
-end
 endsnippet
 snippet lambda "inline one expr unnamed function define" w
 function($1) return $2 end$0
