@@ -1,0 +1,607 @@
+# operator
+snippet as "as" w
+as $0
+endsnippet
+snippet and "and" w
+and $0
+endsnippet
+snippet or "or" w
+or $0
+endsnippet
+
+# complex
+snippet foreach "foreach(INIT; UPDATE; EXTRACT)" w
+foreach $1 as \$$2 (${3:0}; $0)
+endsnippet
+snippet reduce "reduce" w
+reduce $1 as \$$2 (${3:0}; $0)
+endsnippet
+snippet def "define function" b
+def $1${2:($3)}:
+	$0
+;
+endsnippet
+
+# control flow
+snippet if "if" w
+if $1 then
+	$0
+end
+endsnippet
+snippet elif "else if" w
+elif $1 then
+	$0
+endsnippet
+snippet else "else" w
+else
+	$0
+endsnippet
+snippet try "try-catch" w
+try
+	$1
+catch
+	$0
+endsnippet
+snippet label "label define" w
+label \$
+endsnippet
+snippet break "go (back) to label" w
+break \$
+endsnippet
+
+# io
+snippet input "open a new value input" w
+input
+endsnippet
+snippet stderr "stderr" w
+stderr
+endsnippet
+snippet input_filename "input_filename" w
+input_filename
+endsnippet
+snippet input_line_number "input_line_number" w
+input_line_number
+endsnippet
+
+# format filters
+snippet text "@text" w
+| @text
+endsnippet
+snippet json "@json" w
+| @json
+endsnippet
+snippet html "@html" w
+| @html
+endsnippet
+snippet uri "@uri" w
+| @uri
+endsnippet
+snippet csv "@csv" w
+| @csv
+endsnippet
+snippet tsv "@tsv" w
+| @tsv
+endsnippet
+snippet sh "@sh" w
+| @sh
+endsnippet
+snippet base64 "@base64" w
+| @base64
+endsnippet
+snippet base64d "@base64d" w
+| @base64d
+endsnippet
+
+# simple filters
+snippet dbg "debug pipe" w
+| debug
+endsnippet
+snippet debug "debug value" w
+| debug($1)
+endsnippet
+snippet not "boolean not" w
+| not
+endsnippet
+
+# simple function like
+snippet range "range" w
+range($1)
+endsnippet
+snippet test "test" w
+test($1)
+endsnippet
+snippet match "match" w
+match($1)
+endsnippet
+snippet capture "capture" w
+capture($1)
+endsnippet
+snippet scan "scan" w
+scan($1)
+endsnippet
+snippet split "split" w
+split($1)
+endsnippet
+snippet splits "splits" w
+splits($1)
+endsnippet
+snippet sub "sub" w
+sub($1)
+endsnippet
+snippet gsub "gsub" w
+gsub($1)
+endsnippet
+snippet isempty "isempty" w
+isempty($1)
+endsnippet
+snippet limit "limit" w
+limit($1)
+endsnippet
+snippet has "has" w
+has($1)
+endsnippet
+snippet in "in" w
+in($1)
+endsnippet
+snippet map "map" w
+map($1)
+endsnippet
+snippet map_values "map_values" w
+map_values($1)
+endsnippet
+snippet pick "pick" w
+pick($1)
+endsnippet
+snippet path "path" w
+path($1)
+endsnippet
+snippet del "del" w
+del($1)
+endsnippet
+snippet getpath "getpath" w
+getpath($1)
+endsnippet
+snippet setpath "setpath" w
+setpath($1; $2)
+endsnippet
+snippet delpaths "delpaths" w
+delpaths($1)
+endsnippet
+snippet with_entries "with_entries" w
+with_entries($1)
+endsnippet
+snippet select "select" w
+select($1)
+endsnippet
+snippet any "any" w
+any($1)
+endsnippet
+snippet all "all" w
+all($1)
+endsnippet
+snippet bsearch "bsearch" w
+bsearch($1)
+endsnippet
+snippet sort_by "sort_by" w
+sort_by($1)
+endsnippet
+snippet group_by "group_by" w
+group_by($1)
+endsnippet
+snippet min_by "min_by" w
+min_by($1)
+endsnippet
+snippet max_by "max_by" w
+max_by($1)
+endsnippet
+snippet unique_by "unique_by" w
+unique_by($1)
+endsnippet
+snippet contains "contains" w
+contains($1)
+endsnippet
+snippet indices "indices" w
+indices($1)
+endsnippet
+snippet index "index" w
+index($1)
+endsnippet
+snippet rindex "rindex" w
+rindex($1)
+endsnippet
+snippet startswith "startswith" w
+startswith($1)
+endsnippet
+snippet endswith "endswith" w
+endswith($1)
+endsnippet
+snippet ltrimstr "ltrimstr" w
+ltrimstr($1)
+endsnippet
+snippet rtrimstr "rtrimstr" w
+rtrimstr($1)
+endsnippet
+snippet join "join" w
+join($1)
+endsnippet
+snippet while "while" w
+while($1; $2)
+endsnippet
+snippet repeat "repeat" w
+repeat($1)
+endsnippet
+snippet until "until" w
+until($1; $2)
+endsnippet
+snippet walk "walk" w
+walk($1)
+endsnippet
+
+# general filter
+snippet error "error" w
+error
+endsnippet
+snippet first "first" w
+first
+endsnippet
+snippet last "last" w
+last
+endsnippet
+snippet nth "nth" w
+nth
+endsnippet
+snippet abs "abs" w
+abs
+endsnippet
+snippet length "length" w
+length
+endsnippet
+snippet utf8bytelength "utf8bytelength" w
+utf8bytelength
+endsnippet
+snippet keys "keys" w
+keys
+endsnippet
+snippet to_entries "to_entries" w
+to_entries
+endsnippet
+snippet from_entries "from_entries" w
+from_entries
+endsnippet
+snippet arrays "arrays" w
+arrays
+endsnippet
+snippet objects "objects" w
+objects
+endsnippet
+snippet iterables "iterables" w
+iterables
+endsnippet
+snippet booleans "booleans" w
+booleans
+endsnippet
+snippet numbers "numbers" w
+numbers
+endsnippet
+snippet normals "normals" w
+normals
+endsnippet
+snippet finites "finites" w
+finites
+endsnippet
+snippet strings "strings" w
+strings
+endsnippet
+snippet nulls "nulls" w
+nulls
+endsnippet
+snippet values "values" w
+values
+endsnippet
+snippet scalars "scalars" w
+scalars
+endsnippet
+snippet empty "empty" w
+empty
+endsnippet
+snippet halt "halt" w
+halt
+endsnippet
+snippet halt_error "halt_error" w
+halt_error
+endsnippet
+snippet paths "paths" w
+paths
+endsnippet
+snippet add "add" w
+add
+endsnippet
+snippet flatten "flatten" w
+flatten
+endsnippet
+snippet tonumber "tonumber" w
+tonumber
+endsnippet
+snippet tostring "tostring" w
+tostring
+endsnippet
+snippet type "type" w
+type
+endsnippet
+snippet infinite "infinite" w
+infinite
+endsnippet
+snippet nan "nan" w
+nan
+endsnippet
+snippet isinfinite "isinfinite" w
+isinfinite
+endsnippet
+snippet isnan "isnan" w
+isnan
+endsnippet
+snippet isfinite "isfinite" w
+isfinite
+endsnippet
+snippet isnormal "isnormal" w
+isnormal
+endsnippet
+snippet sort "sort" w
+sort
+endsnippet
+snippet min "min" w
+min
+endsnippet
+snippet max "max" w
+max
+endsnippet
+snippet unique "unique" w
+unique
+endsnippet
+snippet reverse "reverse" w
+reverse
+endsnippet
+snippet inside "inside" w
+inside
+endsnippet
+snippet combinations "combinations" w
+combinations
+endsnippet
+snippet explode "explode" w
+explode
+endsnippet
+snippet implode "implode" w
+implode
+endsnippet
+snippet ascii_downcase "ascii_downcase" w
+ascii_downcase
+endsnippet
+snippet ascii_upcase "ascii_upcase" w
+ascii_upcase
+endsnippet
+snippet transpose "transpose" w
+transpose
+endsnippet
+
+# math filter
+snippet acos "(math) acos" w
+acos
+endsnippet
+snippet acosh "(math) acosh" w
+acosh
+endsnippet
+snippet asin "(math) asin" w
+asin
+endsnippet
+snippet asinh "(math) asinh" w
+asinh
+endsnippet
+snippet atan "(math) atan" w
+atan
+endsnippet
+snippet atanh "(math) atanh" w
+atanh
+endsnippet
+snippet cbrt "(math) cbrt" w
+cbrt
+endsnippet
+snippet ceil "(math) ceil" w
+ceil
+endsnippet
+snippet cos "(math) cos" w
+cos
+endsnippet
+snippet cosh "(math) cosh" w
+cosh
+endsnippet
+snippet erf "(math) erf" w
+erf
+endsnippet
+snippet erfc "(math) erfc" w
+erfc
+endsnippet
+snippet exp "(math) exp" w
+exp
+endsnippet
+snippet exp10 "(math) exp10" w
+exp10
+endsnippet
+snippet exp2 "(math) exp2" w
+exp2
+endsnippet
+snippet expm1 "(math) expm1" w
+expm1
+endsnippet
+snippet fabs "(math) fabs" w
+fabs
+endsnippet
+snippet floor "(math) floor" w
+floor
+endsnippet
+snippet gamma "(math) gamma" w
+gamma
+endsnippet
+snippet j0 "(math) j0" w
+j0
+endsnippet
+snippet j1 "(math) j1" w
+j1
+endsnippet
+snippet lgamma "(math) lgamma" w
+lgamma
+endsnippet
+snippet log "(math) log" w
+log
+endsnippet
+snippet log10 "(math) log10" w
+log10
+endsnippet
+snippet log1p "(math) log1p" w
+log1p
+endsnippet
+snippet log2 "(math) log2" w
+log2
+endsnippet
+snippet logb "(math) logb" w
+logb
+endsnippet
+snippet nearbyint "(math) nearbyint" w
+nearbyint
+endsnippet
+snippet pow10 "(math) pow10" w
+pow10
+endsnippet
+snippet rint "(math) rint" w
+rint
+endsnippet
+snippet round "(math) round" w
+round
+endsnippet
+snippet significand "(math) significand" w
+significand
+endsnippet
+snippet sin "(math) sin" w
+sin
+endsnippet
+snippet sinh "(math) sinh" w
+sinh
+endsnippet
+snippet sqrt "(math) sqrt" w
+sqrt
+endsnippet
+snippet tan "(math) tan" w
+tan
+endsnippet
+snippet tanh "(math) tanh" w
+tanh
+endsnippet
+snippet tgamma "(math) tgamma" w
+tgamma
+endsnippet
+snippet trunc "(math) trunc" w
+trunc
+endsnippet
+snippet y0 "(math) y0" w
+y0
+endsnippet
+snippet y1 "(math) y1" w
+y1
+endsnippet
+
+# math 2 args
+snippet atan2 "(math) atan2" w
+atan2($1; $2)
+endsnippet
+snippet copysign "(math) copysign" w
+copysign($1; $2)
+endsnippet
+snippet drem "(math) drem" w
+drem($1; $2)
+endsnippet
+snippet fdim "(math) fdim" w
+fdim($1; $2)
+endsnippet
+snippet fmax "(math) fmax" w
+fmax($1; $2)
+endsnippet
+snippet fmin "(math) fmin" w
+fmin($1; $2)
+endsnippet
+snippet fmod "(math) fmod" w
+fmod($1; $2)
+endsnippet
+snippet frexp "(math) frexp" w
+frexp($1; $2)
+endsnippet
+snippet hypot "(math) hypot" w
+hypot($1; $2)
+endsnippet
+snippet jn "(math) jn" w
+jn($1; $2)
+endsnippet
+snippet ldexp "(math) ldexp" w
+ldexp($1; $2)
+endsnippet
+snippet modf "(math) modf" w
+modf($1; $2)
+endsnippet
+snippet nextafter "(math) nextafter" w
+nextafter($1; $2)
+endsnippet
+snippet nexttoward "(math) nexttoward" w
+nexttoward($1; $2)
+endsnippet
+snippet pow "(math) pow" w
+pow($1; $2)
+endsnippet
+snippet remainder "(math) remainder" w
+remainder($1; $2)
+endsnippet
+snippet scalb "(math) scalb" w
+scalb($1; $2)
+endsnippet
+snippet scalbln "(math) scalbln" w
+scalbln($1; $2)
+endsnippet
+snippet yn "(math) yn" w
+yn($1; $2)
+endsnippet
+
+# math 3 args
+snippet fma "(math) fma" w
+fma($1; $2; $3)
+endsnippet
+
+# multi files
+snippet module "declare module" b
+module {$1};
+endsnippet
+snippet modulemeta "get module metadata" b
+("$1" | modulemeta)
+endsnippet
+snippet include "include .jq source" b
+include "$1"$2;
+endsnippet
+snippet import "import .jq module" b
+import "$1" as $2;
+endsnippet
+snippet importobj "import .json object" b
+import "$1" as \$$2;
+endsnippet
+
+# variables
+snippet args "$ARGS.positional" b
+\$ARGS.positional
+endsnippet
+snippet args_named "$ARGS.named" b
+\$ARGS.named
+endsnippet
+snippet env "$ENV" b
+\$ENV
+endsnippet
+snippet loc "$__loc__" b
+\$__loc__
+endsnippet
+snippet JQ_BUILD_CONFIGURATION "$JQ_BUILD_CONFIGURATION" b
+$JQ_BUILD_CONFIGURATION
+endsnippet
