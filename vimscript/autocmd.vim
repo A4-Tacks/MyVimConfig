@@ -161,6 +161,7 @@ function SetDefaultFileTypeOptions()
     " define literals {{{
     let expr = 'expr'
     let syntax = 'syntax'
+    let indent = 'indent'
     let marker = 'marker'
     " }}}
 
@@ -235,6 +236,9 @@ function SetDefaultFileTypeOptions()
 
     elseif l:type == 'ocaml'
         call s:set(#{foldmethod: syntax, shiftwidth: 2})
+
+    elseif l:type == 'jq'
+        call s:set(#{foldmethod: indent, shiftwidth: 2})
 
     elseif ['javascript', 'typescript']->index(l:type) != -1
         call s:set(#{foldmethod: syntax, shiftwidth: 2})

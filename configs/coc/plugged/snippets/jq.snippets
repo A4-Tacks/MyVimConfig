@@ -17,9 +17,14 @@ snippet reduce "reduce" w
 reduce $1 as \$$2 (${3:0}; $0)
 endsnippet
 snippet def "define function" b
-def $1${2:($3)}:
+def $1:
 	$0
-;
+	;
+endsnippet
+snippet fn "define function" b
+def $1:
+	$0
+	;
 endsnippet
 
 # control flow
