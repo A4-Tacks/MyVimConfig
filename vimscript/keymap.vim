@@ -122,6 +122,9 @@ inoremap <C-l> <Del>
 " paste start
 noremap! <silent> #cf <C-o>:set paste eventignore=TextChangedI,TextChangedP,InsertChange,InsertCharPre<cr>
 
+" 快速普通回车新行
+inoremap <c-o> <end><cr>
+
 " emacs{{{
 inoremap <C-a> <Home>
 inoremap <C-e> <End>
