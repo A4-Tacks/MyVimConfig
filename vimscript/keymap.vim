@@ -302,6 +302,9 @@ onoremap <silent> av :<C-u>norm! v0og_<CR>
 onoremap z. ^
 onoremap z; g_
 "}}}
+" 选区文本对象 {{{
+onoremap gv :<c-u>norm!gv<cr>
+"}}}
 " 缩进文本对象 {{{
 function! TextObjectIndentBlock(out, rev=v:false, goto=v:false)
     let Mov = {n -> n..'G'}
