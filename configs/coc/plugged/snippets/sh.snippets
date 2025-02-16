@@ -248,7 +248,7 @@ while getopts h$1 opt; do case "$opt" in
 			'    -h                 show help' \
 			&& exit
 		;;$2
-	*)
+	:|\?)
 		((--OPTIND <= 0)) && OPTIND=1
 		printf '%q: parse args failed, near by %q\n' "\$0" "${!OPTIND}" >&2
 		exit 2
