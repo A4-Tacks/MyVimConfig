@@ -146,6 +146,9 @@ nnoremap <leader>g :registers<cr>
 xnoremap <expr> I mode()!~#'<c-v>' ? '<c-v>I' : 'I'
 xnoremap <expr> A mode()!~#'<c-v>' ? '<c-v>A' : 'A'
 
+" 交换两行, 省的多按一次d
+nnoremap <expr> dp &diff?'dp':':m+1<cr>'
+
 " next or prev buffer {{{
 command! -count -bar BufferNext execute "bnext " .. (<range> ? <line2>-<line1> + 1 : "")
 command! -count -bar BufferPrev execute "bprevious " .. (<range> ? <line2>-<line1> + 1 : "")
