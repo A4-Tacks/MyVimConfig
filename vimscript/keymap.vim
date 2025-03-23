@@ -324,10 +324,12 @@ function! TextObjectIndentBlock(out, rev=v:false, goto=v:false)
     let ranged = bg != ed && !a:out
     if !a:rev
         let indent = indent(nextnonblank(bg))
-        let ed = nextnonblank(ed + ranged)
+        let eed = nextnonblank(ed + ranged)
+        if indent(eed) == indent | let ed = eed | en
     else
         let indent = indent(prevnonblank(ed))
-        let bg = prevnonblank(bg - ranged)
+        let ebg = prevnonblank(bg - ranged)
+        if indent(ebg) == indent | let bg = ebg | en
     endif
 
     for _ in range(v:count1)
