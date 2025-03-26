@@ -104,8 +104,8 @@ endsnippet
 snippet dbg "debug pipe" w
 | debug
 endsnippet
-snippet debug "debug value" w
-| debug($1)
+snippet dbgf "debug pipe first" w
+debug |
 endsnippet
 snippet not "boolean not" w
 | not
@@ -269,6 +269,9 @@ utf8bytelength
 endsnippet
 snippet keys "keys" w
 keys
+endsnippet
+snippet keys_unsorted "keys_unsorted" w
+keys_unsorted
 endsnippet
 snippet to_entries "to_entries" w
 to_entries
