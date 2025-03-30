@@ -151,6 +151,20 @@ nnoremap <expr> dp &diff?'dp':':<c-u>m+1<cr>'
 " 重复行, 省的多按一次y
 nnoremap yp yyp
 
+" I-Mode M-Fn {{{
+imap <M-F1> <esc><F1>
+imap <M-F2> <esc><F2>
+imap <M-F3> <esc><F3>
+imap <M-F4> <esc><F4>
+imap <M-F5> <esc><F5>
+imap <M-F6> <esc><F6>
+imap <M-F7> <esc><F7>
+imap <M-F8> <esc><F8>
+imap <M-F9> <esc><F9>
+imap <M-F10> <esc><F10>
+imap <M-F11> <esc><F11>
+imap <M-F12> <esc><F12>
+" }}}
 " next or prev buffer {{{
 command! -count -bar BufferNext execute "bnext " .. (<range> ? <line2>-<line1> + 1 : "")
 command! -count -bar BufferPrev execute "bprevious " .. (<range> ? <line2>-<line1> + 1 : "")
