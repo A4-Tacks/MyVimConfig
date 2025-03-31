@@ -39,6 +39,7 @@ let s:vim_scripts =<< trim EOF
             coc_nvim.vim
             JavaComplete2.vim
             NERDTree.vim
+            winmode.vim
         }
     }
 }

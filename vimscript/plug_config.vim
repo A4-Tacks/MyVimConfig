@@ -17,6 +17,9 @@ Plug 'w0rp/ale', " { 'on': 'ALEEnable' }
 " 彩虹括号
 "Plug 'luochen1990/rainbow'
 
+" 窗口控制模式
+Plug 'A4-Tacks/winmode.vim'
+
 call plug#end() " Plug配置文件
 
 filetype plugin indent on

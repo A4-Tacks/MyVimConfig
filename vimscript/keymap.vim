@@ -459,49 +459,6 @@ nnoremap <silent> <leader>- <c-w>3-
 nnoremap <silent> <leader>+ <c-w>6>
 nnoremap <silent> <leader>_ <c-w>6<
 "}}}
-" windows control mode {{{
-nnoremap <silent> m :call StartWindowControl()<cr>
-nnoremap <silent> <c-w>m :call StartWindowControl()<cr>
-nnoremap <silent> <c-w><c-m> :call StartWindowControl()<cr>
-tnoremap <silent> <c-w>m <cmd>call StartWindowControl()<cr>
-tnoremap <silent> <c-w><c-m> <cmd>call StartWindowControl()<cr>
-function! StartWindowControl()
-    let extra_cmd = {
-                \ 'M': "norm!\<c-w>_\<c-w>|",
-                \ 'm': "norm!\<c-w>=",
-                \ "'": 'exe"norm!m".getcharstr()',
-                \ ':': 'cal feedkeys(" :")',
-                \ 'gb': 'bn',
-                \ 'gB': 'bp',
-                \ }
-    let num = ''
-    let oprefix = ''
-    while v:true
-        let ch = getcharstr()
-        if ch =~# "[\<C-w>\<esc>\<c-m> ia]"
-            return
-        elseif num != '' && ch =~# '\d'
-            let num *= 10
-            let num += ch->str2nr()
-        elseif ch =~# '\d'
-            let num = ch->str2nr()
-        elseif oprefix->empty() && ch ==# 'g'
-            let oprefix = 'g'
-        else
-            if extra_cmd->has_key(oprefix.ch)
-                let cmd = extra_cmd[oprefix.ch]
-            else
-                let cmd = "norm \<C-w>".num.oprefix.ch
-            endif
-            execute cmd
-            echo cmd
-            redraw
-            let num = ''
-            let oprefix = ''
-        endif
-    endwhile
-endfunction
-" }}}
 
 " quit
 nnoremap <silent> <leader>q <C-w>q
