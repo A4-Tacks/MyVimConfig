@@ -52,7 +52,18 @@ noremap! #> <><Left>
 inoremap ( ()<Left>
 inoremap [ []<Left>
 inoremap { {}<Left>
-inoremap " ""<Left>
+function! s:double_quote()
+    let col = col('.')-1
+    let line = getline('.')
+    if col >= 1 && line[col-1:] =~ '^""'
+        return "\<Right>"
+    endif
+    if col >= 2 && line[col-2:] =~ '^""'
+        return '""""'."\<Left>\<Left>\<Left>"
+    endif
+    return '""'."\<Left>"
+endfunction
+inoremap <expr> " <SID>double_quote()
 " 快捷符号映射 {{{1
 noremap! #lk ->
 noremap! #Lk ->
