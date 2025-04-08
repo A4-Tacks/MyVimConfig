@@ -163,18 +163,18 @@ nnoremap <expr> dp &diff?'dp':':<c-u>m+1<cr>'
 nnoremap yp yyp
 
 " I-Mode M-Fn {{{
-imap <M-F1> <esc><F1>
-imap <M-F2> <esc><F2>
-imap <M-F3> <esc><F3>
-imap <M-F4> <esc><F4>
-imap <M-F5> <esc><F5>
-imap <M-F6> <esc><F6>
-imap <M-F7> <esc><F7>
-imap <M-F8> <esc><F8>
-imap <M-F9> <esc><F9>
-imap <M-F10> <esc><F10>
-imap <M-F11> <esc><F11>
-imap <M-F12> <esc><F12>
+imap <M-F1>  <c-g>u<esc><F1>
+imap <M-F2>  <c-g>u<esc><F2>
+imap <M-F3>  <c-g>u<esc><F3>
+imap <M-F4>  <c-g>u<esc><F4>
+imap <M-F5>  <c-g>u<esc><F5>
+imap <M-F6>  <c-g>u<esc><F6>
+imap <M-F7>  <c-g>u<esc><F7>
+imap <M-F8>  <c-g>u<esc><F8>
+imap <M-F9>  <c-g>u<esc><F9>
+imap <M-F10> <c-g>u<esc><F10>
+imap <M-F11> <c-g>u<esc><F11>
+imap <M-F12> <c-g>u<esc><F12>
 " }}}
 " next or prev buffer {{{
 command! -count -bar BufferNext execute "bnext " .. (<range> ? <line2>-<line1> + 1 : "")
