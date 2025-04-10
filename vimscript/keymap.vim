@@ -176,6 +176,38 @@ imap <M-F10> <c-g>u<esc><F10>
 imap <M-F11> <c-g>u<esc><F11>
 imap <M-F12> <c-g>u<esc><F12>
 " }}}
+" Swap visual from last changed or yanked {{{
+function s:swap_last_changed_or_yanked(old = v:false, cur = v:false)
+    let line = !empty(a:old) ? a:old[0] : line("'[")
+    let col  = !empty(a:old) ? a:old[1] : charcol("'[")
+    let cur  = !empty(a:cur) ? a:cur    : [
+                \line("."), min([charcol("."), charcol("v")]),
+                \abs(charcol("v")-charcol("."))+1]
+    let diff = 0
+
+    if line == cur[0] && col > cur[1]
+        let diff = strcharlen(@")-cur[2]
+        let col += diff
+    endif
+    let tocol = col <= 1 ? '' : (col-1).'l'
+
+    let paste = col > strcharlen(getline(line))+diff ? 'p' : 'P'
+    return "p".line."G0".tocol.paste
+endfunction
+function s:swap_last_changed_or_yanked_object()
+    let g:swap_last_changed_or_yanked_line = line("'[")
+    let g:swap_last_changed_or_yanked_col  = charcol("'[")
+    set opfunc=<SID>swap_last_changed_or_yanked_post_object
+    return 'g@'
+endfunction
+function s:swap_last_changed_or_yanked_post_object(_)
+    let old = [g:swap_last_changed_or_yanked_line, g:swap_last_changed_or_yanked_col]
+    let cur = [line("'["), charcol("'["), abs(charcol("']")-charcol("'["))+1]
+    exe "norm!vg`[og`]".s:swap_last_changed_or_yanked(old, cur)
+endfunction
+xnoremap <expr> <c-p> <SID>swap_last_changed_or_yanked()
+nnoremap <expr> <c-p> <SID>swap_last_changed_or_yanked_object()
+" }}}
 " next or prev buffer {{{
 command! -count -bar BufferNext execute "bnext " .. (<range> ? <line2>-<line1> + 1 : "")
 command! -count -bar BufferPrev execute "bprevious " .. (<range> ? <line2>-<line1> + 1 : "")
@@ -217,6 +249,8 @@ function! ShowBufferInfo()
                 \   &eol,
                 \   &ft,
                 \   )
+    echo ">"
+    exe "norm!g\<c-g>"
 endfunction
 nnoremap <C-g> :call ShowBufferInfo()<cr>
 " }}}
