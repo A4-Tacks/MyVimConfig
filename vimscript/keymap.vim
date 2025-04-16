@@ -182,16 +182,20 @@ function s:swap_last_changed_or_yanked(old = v:false, cur = v:false)
     let col  = !empty(a:old) ? a:old[1] : charcol("'[")
     let cur  = !empty(a:cur) ? a:cur    : [
                 \line("."), min([charcol("."), charcol("v")]),
-                \abs(charcol("v")-charcol("."))+1]
+                \abs(charcol("v")-charcol("."))+1,
+                \abs(line("v")-line("."))+1]
     let diff = 0
 
     if line == cur[0] && col > cur[1]
         let diff = strcharlen(@")-cur[2]
         let col += diff
+    elseif line > cur[0] && @" =~ '\n$'
+        let line += count(@", "\n")-cur[3]-1
     endif
-    let tocol = col <= 1 ? '' : (col-1).'l'
+    let eol = col > strcharlen(getline(line))+diff
 
-    let paste = col > strcharlen(getline(line))+diff ? 'p' : 'P'
+    let tocol = col <= 1 ? '' : eol ? '$' : (col-1).'l'
+    let paste = eol ? 'p' : 'P'
     return "p".line."G0".tocol.paste
 endfunction
 function s:swap_last_changed_or_yanked_object()
@@ -202,7 +206,9 @@ function s:swap_last_changed_or_yanked_object()
 endfunction
 function s:swap_last_changed_or_yanked_post_object(_)
     let old = [g:swap_last_changed_or_yanked_line, g:swap_last_changed_or_yanked_col]
-    let cur = [line("'["), charcol("'["), abs(charcol("']")-charcol("'["))+1]
+    let cur = [line("'["), charcol("'["),
+                \abs(charcol("'[")-charcol("']"))+1,
+                \abs(line("'[")-line("']"))+1]
     exe "norm!vg`[og`]".s:swap_last_changed_or_yanked(old, cur)
 endfunction
 xnoremap <expr> <c-p> <SID>swap_last_changed_or_yanked()
