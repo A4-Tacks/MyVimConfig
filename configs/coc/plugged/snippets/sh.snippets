@@ -253,8 +253,9 @@ while getopts h$1 opt; do case "$opt" in
 		printf '%q: parse args failed, near by %q\n' "\$0" "${!OPTIND}" >&2
 		exit 2
 esac done
-if [ "$OPTIND" -le $# ]; then
-	printf '%q: unexpected arg %q\n' "\$0" "${!OPTIND}" >&2
+set -- "\${@:OPTIND}"
+if [ \$# -ne 0 ]; then
+	printf '%q: unexpected arg %q\n' "\$0" "\$1" >&2
 	exit 2
 fi
 
