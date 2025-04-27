@@ -546,7 +546,7 @@ function! Runer() " -> dict
     function! s:clang(args) dict " -> str {{{2
         let [a, b] = SplitLevelsArgs(a:args)
         let outf = expand("%:p:r") .. ".out"
-        let opts = '-Wall -Wextra -Wno-old-style-declaration'
+        let opts = '-Wall -Wextra'
         return ['time gcc %s %p -o %f %F && time %f %F', opts, outf, a, outf, b]
     endfunction
     function! s:sh(args) dict " -> str {{{2
