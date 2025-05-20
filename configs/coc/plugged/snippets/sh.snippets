@@ -260,6 +260,14 @@ if [ \$# -ne 0 ]; then
 fi
 
 endsnippet
+snippet getopts_longprg "getopts long extension" i
+case "\$opt-\$OPTARG" in
+	--help) opt=h;;&
+	--*) OPTOPT=\${OPTARG%%=*} OPTARG=\${OPTARG#*=}
+esac; case "\$opt" in
+	-) printf '%q: invalid long arg %q\n' "\$0" "\$OPTOPT" >&2; exit 2
+esac;
+endsnippet
 snippet OPTARG "getopts argument" i
 OPTARG
 endsnippet
