@@ -90,7 +90,8 @@ noremap! #M ``<Left>
 noremap! #N +
 noremap! #U =
 
-nnoremap Q A
+nmap Q A
+xmap Q A
 
 " Fold
 inoremap #zk {{{
