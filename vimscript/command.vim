@@ -39,9 +39,13 @@ let g:code_format_buffer_commands = {
             \ }
 function! Fmt(line1, line2)
     let var_name = 'g:code_format_buffer_commands'
+    let indent = indent(a:line1)
     let ft = &filetype
+    let endl = line('$')
     if index(keys(eval(var_name)), ft) != -1
         execute StrFmt('{},{} {}', a:line1, a:line2, eval(var_name)[ft])
+        let offset = line('$') - endl
+        silent execute $'{a:line1},{a:line2+offset} s/^/{repeat(" ", indent)}'
     else
         echoerr "filetype" .. ft .. " not in " .. string(keys(eval(var_name)))
     endif
