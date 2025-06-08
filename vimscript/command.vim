@@ -32,18 +32,19 @@ command! -range Fmt call Fmt(<line1>, <line2>)
 let g:code_format_buffer_commands = {
             \ "python": '!black -q -- -',
             \ "sh": '!shfmt -ci -sr -i 4 -s -',
-            \ "rust": '!rustfmt --config match_block_trailing_comma=true,struct_lit_single_line=false,max_width=78,where_single_line=true',
+            \ "rust": '!rustfmt --config match_block_trailing_comma=true,struct_lit_single_line=false,max_width={width},where_single_line=true',
             \ "json": "!jq . --indent 4",
             \ "c": "!clang-format --style='{BasedOnStyle: llvm, IndentWidth: 4}'",
             \ "cpp": "!clang-format --style='{BasedOnStyle: llvm, IndentWidth: 4}'",
             \ }
-function! Fmt(line1, line2)
+function! Fmt(line1, line2) abort
     let var_name = 'g:code_format_buffer_commands'
     let indent = indent(a:line1)
     let ft = &filetype
     let endl = line('$')
     if index(keys(eval(var_name)), ft) != -1
-        execute StrFmt('{},{} {}', a:line1, a:line2, eval(var_name)[ft])
+        let cmd = eval(var_name)[ft]->substitute('{width}', 78-indent, 'g')
+        execute StrFmt('{},{} {}', a:line1, a:line2, cmd)
         let offset = line('$') - endl
         silent execute $'{a:line1},{a:line2+offset} s/^/{repeat(" ", indent)}'
     else
