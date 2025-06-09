@@ -46,7 +46,7 @@ function! Fmt(line1, line2) abort
         let cmd = eval(var_name)[ft]->substitute('{width}', 78-indent, 'g')
         execute StrFmt('{},{} {}', a:line1, a:line2, cmd)
         let offset = line('$') - endl
-        silent execute $'{a:line1},{a:line2+offset} s/^/{repeat(" ", indent)}'
+        silent execute $'{a:line1},{a:line2+offset} s/^\ze./{repeat(" ", indent)}'
     else
         echoerr "filetype" .. ft .. " not in " .. string(keys(eval(var_name)))
     endif
