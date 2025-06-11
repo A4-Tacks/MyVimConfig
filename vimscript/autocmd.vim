@@ -193,51 +193,12 @@ function SetDefaultFileTypeOptions()
         call s:set(#{foldmethod: marker})
 
     elseif l:type == 'c'
-        function! CEditType(str = '', select = 0)
-            let ColMove = {col -> col < 2 ? "" : (col - 1) .. "l"}
-            if a:select
-                let control = StrFmt("{}G0{}v{}G0{}p",
-                            \ line("'<"), ColMove(col("'<")),
-                            \ line("'>"), ColMove(col("'>")))
-            else
-                let control = StrFmt("{}G0{}p",
-                            \ line("."), ColMove(col(".")))
-            endif
-            if strlen(a:str) != 0
-                try
-                    let text = CType(0, a:str)
-                catch /.*/
-                    echoerr v:exception
-                    throw "CTypeToRsError"
-                endtry
-                enew
-                call setline(1, text)
-            else
-                enew
-            endif
-            imap <buffer> <F9> <Esc><F9>
-            execute 'nnoremap <buffer><silent> <F9> :'
-                        \.  ':let text=join(getline("^","$"))'
-                        \.  '\|if strlen(text)'
-                        \.      '\|try'
-                        \.          '\|let @@=CType(1,text)'
-                        \.      '\|catch /.*/'
-                        \.          '\|echoerr v:exception'
-                        \.          '\|throw "RsToCTypeError"'
-                        \.      '\|endtry'
-                        \.      '\|if @@==#"syntax error"'
-                        \.          '\|echoerr "SyntaxError"'
-                        \.      '\|else'
-                        \.          '\|bp\|bd!#'
-                        \.          '\|execute "normal! ' . control . '"'
-                        \.      '\|endif'
-                        \.  '\|else'
-                        \.      '\|bp\|bd!#'
-                        \.  '\|endif'
-                        \.  "\<cr>"
-        endfunction
-        xnoremap <buffer><silent> <F9> y:call CEditType(@@, 1)<Cr>
-        nnoremap <buffer><silent> <F9> :call CEditType()<Cr>
+        xnoremap <buffer><silent> <F9>   y:<c-u>let@@=join(CType(0,@@),"\n")<cr>gvp
+        xnoremap <buffer><silent> <C-F9> y:<c-u>let@@=join(CType(1,@@),"\n")<cr>gvp
+        nmap <buffer><silent> <F9>   _vg_<F9>
+        nmap <buffer><silent> <C-F9> _vg_<C-F9>
+        imap <buffer><silent> <F9>   <esc><F9>
+        imap <buffer><silent> <C-F9> <esc><C-F9>
         call s:set(#{foldmethod: syntax})
 
     elseif l:type == 'ocaml'

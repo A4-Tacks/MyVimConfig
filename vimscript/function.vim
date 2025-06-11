@@ -161,24 +161,12 @@ function! CType(mode, str) " {{{1
     " 将 c 类型 和 rs 类型转换
     " mode(0) c -> rs
     " mode(1) rs -> c
-    let Rename = {x -> substitute(x, '\<func\>', 'func_', 'g')}
-    let URename = {x -> substitute(x, '\<func_\>', 'func', 'g')}
-    let Strip = {x -> substitute(x, '^\(\n\|\s\)\+\|\(\n\|\s\)\+$', '', 'g')}
-    let str = Rename(a:str)
     if a:mode
         " rs to c
-        let cdecl_expr = Py3Call("rs_to_cdecl", str)
-        return Strip(URename(system("echo " . SystemString(cdecl_expr) . '| cdecl')))
+        return systemlist('cdecl-to-rsdecl -c', a:str)
     else
         " c to rs
-        let tmp_file = expand("~/") . ".vim_ctype_out_tmp_" . rand()
-        let sys_res = system("echo explain " . SystemString(str)
-                    \. '| cdecl 2> ' . SystemString(tmp_file))
-        for line in readfile(tmp_file)
-            30 echowindow line
-        endfor
-        call Py3Call('os.remove', tmp_file)
-        return Strip(URename(Py3Call("cdecl_to_rs", sys_res)))
+        return systemlist('cdecl-to-rsdecl', a:str)
     endif
 endfunction
 function! UpdateIndentLine() " {{{1
