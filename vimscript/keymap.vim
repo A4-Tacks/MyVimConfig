@@ -161,7 +161,7 @@ xnoremap <expr> I mode()!~#'<c-v>' ? '<c-v>I' : 'I'
 xnoremap <expr> A mode()!~#'<c-v>' ? '<c-v>A' : 'A'
 
 " 交换两行, 省的多按一次d
-nnoremap <expr> dp &diff?'dp':':<c-u>m+1<cr>'
+nnoremap <expr> dp &diff?'dp':'ddp'
 " 重复行, 省的多按一次y
 nnoremap yp yyp
 
