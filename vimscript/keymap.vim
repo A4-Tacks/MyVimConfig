@@ -165,6 +165,8 @@ nnoremap <expr> dp &diff?'dp':'ddp'
 " 重复行, 省的多按一次y
 nnoremap yp yyp
 
+nnoremap <expr> gl &wrap?':<c-u>set nowrap<cr>':':<c-u>set wrap<cr>'
+
 " I-Mode M-Fn {{{
 imap <M-F1>  <c-g>u<esc><F1>
 imap <M-F2>  <c-g>u<esc><F2>
