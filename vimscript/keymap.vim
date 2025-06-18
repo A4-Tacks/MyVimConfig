@@ -139,6 +139,8 @@ noremap! <silent> #cf <C-o>:set paste eventignore=TextChangedI,TextChangedP,Inse
 nnoremap <c-h> %
 onoremap <c-h> %
 xnoremap <c-h> %
+onoremap m %
+xnoremap m %
 
 " 快速普通回车新行
 inoremap <expr> <c-o> (col('.')>=col('$')?'':'<end>').'<c-g>u<cr>'
