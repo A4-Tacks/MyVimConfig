@@ -156,6 +156,8 @@ xnoremap & @@
 
 nnoremap <leader>g :registers<cr>
 
+nnoremap <expr> <leader> ''
+
 " 省的每次列插入还要按一下块选择
 xnoremap <expr> I mode()!~#'<c-v>' ? '<c-v>I' : 'I'
 xnoremap <expr> A mode()!~#'<c-v>' ? '<c-v>A' : 'A'
