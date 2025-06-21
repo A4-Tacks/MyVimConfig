@@ -198,14 +198,16 @@ function s:swap_last_changed_or_yanked(old = v:false, cur = v:false)
                 \abs(charcol("v")-charcol("."))+1,
                 \abs(line("v")-line("."))+1]
     let diff = 0
+    let line_mode = 0
 
     if line == cur[0] && col > cur[1]
         let diff = strcharlen(@")-cur[2]
         let col += diff
     elseif line > cur[0] && @" =~ '\n$'
         let line += count(@", "\n")-cur[3]-1
+        let line_mode = 1
     endif
-    let eol = col > strcharlen(getline(line))+diff
+    let eol = col > strcharlen(getline(line))+diff || line_mode
 
     let tocol = col <= 1 ? '' : eol ? '$' : (col-1).'l'
     let paste = eol ? 'p' : 'P'
