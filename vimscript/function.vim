@@ -163,10 +163,10 @@ function! CType(mode, str) " {{{1
     " mode(1) rs -> c
     if a:mode
         " rs to c
-        return systemlist('cdecl-to-rsdecl -c', a:str)
+        return systemlist('cdecl-to-rsdecl -ac', a:str)
     else
         " c to rs
-        return systemlist('cdecl-to-rsdecl', a:str)
+        return systemlist('cdecl-to-rsdecl -a', a:str)
     endif
 endfunction
 function! UpdateIndentLine() " {{{1
