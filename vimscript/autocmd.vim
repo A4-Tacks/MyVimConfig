@@ -154,7 +154,9 @@ call AutoLightWordTimer(135)
 " 从默认行为来说, 这是本来就有的. 但是代码片段插件并不会触发这个, 所以增加这个
 autocmd TextChangedI * if foldclosed('.') != -1 | foldopen! | en
 " Load plugged {{{1
-autocmd Syntax * call SetDefaultFileTypeOptions()
+aug SetDefaultFileTypeOptions
+    autocmd Syntax * call SetDefaultFileTypeOptions()
+aug end
 function! s:set(tbl)
     for [k, v] in items(a:tbl)
         execute 'setlocal '.k..'='.v
