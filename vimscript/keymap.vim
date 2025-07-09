@@ -133,6 +133,7 @@ tnoremap <kPageDown> <PageDown>
 
 " del
 inoremap <C-l> <Del>
+noremap! <C-x> <Del>
 " paste start
 noremap! <silent> #cf <C-o>:set paste eventignore=TextChangedI,TextChangedP,InsertChange,InsertCharPre<cr>
 
