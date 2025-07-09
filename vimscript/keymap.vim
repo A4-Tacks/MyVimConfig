@@ -189,6 +189,64 @@ imap <M-F10> <c-g>u<esc><F10>
 imap <M-F11> <c-g>u<esc><F11>
 imap <M-F12> <c-g>u<esc><F12>
 " }}}
+" 驼峰蛇形转换 {{{
+" remap to object mode
+xmap gs <esc>gsgv
+xmap gS <esc>gSgv
+xmap gc <esc>gcgv
+xmap gC <esc>gCgv
+
+nnoremap <expr> gs <SID>snake_and_camel_object('Camel2snake', 0)
+nnoremap <expr> gS <SID>snake_and_camel_object('Camel2snake', 1)
+nnoremap <expr> gc <SID>snake_and_camel_object('Snake2Camel', 0)
+nnoremap <expr> gC <SID>snake_and_camel_object('Snake2Camel', 1)
+
+onoremap gs _
+onoremap gS _
+onoremap gc _
+onoremap gC _
+
+function! s:snake_and_camel_object(name, upper)
+    let g:snake_and_camel_object_name = a:name
+    let g:snake_and_camel_object_upper = a:upper
+    set opfunc=<SID>snake_and_camel_post_object
+    return 'g@'
+endfunction
+
+function! s:snake_and_camel_post_object(type)
+    let F = funcref(g:snake_and_camel_object_name)
+    let F1 = {line, start -> F(line, g:snake_and_camel_object_upper, start)}
+    let bg = [line("'["), col("'[")-1]
+    let ed = [line("']"), col("']")-1]
+
+    if a:type == "line"
+        for line in range(bg[0], ed[0])
+            call setline(line, F1(getline(line), 0))
+        endfor
+    elseif a:type == "block"
+        let [bgi, edi] = sort([bg[1], ed[1]])
+        for line in range(bg[0], ed[0])
+            let text = getline(line)
+            call setline(line, F1(text[:edi], bgi) . text[edi+1:])
+        endfor
+    elseif a:type == "char"
+        if bg[0]+1 <= ed[0]-1
+            for line in range(bg[0]+1, ed[0]-1)
+                call setline(line, F1(getline(line), 0))
+            endfor
+        endif
+
+        let text = getline(bg[0])
+        if bg[0] == ed[0]
+            call setline(bg[0], F1(text[:ed[1]], bg[1]) . text[ed[1]+1:])
+        else
+            call setline(bg[0], F1(text, bg[1]))
+            let text = getline(ed[0])
+            call setline(ed[0], F1(text[:ed[1]], 0) . text[ed[1]+1:])
+        endif
+    endif
+endfunction
+" }}}
 " Swap visual from last changed or yanked {{{
 function s:swap_last_changed_or_yanked(old = v:false, cur = v:false)
     let line = !empty(a:old) ? a:old[0] : line("'[")

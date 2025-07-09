@@ -97,23 +97,6 @@ function! VarInit(name, default) " {{{1
         execute "let " .. a:name .. " = a:default"
     endif
 endfunction
-function! ToSnake(name, big_start = v:true) " {{{1
-    " 转换为驼峰命名法
-    let l:res = ""
-    let l:upper_tag = a:big_start
-    for l:char in a:name
-        if match(l:char, '[ _]') != -1
-            let l:upper_tag = v:true
-        else
-            if l:upper_tag
-                let l:upper_tag = v:false
-                let l:char = toupper(l:char)
-            endif
-            let l:res ..= l:char
-        endif
-    endfor
-    return l:res
-endfunction
 function! SplitLevelsArgs(args) " -> list[list[str]; 2] {{{1
     " 切分两段参数, 如果没有给出段分割符`--`则默认最后一段
     let idx = index(a:args, "--")
@@ -302,6 +285,16 @@ function! FunExists(name) " {{{1
     catch /^Vim\%((\a\+)\)\=:E700:/
         return v:false
     endtry
+endfunction
+function! Camel2snake(word, upper = 0, start = 0) " {{{1
+    let prefix = a:start ? a:word[:a:start-1] : ''
+    let rest = substitute(a:word[a:start:], '\v%(<_*)@<!\u', '_&', 'g')
+    return prefix . (a:upper ? toupper(rest) : tolower(rest))
+endfunction
+function! Snake2Camel(word, upper = 1, start = 0) " {{{1
+    let prefix = a:start ? a:word[:a:start-1] : ''
+    let pat = $'\v(<_{a:upper ? '*\l=' : '+'})|_(\l)'
+    return prefix . substitute(a:word[a:start:], pat, '\U\1\2', 'g')
 endfunction
 function! MatchAll(expr, pat) " {{{1
     let rem = a:expr
