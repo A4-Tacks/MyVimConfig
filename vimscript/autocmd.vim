@@ -22,7 +22,7 @@ function SetTitle()
         set -o nounset
         set -o errtrace
         #set -o pipefail
-        function CATCH_ERROR {
+        function CATCH_ERROR { # {{{
             local __LEC=$? __i __j
             echo "Traceback (most recent call last):" >&2
             for ((__i = ${#FUNCNAME[@]} - 1; __i >= 0; --__i)); do
@@ -40,7 +40,8 @@ function SetTitle()
             echo "Error: [ExitCode: ${__LEC}]" >&2
             exit "${__LEC}"
         }
-        trap CATCH_ERROR ERR
+        trap CATCH_ERROR ERR # }}}
+
         EOF
         call Appends(0, script)
 
