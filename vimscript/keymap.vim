@@ -633,7 +633,7 @@ function! Runer() " -> dict
     endfunction
     function! s:rust(args) dict " -> str {{{2
         let [a, b] = SplitLevelsArgs(a:args)
-        if expand("%:t") ==# "main.rs"
+        if expand("%:t") ==# "main.rs" || expand("%:p:h") =~# 'src/bin$'
             return ['time cargo run %F -- %F', a, b]
         else
             return ['time cargo test %F -- %F', a, b]
