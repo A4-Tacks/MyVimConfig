@@ -179,6 +179,7 @@ function SetDefaultFileTypeOptions()
         call s:set(#{foldmethod: expr, foldexpr: 'HeadLineIndentFunction(v:lnum)'})
 
     elseif l:type == 'rust'
+        inoremap <buffer><expr> ! getline('.')[max([0,col('.')-3]):]=~'^#[]'?'<Left>!<Right>':'!'
         call s:set(#{foldmethod: syntax})
 
     elseif l:type == 'sh'
