@@ -33,6 +33,11 @@ nmap <F4> <Plug>(coc-fix-current)
 
 " 命令列表
 nnoremap <leader>c :CocCommand<CR>
+xnoremap <leader>c :CocCommand<CR>
+
+" rust-analyzer 合并行
+nnoremap <leader>z vj:CocCommand rust-analyzer.joinLines<CR>
+xnoremap <leader>z   :CocCommand rust-analyzer.joinLines<CR>
 
 " 大纲
 nnoremap <silent><nowait> <leader>o :call ToggleCocOutline()<CR>
