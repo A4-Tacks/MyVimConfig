@@ -250,44 +250,42 @@ function! s:snake_and_camel_post_object(type)
 endfunction
 " }}}
 " Swap visual from last changed or yanked {{{
-function s:swap_last_changed_or_yanked(old = v:false, cur = v:false)
-    let line = !empty(a:old) ? a:old[0] : line("'[")
-    let col  = !empty(a:old) ? a:old[1] : charcol("'[")
-    let cur  = !empty(a:cur) ? a:cur    : [
-                \line("."), min([charcol("."), charcol("v")]),
-                \abs(charcol("v")-charcol("."))+1,
-                \abs(line("v")-line("."))+1]
-    let diff = 0
-    let line_mode = 0
-
-    if line == cur[0] && col > cur[1]
-        let diff = strcharlen(@")-cur[2]
-        let col += diff
-    elseif line > cur[0] && @" =~ '\n$'
-        let line += count(@", "\n")-cur[3]-1
-        let line_mode = 1
-    endif
-    let eol = col > strcharlen(getline(line))+diff || line_mode
-
-    let tocol = col <= 1 ? '' : eol ? '$' : (col-1).'l'
-    let paste = eol ? 'p' : 'P'
-    return "p".line."G0".tocol.paste
-endfunction
 function s:swap_last_changed_or_yanked_object()
-    let g:swap_last_changed_or_yanked_line = line("'[")
-    let g:swap_last_changed_or_yanked_col  = charcol("'[")
+    let g:swap_last_changed_or_yanked_plin = line("'[")
+    let g:swap_last_changed_or_yanked_pcol = charcol("'[")
     set opfunc=<SID>swap_last_changed_or_yanked_post_object
     return 'g@'
 endfunction
-function s:swap_last_changed_or_yanked_post_object(_)
-    let old = [g:swap_last_changed_or_yanked_line, g:swap_last_changed_or_yanked_col]
-    let cur = [line("'["), charcol("'["),
-                \abs(charcol("'[")-charcol("']"))+1,
-                \abs(line("'[")-line("']"))+1]
-    exe "norm!vg`[og`]".s:swap_last_changed_or_yanked(old, cur)
+function! s:swap_last_changed_or_yanked_post_object(type)
+    let [clin, ccol] = [line("'["), charcol("'[")]
+    let [elin, ecol] = [line("']"), charcol("']")]
+    let plin = g:swap_last_changed_or_yanked_plin
+    let pcol = g:swap_last_changed_or_yanked_pcol
+
+    if a:type == "line"
+        let yanks = split(@", '\n')
+        let lines = getline(clin, elin)
+        call append(elin, yanks)
+        call deletebufline("", clin, elin)
+        if plin > clin | let plin += len(yanks)-len(lines) | endif
+        call append(plin-1, lines)
+    else
+        if clin < plin && a:type != "block"
+            let plin += count(@", "\n") - (elin-clin)
+        endif
+
+        let cp = pcol < col([plin, '$']) ? 'P' : 'p'
+        let v = a:type == "block" ? "\<c-v>" : 'v'
+
+        if clin == plin && ccol < pcol
+            let pcol += strcharlen(@") - (ecol-ccol+1)
+        endif
+        exe $"norm!{clin}G{ccol}|{v}{elin}G{ecol}|p{plin}G{pcol}|{cp}\<c-o>"
+        return
+    endif
 endfunction
-xnoremap <expr> <c-p> <SID>swap_last_changed_or_yanked()
 nnoremap <expr> <c-p> <SID>swap_last_changed_or_yanked_object()
+xmap <c-p> <esc><c-p>gv
 " }}}
 " next or prev buffer {{{
 command! -count -bar BufferNext execute "bnext " .. (<range> ? <line2>-<line1> + 1 : "")
