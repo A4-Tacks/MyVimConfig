@@ -261,6 +261,7 @@ function! s:swap_last_changed_or_yanked_post_object(type)
     let [elin, ecol] = [line("']"), charcol("']")]
     let plin = g:swap_last_changed_or_yanked_plin
     let pcol = g:swap_last_changed_or_yanked_pcol
+    let L = { n -> n>1 ? $'0{n-1}l' : '0' }
 
     if a:type == "line"
         let yanks = split(@", '\n')
@@ -280,7 +281,7 @@ function! s:swap_last_changed_or_yanked_post_object(type)
         if clin == plin && ccol < pcol
             let pcol += strcharlen(@") - (ecol-ccol+1)
         endif
-        exe $"norm!{clin}G{ccol}|{v}{elin}G{ecol}|p{plin}G{pcol}|{cp}\<c-o>"
+        exe $"norm!{clin}G{L(ccol)}{v}{elin}G{L(ecol)}p{plin}G{L(pcol)}{cp}\<c-o>"
         return
     endif
 endfunction
