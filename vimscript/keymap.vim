@@ -777,12 +777,12 @@ function! s:snippet_jump(is_next, raw, enter)
 
     return a:raw()
 endfunction
-inoremap <nowait><silent><expr><C-k> <SID>snippet_jump(v:false,{-> ''}, "\<lt>C-r>=")
-inoremap <nowait><silent><expr><C-j> <SID>snippet_jump(v:true, {-> ''}, "\<lt>C-r>=")
-snoremap <nowait><silent><expr><C-k> <SID>snippet_jump(v:false,{-> ''}, "\<lt>esc>")
-snoremap <nowait><silent><expr><C-j> <SID>snippet_jump(v:true, {-> ''}, "\<lt>esc>")
-xnoremap <nowait><silent><expr><C-k> <SID>snippet_jump(v:false,{-> ''}, "\<lt>esc>")
-xnoremap <nowait><silent><expr><C-j> <SID>snippet_jump(v:true, {-> ''}, "\<lt>esc>")
+"inoremap <nowait><silent><expr><C-k> <SID>snippet_jump(v:false,{-> ''}, "\<lt>C-r>=")
+"inoremap <nowait><silent><expr><C-j> <SID>snippet_jump(v:true, {-> ''}, "\<lt>C-r>=")
+"snoremap <nowait><silent><expr><C-k> <SID>snippet_jump(v:false,{-> ''}, "\<lt>esc>")
+"snoremap <nowait><silent><expr><C-j> <SID>snippet_jump(v:true, {-> ''}, "\<lt>esc>")
+"xnoremap <nowait><silent><expr><C-k> <SID>snippet_jump(v:false,{-> ''}, "\<lt>esc>")
+"xnoremap <nowait><silent><expr><C-j> <SID>snippet_jump(v:true, {-> ''}, "\<lt>esc>")
 
 " End {{{1
 " }}}
