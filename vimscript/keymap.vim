@@ -56,7 +56,7 @@ inoremap { {}<Left>
 function! s:double_quote()
     let col = col('.')-1
     let line = getline('.')
-    if col >= 1 && line[col-1:] =~ '^""'
+    if line[col:] =~ '^"'
         return "\<Right>"
     endif
     if col >= 2 && line[col-2:] =~ '^""'
