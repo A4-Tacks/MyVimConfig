@@ -275,7 +275,7 @@ function! s:swap_last_changed_or_yanked_post_object(type)
             let plin += count(@", "\n") - (elin-clin)
         endif
 
-        let cp = pcol < col([plin, '$']) ? 'P' : 'p'
+        let cp = pcol < charcol([plin, '$']) ? 'P' : 'p'
         let v = a:type == "block" ? "\<c-v>" : 'v'
 
         if clin == plin && ccol < pcol
