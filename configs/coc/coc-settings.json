@@ -44,6 +44,8 @@
             "sh"
         ]
     },
+    "suggest.insertMode": "insert",
+
     "codeLens.enable": true,
     "codeLens.position": "eol",
     "codeLens.subseparator": "| ",
