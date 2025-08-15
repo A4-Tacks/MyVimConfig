@@ -177,6 +177,12 @@ nnoremap yp yyp
 
 nnoremap <expr> gl &wrap?':<c-u>set nowrap<cr>':':<c-u>set wrap<cr>'
 
+" 快速括号
+exe 'xnoremap <leader>( c()<Left><esc>p'
+exe 'xnoremap <leader>[ c[]<Left><esc>p'
+exe 'xnoremap <leader>{ c{}<Left><esc>p'
+exe 'xnoremap <leader><lt> c<lt>><Left><esc>p'
+
 " I-Mode M-Fn {{{
 imap <M-F1>  <c-g>u<esc><F1>
 imap <M-F2>  <c-g>u<esc><F2>
