@@ -73,6 +73,7 @@
     "rust-analyzer.lens.references.trait.enable": true,
     //"rust-analyzer.lens.references.method.enable": true,
     "rust-analyzer.lens.implementations.enable": true,
+    "rust-analyzer.rustfmt.rangeFormatting.enable": true,
 
     "typescript.inlayHints.parameterNames.enabled": "all",
     "typescript.inlayHints.functionLikeReturnTypes.enabled": true,
