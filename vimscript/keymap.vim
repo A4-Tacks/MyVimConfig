@@ -329,11 +329,12 @@ function! ShowBufferInfo()
     echo "Line: {}/{} --{}%--"->StrFmt(
                 \   line('.'), line('$'),
                 \   float2nr((line('.')+0.0) / line('$') * 100))
-    echo "fenc:{} ff:{} eol:{} ft:{}"->StrFmt(
+    echo "fenc={} ff={} ft={} {}eol{}"->StrFmt(
                 \   &fenc->strlen() ? &fenc : 'NONE',
                 \   &ff,
-                \   &eol,
                 \   &ft,
+                \   &eol  ? '' : 'no',
+                \   &bomb ? ' bomb' : '',
                 \   )
     echo ">"
     exe "norm!g\<c-g>"
