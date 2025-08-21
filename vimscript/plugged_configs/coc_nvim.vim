@@ -167,6 +167,8 @@ augroup mygroup
   autocmd FileType typescript,json setl formatexpr=CocAction('formatSelected')
   " Update signature help on jump placeholder
   autocmd User CocJumpPlaceholder call CocActionAsync('showSignatureHelp')
+  " Update statusline
+  autocmd User CocStatusChange redrawstatus
 augroup end
 
 " Applying code actions to the selected code block
