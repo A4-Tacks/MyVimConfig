@@ -32,7 +32,7 @@ command! -range Fmt call Fmt(<line1>, <line2>)
 let g:code_format_buffer_commands = {
             \ "python": '!black -q -- -',
             \ "sh": '!shfmt -ci -sr -i 4 -s -',
-            \ "rust": '!rustfmt --config match_block_trailing_comma=true,struct_lit_single_line=false,max_width={width},where_single_line=true',
+            \ "rust": '!rustfmt --edition=2024 --config match_block_trailing_comma=true,struct_lit_single_line=false,max_width={width},where_single_line=true',
             \ "json": "!jq . --indent 4",
             \ "c": "!clang-format --style='{BasedOnStyle: llvm, IndentWidth: 4}'",
             \ "cpp": "!clang-format --style='{BasedOnStyle: llvm, IndentWidth: 4}'",
