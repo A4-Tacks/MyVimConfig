@@ -54,6 +54,10 @@ endfunction
 nmap <silent> <C-k> <Plug>(coc-diagnostic-prev)
 nmap <silent> <C-j> <Plug>(coc-diagnostic-next)
 
+" 片段跳转
+inoremap <silent> <c-j> <cmd>:call coc#snippet#jump(1,0)<cr>
+inoremap <silent> <c-k> <cmd>:call coc#snippet#jump(0,0)<cr>
+
 " 显示代码诊断
 nnoremap <silent> <C-F4> :CocDiagnostics<Cr>
 
