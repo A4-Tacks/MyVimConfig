@@ -107,6 +107,8 @@ inoremap #ZL }}}
 inoremap <silent> jk <Esc>
 snoremap <silent> jk <Esc>
 
+snoremap <cr> <esc>
+
 " terminal
 " term 回 vim
 tnoremap <C-w>e <C-\><C-n>
