@@ -21,6 +21,7 @@ inoremap <silent><expr> <C-e> coc#pum#visible() ? coc#pum#cancel() : "\<End>"
 " 代码操作选择
 xmap <F3> <Plug>(coc-codeaction-selected)
 nmap <F3> <Plug>(coc-codeaction-cursor)
+smap <F3> <esc><F3>
 
 xmap <c-@> <Plug>(coc-codeaction-selected)
 nmap <c-@> <Plug>(coc-codeaction-cursor)
