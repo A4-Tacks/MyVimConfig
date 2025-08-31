@@ -755,7 +755,7 @@ function! NEnterInsert()
 endfunction
 nnoremap <expr> <Cr> NEnterInsert()
 " }}}2
-vnoremap <expr> <cr> foldclosed('.') != -1
+xnoremap <expr> <cr> foldclosed('.') != -1
             \ ? execute('foldopen!')
             \ : "\<cr>"
 
