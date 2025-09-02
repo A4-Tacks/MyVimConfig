@@ -103,7 +103,7 @@ call BigWin(v:false)
 "            \ |     let g:prev_search_forward = v:searchforward
 "            \ | en
 "            \ | let @/ = ""
-autocmd InsertEnter * call feedkeys("\<cmd>:noh\<cr>", 'n')
+autocmd InsertEnter * call feedkeys("\<cmd>:noh\<cr>", 'ni')
 " Clear search buffer {{{1
 autocmd VimEnter * let @/ = ""
 " In cmd line tag variable {{{1
