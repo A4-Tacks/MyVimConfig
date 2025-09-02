@@ -562,8 +562,8 @@ nmap <silent> g4im 4gim
 nmap <silent> g4am 4gam
 "}}}
 " Disable Empty Search And Prev Search {{{1
-nnoremap <expr> n strlen(@/) > 0 ? "n" : execute('let@/=get(g:,"prev_search","")\|let v:searchforward=get(g:,"prev_search_forward",1)').(@/->strlen()?'n':'')
-nnoremap <expr> N strlen(@/) > 0 ? "N" : execute('let@/=get(g:,"prev_search","")\|let v:searchforward=get(g:,"prev_search_forward",1)').(@/->strlen()?'N':'')
+"nnoremap <expr> n strlen(@/) > 0 ? "n" : execute('let@/=get(g:,"prev_search","")\|let v:searchforward=get(g:,"prev_search_forward",1)').(@/->strlen()?'n':'')
+"nnoremap <expr> N strlen(@/) > 0 ? "N" : execute('let@/=get(g:,"prev_search","")\|let v:searchforward=get(g:,"prev_search_forward",1)').(@/->strlen()?'N':'')
 " Leader maps {{{1
 
 " open terminal or update NERDTree
