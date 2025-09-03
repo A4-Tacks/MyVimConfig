@@ -270,6 +270,10 @@ esac;
 endsnippet
 snippet getopts_gnucontroller "getopts skip position args extension" i
 case "${!OPTIND---}" in
+	# TODO begin
+args=()
+set -- "${args[@]}" "${@:OPTIND}"
+	# TODO end
 	-*?)false;;
 	*)  args+=("${!OPTIND}"); ((++OPTIND)); continue
 esac || $0
