@@ -108,6 +108,10 @@ inoremap <silent> jk <Esc>
 snoremap <silent> jk <Esc>
 
 snoremap <cr> <esc>
+smap <c-n> <nl><c-n>
+smap <c-p> <nl><c-p>
+smap <tab> <nl><tab>
+smap <S-tab> <nl><S-tab>
 
 " terminal
 " term 回 vim
