@@ -254,6 +254,8 @@ if exists('enable_builtin_completion_auto_popup')
                     \       ))
                     \ | en
 endif
+" 差异模式禁用 coc {{{1
+autocmd VimEnter * if &diff | execute 'CocDisable' | en
 " 语法文件注册 {{{1
 augroup filetypedetect
     autocmd BufNewFile,BufRead *.mdtlbl setfiletype mdtlbl
