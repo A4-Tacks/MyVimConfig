@@ -2,7 +2,7 @@
 noremap! #x \
 noremap! #& \|
 noremap! #h \|
-noremap! <expr> #a getline('.')[col('.')-1]==' '?'\|\|<right>':'\|\| '
+noremap! <expr> #a '\|\| '
 noremap! #H \|
 noremap! #A \|\|
 inoremap #' ''<Left>
