@@ -456,6 +456,7 @@ onoremap <silent> iv :<C-u>norm! v_og_<CR>
 xnoremap <silent> av :<C-u>norm! v0og_<CR>
 onoremap <silent> av :<C-u>norm! v0og_<CR>
 
+xnoremap . ^
 onoremap z. ^
 onoremap z; g_
 "}}}
