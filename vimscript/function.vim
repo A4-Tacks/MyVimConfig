@@ -214,6 +214,7 @@ function! SetUserColors() " {{{1
     " 左侧边栏
     hi! SignColumn term=standout cterm=none gui=bold
                 \ ctermfg=14 ctermbg=242 guifg=Cyan guibg=Grey
+    hi! link CursorLineSign SignColumn
 
     hi! CocInlayHint cterm=none ctermfg=252 ctermbg=236
 
