@@ -118,6 +118,9 @@ function AutoLightWordTimer(time)
 
     function AutoLightWordTimerF(timer) closure
         let l:word = GetCursorWord()
+        if mode() =~# '^r'
+            return
+        endif
         if g:in_cmd_line " enter command mode no light word {{{
             if l:oldmode == g:in_cmd_line
                 return
