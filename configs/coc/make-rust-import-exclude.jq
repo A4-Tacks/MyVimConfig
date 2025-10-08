@@ -1,4 +1,4 @@
-#!/usr/bin/env -S /bin/jq -nsRcf
+#!/bin/jq -nsRcf
 
 "(?<tt>
   (?<tree>
