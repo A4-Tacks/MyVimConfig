@@ -22,6 +22,8 @@ def tree($parent):
   $prefix | rtrimstr($rest) as $prefix |
   if $rest then
     $rest | sub("^\\{"; "") | sub("\\}$"; "") | tree($parent+$prefix)
+  elif $prefix == "self" then
+    $parent | sub("::$"; "") | make
   else
     $parent+$prefix | make
   end
