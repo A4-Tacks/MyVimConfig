@@ -41,18 +41,32 @@ noremap! #lq ]
 noremap! #lw }
 noremap! #le >
 
-noremap! #q []<Left>
-noremap! #w {}<Left>
+imap #q [
+imap #w {
+imap #Q [
+imap #W {
+cnoremap #q []<Left>
+cnoremap #w {}<Left>
+cnoremap #Q []<Left>
+cnoremap #W {}<Left>
 noremap! #e <><Left>
-noremap! #Q []<Left>
-noremap! #W {}<Left>
 noremap! #E <><Left>
 noremap! #< <><Left>
 noremap! #> <><Left>
 
 inoremap ( ()<Left>
-inoremap [ []<Left>
-inoremap { {}<Left>
+inoremap [ <cmd>call <SID>insert_pair('[]')<cr>
+inoremap { <cmd>call <SID>insert_pair('{}')<cr>
+function! s:insert_pair(pair)
+    let line = getline('.')
+    let i = col('.') - 1
+    let left = i ? line[:i-1] : ''
+    let right = line[i:]
+    call setline(line('.'), left.a:pair.right)
+    let pos = getpos('.')
+    let pos[2] += 1
+    call setpos('.', pos)
+endfunction
 function! s:double_quote()
     let col = col('.')-1
     let line = getline('.')
