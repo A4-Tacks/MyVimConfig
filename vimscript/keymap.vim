@@ -69,16 +69,29 @@ function! s:insert_pair(pair)
 endfunction
 function! s:double_quote()
     let col = col('.')-1
+    let pos = getpos('.')
     let line = getline('.')
+
+    let pos[2] += 1
+
     if line[col:] =~ '^"'
-        return "\<Right>"
+        call setpos('.', pos)
+        return
     endif
+
+    let left = col ? line[:col-1] : ''
+    let right = line[col:]
+
     if col >= 2 && line[col-2:] =~ '^""'
-        return '""""'."\<Left>\<Left>\<Left>"
+        call setline(line('.'), left.'""""'.right)
+        call setpos('.', pos)
+        return
     endif
-    return '""'."\<Left>"
+
+    call setline(line('.'), left.'""'.right)
+    call setpos('.', pos)
 endfunction
-inoremap <expr> " <SID>double_quote()
+inoremap " <cmd>call <SID>double_quote()<cr>
 " 快捷符号映射 {{{1
 noremap! #lk ->
 noremap! #Lk ->
@@ -88,20 +101,20 @@ noremap! #kl =>
 noremap! #Kl =>
 noremap! #KL =>
 
-noremap! #i ""<Left>
-noremap! #I ""<Left>
-noremap! #o ''<Left>
-noremap! #O ''<Left>
-noremap! #m ``<Left>
-noremap! #M ``<Left>
+cnoremap #i ""<Left>
+cnoremap #I ""<Left>
+cnoremap #o ''<Left>
+cnoremap #O ''<Left>
+cnoremap #m ``<Left>
+cnoremap #M ``<Left>
+inoremap #i <cmd>call <SID>insert_pair('""')<cr>
+inoremap #I <cmd>call <SID>insert_pair('""')<cr>
+inoremap #o <cmd>call <SID>insert_pair("''")<cr>
+inoremap #O <cmd>call <SID>insert_pair("''")<cr>
+inoremap #m <cmd>call <SID>insert_pair('``')<cr>
+inoremap #M <cmd>call <SID>insert_pair('``')<cr>
 noremap! #n +
 noremap! #u =
-noremap! #I ""<Left>
-noremap! #I ""<Left>
-noremap! #O ''<Left>
-noremap! #O ''<Left>
-noremap! #M ``<Left>
-noremap! #M ``<Left>
 noremap! #N +
 noremap! #U =
 
