@@ -8,7 +8,6 @@ noremap! #A \|\|
 inoremap #' ''<Left>
 inoremap #_ ~
 inoremap #" `
-inoremap #b #[]<Left>
 " 可视模式下使用退格键即可删除选中内容 {{{1
 vnoremap <Bs> <Del>
 " 全角转半角 {{{1

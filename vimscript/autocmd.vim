@@ -185,6 +185,7 @@ function SetDefaultFileTypeOptions()
 
     elseif l:type == 'rust'
         inoremap <buffer><expr> ! col('.')>=3 && getline('.')[max([0,col('.')-3]):]=~'^#[]'?'<Left>!<Right>':'!'
+        inoremap <buffer> #b #[]<Left>
         call s:set(#{foldmethod: syntax})
 
     elseif l:type == 'sh'
@@ -218,6 +219,9 @@ function SetDefaultFileTypeOptions()
 
     elseif ['javascript', 'typescript']->index(l:type) != -1
         call s:set(#{foldmethod: syntax, shiftwidth: 2})
+
+    elseif l:type =~# 'commit'
+        inoremap <buffer> #b Example<cr>---<cr>```rust<cr>```<cr><cr>**Before this PR**<cr><cr>**After this PR**<cr><cr>```rust<cr>```<esc>k03lvg_<c-g>
 
     endif
 
