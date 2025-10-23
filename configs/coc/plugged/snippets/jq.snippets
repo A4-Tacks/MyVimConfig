@@ -625,3 +625,32 @@ endsnippet
 snippet JQ_BUILD_CONFIGURATION "$JQ_BUILD_CONFIGURATION" b
 $JQ_BUILD_CONFIGURATION
 endsnippet
+
+# dates
+snippet now "now date" b
+now
+endsnippet
+snippet strptime "parse date string" b
+strptime($1)
+endsnippet
+snippet strftime "format to date string, use UTC" b
+strftime($1)
+endsnippet
+snippet strflocaltime "format to date string, use UTC+local" b
+strflocaltime($1)
+endsnippet
+snippet mktime "mktime" b
+mktime
+endsnippet
+snippet gmtime "UTC time struct" b
+gmtime
+endsnippet
+snippet localtime "local time struct" b
+localtime
+endsnippet
+snippet fromdate "fromdateiso8601" b
+fromdate
+endsnippet
+snippet todate "todateiso8601" b
+todate
+endsnippet
