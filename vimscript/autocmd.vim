@@ -169,18 +169,35 @@ function! s:set(tbl)
         silent execute 'do OptionSet '.k
     endfor
 endfunction
-function! s:place_fold_text()
+function! s:make_indent_line(line) abort
+    let char = get(g:, 'indentLine_char', '|')
+    let pattern = '\%5c'
+    for i in range(1, 8)
+        let pattern .= $'\|\%{5+i*4}c'
+    endfor
+    return substitute(a:line, $'\%(^ *\)\@<=\%({pattern}\) ', char, 'g')
+endfunction
+function! s:place_fold_wrapped(line_break)
+    let span = v:foldend-v:foldstart+1
+    if span == 3
+        let head = getline(v:foldstart)
+        let line = trim(getline(v:foldstart+1))
+        if strcharlen(head)+strcharlen(line) < a:line_break+5
+            return $' {line} '
+        endif
+    endif
+    return ' … '
+endfunction
+function! s:place_fold_text() abort
     let line_break = &cc ? &cc : &tw ? &tw : 79
     let line = slice(getline(v:foldstart), 0, line_break)
+    let end = slice(trim(getline(v:foldend)), -6)
     let span = v:foldend-v:foldstart+1
     let tail_parens = matchstr(line, '[([{][ ([{]*\ze *$')
-    let closure = empty(tail_parens) ? '' : ' … '
-    for ch in reverse(tail_parens)
-        let closure .= ch == '{' ? '}' :
-                    \  ch == '[' ? ']' :
-                    \  ch == '(' ? ')' :
-                    \  ' '
-    endfor
+    let closure = empty(tail_parens) ? '' : s:place_fold_wrapped(line_break).end
+
+    let line = trim(line, ' ', 2)
+    let line = s:make_indent_line(line)
     return $'{line.closure} ¥ {span} 行'
 endfunction
 function SetDefaultFileTypeOptions()
