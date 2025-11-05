@@ -169,6 +169,20 @@ function! s:set(tbl)
         silent execute 'do OptionSet '.k
     endfor
 endfunction
+function! s:place_fold_text()
+    let line_break = &cc ? &cc : &tw ? &tw : 79
+    let line = slice(getline(v:foldstart), 0, line_break)
+    let span = v:foldend-v:foldstart+1
+    let tail_parens = matchstr(line, '[([{][ ([{]*\ze *$')
+    let closure = empty(tail_parens) ? '' : ' … '
+    for ch in reverse(tail_parens)
+        let closure .= ch == '{' ? '}' :
+                    \  ch == '[' ? ']' :
+                    \  ch == '(' ? ')' :
+                    \  ' '
+    endfor
+    return $'{line.closure} ¥ {span} 行'
+endfunction
 function SetDefaultFileTypeOptions()
     " 设置映射 属性 参数 及启动插件
 
@@ -186,7 +200,7 @@ function SetDefaultFileTypeOptions()
     elseif l:type == 'rust'
         inoremap <buffer><expr> ! col('.')>=3 && getline('.')[max([0,col('.')-3]):]=~'^#[]'?'<Left>!<Right>':'!'
         inoremap <buffer> #b #[]<Left>
-        call s:set(#{foldmethod: syntax})
+        call s:set(#{foldmethod: syntax, foldtext: "\<SID>place_fold_text()"})
 
     elseif l:type == 'sh'
         call s:set(#{foldmethod: marker})
