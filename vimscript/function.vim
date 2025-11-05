@@ -189,51 +189,7 @@ function! UpdateUserMatches() " {{{1
     let g:eol_ws_light_id = matchadd('EOLWhiteSpace', '\v\s+$|\S\zs\s{50,}\ze\S', 0, -1)
 endfunction
 function! SetUserColors() " {{{1
-    " Vim 原生补全菜单
-    hi! Pmenu ctermbg=237
-    " Vim 原生补全菜单选中项
-    hi! PmenuSel ctermfg=35 ctermbg=238
-    " 词匹配颜色
-    hi! default WordLight term=nocombine cterm=underline
-
-    " 行高亮
-    hi! CursorLine term=none cterm=none ctermbg=235
-
-    " 语法隐藏颜色
-    hi! Conceal ctermfg=244 ctermbg=NONE guifg=Grey30 guibg=NONE
-
-    hi! User1 cterm=none ctermfg=15 ctermbg=29
-
-    " 背景
-    "hi! Normal term=none cterm=none gui=none ctermfg=15 ctermbg=none guifg=White guibg=Black
-
-    hi! NonText term=bold cterm=none gui=bold ctermfg=12 ctermbg=none guifg=Blue guibg=Black
-
-    hi! link EndOfBuffer NonText
-
-    " 左侧边栏
-    hi! SignColumn term=standout cterm=none gui=bold
-                \ ctermfg=14 ctermbg=242 guifg=Cyan guibg=Grey
-    hi! link CursorLineSign SignColumn
-
-    hi! CocInlayHint cterm=none ctermfg=252 ctermbg=236
-
-    hi! CocFloating ctermbg=237
-    " Coc 搜索匹配项
-    hi! CocSearch ctermfg=35
-    " Coc 搜索匹配项背景
-    hi! CocMenuSel ctermbg=238 guibg=#494949
-    " 警告侧标
-    hi! CocWarningSign ctermfg=0 ctermbg=3
-
-    " 行号颜色
-    "hi! LineNr term=bold cterm=none gui=none
-    "            \ ctermfg=11 ctermbg=none guifg=Yellow guibg=Black
-
-    " 光标所在行行号颜色
-    "hi! CursorLineNr term=underline cterm=underline gui=underline
-    "            \ ctermfg=11 ctermbg=none guifg=Yellow guibg=Black
-
+    hi def WordLight term=nocombine cterm=underline
     hi def EOLWhiteSpace ctermfg=NONE ctermbg=236 guifg=NONE guibg=#3A3A3A
 
     let g:indentLine_char = '│'

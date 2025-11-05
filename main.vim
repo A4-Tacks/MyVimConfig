@@ -26,9 +26,9 @@ let s:vim_scripts =<< trim EOF
     vimscript
     {
         function.vim
-        plug_config.vim
         settings.vim
         colors.vim
+        plug_config.vim
         autocmd.vim
         command.vim
         keymap.vim
