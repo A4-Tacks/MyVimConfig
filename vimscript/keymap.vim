@@ -455,6 +455,8 @@ xnoremap <expr> * <SID>search_cursor(v:true,"\<lt>esc>")
 " 扩展z系列键 {{{
 nnoremap z; zzg_
 xnoremap z; zzg_
+nmap zn z;
+xmap zn z;
 " }}}
 
 " 范围选择 {{{1
