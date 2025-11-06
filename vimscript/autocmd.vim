@@ -194,7 +194,9 @@ function! s:place_fold_text() abort
     let end = slice(trim(getline(v:foldend)), -6)
     let span = v:foldend-v:foldstart+1
     let tail_parens = matchstr(line, '[([{][ ([{]*\ze *$')
-    let closure = empty(tail_parens) ? '' : s:place_fold_wrapped(line_break).end
+    let closure = !empty(tail_parens)
+                \? s:place_fold_wrapped(line_break).end
+                \: strcharlen(line) == line_break ? '…' : ''
 
     let line = trim(line, ' ', 2)
     let line = s:make_indent_line(line)
