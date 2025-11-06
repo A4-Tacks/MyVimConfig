@@ -189,24 +189,30 @@ function! s:place_fold_wrapped(line_break)
     endif
     return ' … '
 endfunction
-function! s:fold_end_wrap()
+function! s:fold_end_wrap(expect_len)
     let end = trim(getline(v:foldend))
     let show_prefix = end =~ '[{[(] *$'
-                \  || end =~ '^} *else\>'
-    return show_prefix ? slice(end, 0, 9) : slice(end, -6)
+                \  || end =~ '^} *\%(else\>\|=\)'
+
+    let basic_len = show_prefix ? 9 : 6
+    let len = a:expect_len < basic_len ? basic_len : a:expect_len
+    return show_prefix ? slice(end, 0, len) : slice(end, -len)
 endfunction
 function! s:place_fold_text() abort
     let line_break = &cc ? &cc : &tw ? &tw : 79
     let line = slice(getline(v:foldstart), 0, line_break)
-    let end = s:fold_end_wrap()
     let span = v:foldend-v:foldstart+1
     let tail_parens = matchstr(line, '[([{][ ([{]*\ze *$')
-    let closure = !empty(tail_parens)
-                \? s:place_fold_wrapped(line_break).end
-                \: strcharlen(line) == line_break ? '…' : ''
+    let breaked_len = strcharlen(line)
 
     let line = trim(line, ' ', 2)
     let line = s:make_indent_line(line)
+
+    let end = s:fold_end_wrap(line_break - breaked_len)
+    let closure = !empty(tail_parens) || breaked_len + strcharlen(end) <= line_break
+                \? s:place_fold_wrapped(line_break).end
+                \: breaked_len == line_break ? '…' : ''
+
     return $'{line.closure} ¥ {span} 行'
 endfunction
 " }}}2
