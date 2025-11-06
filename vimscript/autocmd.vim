@@ -191,7 +191,9 @@ function! s:place_fold_wrapped(line_break)
 endfunction
 function! s:fold_end_wrap()
     let end = trim(getline(v:foldend))
-    return end =~ '[{[(] *$' ? slice(end, 0, 6) : slice(end, -6)
+    let show_prefix = end =~ '[{[(] *$'
+                \  || end =~ '^} *else\>'
+    return show_prefix ? slice(end, 0, 9) : slice(end, -6)
 endfunction
 function! s:place_fold_text() abort
     let line_break = &cc ? &cc : &tw ? &tw : 79
