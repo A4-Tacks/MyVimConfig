@@ -169,6 +169,7 @@ function! s:set(tbl)
         silent execute 'do OptionSet '.k
     endfor
 endfunction
+" Fold Text {{{2
 function! s:make_indent_line(line) abort
     let char = get(g:, 'indentLine_char', '|')
     let pattern = '\%5c'
@@ -188,10 +189,14 @@ function! s:place_fold_wrapped(line_break)
     endif
     return ' … '
 endfunction
+function! s:fold_end_wrap()
+    let end = trim(getline(v:foldend))
+    return end =~ '[{[(] *$' ? slice(end, 0, 6) : slice(end, -6)
+endfunction
 function! s:place_fold_text() abort
     let line_break = &cc ? &cc : &tw ? &tw : 79
     let line = slice(getline(v:foldstart), 0, line_break)
-    let end = slice(trim(getline(v:foldend)), -6)
+    let end = s:fold_end_wrap()
     let span = v:foldend-v:foldstart+1
     let tail_parens = matchstr(line, '[([{][ ([{]*\ze *$')
     let closure = !empty(tail_parens)
@@ -202,6 +207,7 @@ function! s:place_fold_text() abort
     let line = s:make_indent_line(line)
     return $'{line.closure} ¥ {span} 行'
 endfunction
+" }}}2
 function SetDefaultFileTypeOptions()
     " 设置映射 属性 参数 及启动插件
 
