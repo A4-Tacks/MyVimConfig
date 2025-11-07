@@ -216,5 +216,8 @@ let g:awk_is_gawk = 1
 " c headers
 let g:c_syntax_for_h = 1
 
+" markdown not load options
+let g:markdown_recommended_style = 0
+
 " ocamlformat indent
 set runtimepath^=~/.opam/default/share/ocp-indent/vim
