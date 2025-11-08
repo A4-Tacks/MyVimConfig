@@ -134,10 +134,10 @@ inoremap <silent> jk <Esc>
 snoremap <silent> jk <Esc>
 
 snoremap <cr> <esc>
-smap <c-n> <nl><c-n>
-smap <c-p> <nl><c-p>
-smap <tab> <nl><tab>
-smap <S-tab> <nl><S-tab>
+smap <c-n> <bs><c-n>
+smap <c-p> <bs><c-p>
+smap <tab> <bs><tab>
+smap <S-tab> <bs><S-tab>
 
 " terminal
 " term 回 vim
