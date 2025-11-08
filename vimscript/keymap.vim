@@ -138,6 +138,8 @@ smap <c-n> <bs><c-n>
 smap <c-p> <bs><c-p>
 smap <tab> <bs><tab>
 smap <S-tab> <bs><S-tab>
+smap <c-b> <esc>i
+smap <c-f> <esc>a
 
 " terminal
 " term 回 vim
