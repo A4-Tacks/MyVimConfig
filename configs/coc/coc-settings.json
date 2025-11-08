@@ -55,6 +55,7 @@
     "tree.key.toggle": "o",
     "tree.key.close": "q",
     "tree.key.collapseAll": "u",
+    "dialog.confirmKey": "m",
 
     "rust-analyzer.updates.checkOnStartup": false,
     "rust-analyzer.check.workspace": false,
