@@ -608,7 +608,7 @@ nnoremap <leader>T :if&ft!=#'nerdtree'\|NERDTreeCWD\|el\|exe'NERDTreeToggle'\|en
 nnoremap <silent> <leader><leader> <C-w><C-w>
 
 " moves{{{
-nnoremap <silent> <leader>h <C-w>h
+nnoremap <silent> <leader>H <C-w>h
 nnoremap <silent> <leader>j <C-w>j
 nnoremap <silent> <leader>k <C-w>k
 nnoremap <silent> <leader>l <C-w>l
