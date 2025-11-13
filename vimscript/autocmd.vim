@@ -199,6 +199,7 @@ function! s:fold_end_wrap(expect_len)
     return show_prefix ? slice(end, 0, len) : slice(end, -len)
 endfunction
 function! s:place_fold_text() abort
+    if &foldmethod != 'syntax' | return foldtext() | endif
     let line_break = &cc ? &cc : &tw ? &tw : 79
     let line = slice(getline(v:foldstart), 0, line_break)
     let span = v:foldend-v:foldstart+1
