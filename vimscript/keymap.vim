@@ -460,6 +460,20 @@ xnoremap z; zzg_
 nmap zn z;
 xmap zn z;
 " }}}
+" 可视模式边缘跳转 {{{
+function! s:visual_side_jump_col()
+    let [_,      vnum, col, off] = getpos('v')
+    let [bufnum, lnum, _,   _] = getpos('.')
+    call setpos('.', [bufnum, lnum, col+off, 0, col+off])
+endfunction
+function! s:visual_side_jump_line()
+    let [_,      lnum, _,   _] = getpos('v')
+    let [bufnum, _,    col, off] = getpos('.')
+    call setpos('.', [bufnum, lnum, col+off, 0])
+endfunction
+xnoremap <c-r> <cmd>call <SID>visual_side_jump_col()<cr>
+xnoremap <c-t> <cmd>call <SID>visual_side_jump_line()<cr>
+" }}}
 
 " 范围选择 {{{1
 function! RangeMapDefine(key, str) " {{{
