@@ -24,3 +24,6 @@ fi
 
 # link file
 bash ./configs/linker.sh
+
+set -x
+git clone https://github.com/neoclide/coc.nvim --depth=1 ~/.vim/plugged/coc.nvim -b release
