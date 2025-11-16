@@ -196,7 +196,7 @@ function! SetUserColors() " {{{1
     augroup UserMatches
         autocmd!
         autocmd OptionSet shiftwidth,tabstop call UpdateUserMatches()
-        autocmd BufRead,BufNewFile,WinEnter,Syntax,CursorHold * call UpdateUserMatches()
+        autocmd BufEnter,WinEnter,Syntax,CursorHold * call UpdateUserMatches()
     augroup end
     doautocmd UserMatches Syntax
 endfunction
