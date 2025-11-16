@@ -200,7 +200,7 @@ function! SetUserColors() " {{{1
     augroup end
     doautocmd UserMatches Syntax
 endfunction
-function! SizeFmt(num, suffix,)
+function! SizeFmt(num, suffix,) " {{{1
     let num = a:num + 0.0
     if num < 1<<10
         let t = ''
