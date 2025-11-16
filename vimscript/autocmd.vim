@@ -116,6 +116,8 @@ autocmd CmdlineLeave * let g:in_cmd_line = v:false
 function AutoLightWordTimer(time)
     let [g:cursor_word, g:cursor_word_str] = ['', '']
     let l:oldmode = g:in_cmd_line
+    let l:winnr = winnr()
+    let l:tabnr = tabpagenr()
 
     function AutoLightWordTimerF(timer) closure
         let l:word = GetCursorWord()
@@ -131,8 +133,12 @@ function AutoLightWordTimer(time)
         endif " }}}
         let l:oldmode = g:in_cmd_line
         if type(l:word) == type(g:cursor_word) && l:word == g:cursor_word
+                    \&& l:winnr == winnr()
+                    \&& l:tabnr == tabpagenr()
             return
         endif
+        let l:winnr = winnr()
+        let l:tabnr = tabpagenr()
         let g:cursor_word = l:word
         let g:cursor_word_str = type(l:word) == v:t_list ? l:word[0] : l:word
         let g:cursor_word_regex = ''
