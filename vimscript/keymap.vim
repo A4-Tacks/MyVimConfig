@@ -52,6 +52,7 @@ noremap! #e <><Left>
 noremap! #E <><Left>
 noremap! #< <><Left>
 noremap! #> <><Left>
+imap #B #b
 
 inoremap ( ()<Left>
 inoremap [ <cmd>call <SID>insert_pair('[]')<cr>
