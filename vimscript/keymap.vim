@@ -610,7 +610,22 @@ nmap <silent> g4in 4gin
 nmap <silent> g4an 4gan
 nmap <silent> g4im 4gim
 nmap <silent> g4am 4gam
-"}}}
+" }}}
+" 缩进列对象 {{{
+function! s:indent_top()
+    let col = min([indent('.'), col('.')-1])
+    let line = line('.')
+    while line > 1
+        let line -= 1
+        if indent(line) <= col
+            return $'{line}G'
+        endif
+    endwhile
+    return ''
+endfunction
+nnoremap <expr> <c-n> <SID>indent_top()
+xnoremap <expr> <c-n> <SID>indent_top()
+" }}}
 " Disable Empty Search And Prev Search {{{1
 "nnoremap <expr> n strlen(@/) > 0 ? "n" : execute('let@/=get(g:,"prev_search","")\|let v:searchforward=get(g:,"prev_search_forward",1)').(@/->strlen()?'n':'')
 "nnoremap <expr> N strlen(@/) > 0 ? "N" : execute('let@/=get(g:,"prev_search","")\|let v:searchforward=get(g:,"prev_search_forward",1)').(@/->strlen()?'N':'')
