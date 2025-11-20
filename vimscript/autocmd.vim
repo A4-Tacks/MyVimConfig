@@ -277,6 +277,9 @@ function SetDefaultFileTypeOptions()
     elseif l:type =~# 'commit'
         inoremap <buffer> #b Example<cr>---<cr>```rust<cr>```<cr><cr>**Before this PR**<cr><cr>**After this PR**<cr><cr>```rust<cr>```<esc>k03lvg_<c-g>
 
+    elseif l:type =~# 'markdown'
+        inoremap <buffer> #b > [!NOTE]<cr><esc>kg_hv3ho<c-g>
+
     endif
 
     if &foldmethod ==# 'manual'
