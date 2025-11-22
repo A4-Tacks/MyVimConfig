@@ -460,6 +460,7 @@ nnoremap z; zzg_
 xnoremap z; zzg_
 nmap zn z;
 xmap zn z;
+omap zn z;
 " }}}
 " 可视模式边缘跳转 {{{
 function! s:visual_side_jump_col()
