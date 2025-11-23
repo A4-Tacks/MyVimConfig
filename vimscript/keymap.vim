@@ -60,11 +60,14 @@ inoremap { <cmd>call <SID>insert_pair('{}')<cr>
 function! s:insert_pair(pair)
     let line = getline('.')
     let i = col('.') - 1
+    let eol = col('$')
     let left = i ? line[:i-1] : ''
     let right = line[i:]
     call setline(line('.'), left.a:pair.right)
     let pos = getpos('.')
-    let pos[2] += 1
+    norm!==
+    let offset = col('$') - eol - 1
+    let pos[2] += offset
     call setpos('.', pos)
 endfunction
 function! s:double_quote()
