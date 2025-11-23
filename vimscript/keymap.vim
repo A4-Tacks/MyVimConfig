@@ -56,8 +56,8 @@ imap #B #b
 
 inoremap ( ()<Left>
 inoremap [ <cmd>call <SID>insert_pair('[]')<cr>
-inoremap { <cmd>call <SID>insert_pair('{}')<cr>
-function! s:insert_pair(pair)
+inoremap { <cmd>call <SID>insert_pair('{}', 1)<cr>
+function! s:insert_pair(pair, indent = v:false)
     let line = getline('.')
     let i = col('.') - 1
     let eol = col('$')
@@ -65,7 +65,7 @@ function! s:insert_pair(pair)
     let right = line[i:]
     call setline(line('.'), left.a:pair.right)
     let pos = getpos('.')
-    norm!==
+    if a:indent | exe 'norm!==' | endif
     let offset = col('$') - eol - 1
     let pos[2] += offset
     call setpos('.', pos)
