@@ -619,16 +619,16 @@ import "$1" as \$$2;
 endsnippet
 
 # variables
-snippet args "$ARGS.positional" b
+snippet args "$ARGS.positional" w
 \$ARGS.positional
 endsnippet
-snippet args_named "$ARGS.named" b
+snippet args_named "$ARGS.named" w
 \$ARGS.named
 endsnippet
-snippet env "$ENV" b
+snippet env "$ENV" w
 \$ENV
 endsnippet
-snippet loc "$__loc__" b
+snippet loc "$__loc__ # input file location" w
 \$__loc__
 endsnippet
 snippet JQ_BUILD_CONFIGURATION "$JQ_BUILD_CONFIGURATION" b
@@ -636,30 +636,30 @@ $JQ_BUILD_CONFIGURATION
 endsnippet
 
 # dates
-snippet now "now date" b
+snippet now "now date" w
 now
 endsnippet
-snippet strptime "parse date string" b
+snippet strptime "parse date string" w
 strptime($1)
 endsnippet
-snippet strftime "format to date string, use UTC" b
+snippet strftime "format to date string, use UTC" w
 strftime($1)
 endsnippet
-snippet strflocaltime "format to date string, use UTC+local" b
+snippet strflocaltime "format to date string, use UTC+local" w
 strflocaltime($1)
 endsnippet
-snippet mktime "mktime" b
+snippet mktime "mktime" w
 mktime
 endsnippet
-snippet gmtime "UTC time struct" b
+snippet gmtime "UTC time struct" w
 gmtime
 endsnippet
-snippet localtime "local time struct" b
+snippet localtime "local time struct" w
 localtime
 endsnippet
-snippet fromdate "fromdateiso8601" b
+snippet fromdate "fromdateiso8601" w
 fromdate
 endsnippet
-snippet todate "todateiso8601" b
+snippet todate "todateiso8601" w
 todate
 endsnippet
