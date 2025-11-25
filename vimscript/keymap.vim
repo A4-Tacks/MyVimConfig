@@ -3,8 +3,8 @@ noremap! #x \
 noremap! #& \|
 noremap! #h \|
 noremap! <expr> #a '\|\| '
+map! #A #a
 noremap! #H \|
-noremap! #A \|\|
 inoremap #' ''<Left>
 inoremap #_ ~
 inoremap #" `
