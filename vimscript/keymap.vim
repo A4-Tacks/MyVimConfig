@@ -479,6 +479,16 @@ endfunction
 xnoremap <c-r> <cmd>call <SID>visual_side_jump_col()<cr>
 xnoremap <c-t> <cmd>call <SID>visual_side_jump_line()<cr>
 " }}}
+" 退出键 {{{
+function! s:confirm_exit_all()
+    echon "Input Tab,#,',\",c,q to exit all:"
+    let result = getcharstr()
+    if result =~? "[\<tab>'\"cq]"
+        qa!
+    endif
+endfunction
+nnoremap <F12> <cmd>call <SID>confirm_exit_all()<cr>
+" }}}
 
 " 范围选择 {{{1
 function! RangeMapDefine(key, str) " {{{
