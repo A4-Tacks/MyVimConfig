@@ -636,7 +636,7 @@ function! s:indent_top()
     let col = min([indent('.'), col('.')-1])
     let line = line('.')
     while line > 1
-        let line -= 1
+        let line = prevnonblank(line-1)
         if indent(line) <= col
             return $'{line}G'
         endif
