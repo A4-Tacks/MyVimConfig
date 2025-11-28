@@ -77,13 +77,19 @@ function! s:double_quote()
 
     let pos[2] += 1
 
-    if line[col:] =~ '^"'
+    let left = col ? line[:col-1] : ''
+    let right = line[col:]
+
+    if left =~ '\v%(^|[^\\])%(\\\\)*\\$' || &filetype == 'vim' && left =~ '^ *$'
+        call setline(line('.'), left.'"'.right)
         call setpos('.', pos)
         return
     endif
 
-    let left = col ? line[:col-1] : ''
-    let right = line[col:]
+    if line[col:] =~ '^"'
+        call setpos('.', pos)
+        return
+    endif
 
     if col >= 2 && line[col-2:] =~ '^""'
         call setline(line('.'), left.'""""'.right)
@@ -110,7 +116,7 @@ cnoremap #o ''<Left>
 cnoremap #O ''<Left>
 cnoremap #m ``<Left>
 cnoremap #M ``<Left>
-inoremap #i <cmd>call <SID>insert_pair('""')<cr>
+imap #i "
 inoremap #I <cmd>call <SID>insert_pair('""')<cr>
 inoremap #o <cmd>call <SID>insert_pair("''")<cr>
 inoremap #O <cmd>call <SID>insert_pair("''")<cr>
