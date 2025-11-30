@@ -241,8 +241,9 @@ function SetDefaultFileTypeOptions()
         inoremap <buffer><expr> ! col('.')>=3 && getline('.')[max([0,col('.')-3]):]=~'^#[]'?'<Left>!<Right>':'!'
         inoremap <buffer> #b #[]<Left>
         inoremap <buffer><expr> <lt> getline('.')[:max([0, col('.')-2])] =~ '::$' ? '<lt>><Left>'
-                    \: getline('.')[:col('.')-1] =~ '\<fn\s\+\<\S\+\>($' ? '<lt>><Left>'
+                    \: getline('.')[:col('.')] =~ '\v<(fn\|struct\|enum\|union)\s+<\S+>\s*(\(.=\|\{)$' ? '<lt>><Left>'
                     \: getline('.')[:col('.')-1] =~ '\>($' ? '::<lt>><Left>'
+                    \: getline('.')[:col('.')-1] =~ '[,>]$' ? '<lt>><Left>'
                     \: '<lt>'
         call s:set(#{foldmethod: syntax, foldtext: "\<SID>place_fold_text()"})
 
