@@ -45,6 +45,7 @@
         ]
     },
     "suggest.insertMode": "insert",
+    "inlayHint.refreshOnInsertMode": true,
 
     "codeLens.enable": true,
     "codeLens.position": "eol",
