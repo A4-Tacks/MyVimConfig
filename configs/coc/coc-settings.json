@@ -68,6 +68,7 @@
     "rust-analyzer.inlayHints.closureCaptureHints.enable": false,
     "rust-analyzer.inlayHints.closureReturnTypeHints.enable": "with_block",
     "rust-analyzer.inlayHints.typeHints.hideClosureInitialization": true,
+    "rust-analyzer.inlayHints.typeHints.hideInferredTypes": true,
     "rust-analyzer.lens.enable": true,
     "rust-analyzer.lens.run.enable": false,
     "rust-analyzer.lens.debug.enable": false,
