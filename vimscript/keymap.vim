@@ -65,7 +65,7 @@ function! s:insert_pair(pair, indent = v:false)
     let right = line[i:]
     call setline(line('.'), left.a:pair.right)
     let pos = getpos('.')
-    if a:indent | exe 'norm!==' | endif
+    if a:indent && line =~ '^\s*$' | exe 'norm!==' | endif
     let offset = col('$') - eol - 1
     let pos[2] += offset
     call setpos('.', pos)
