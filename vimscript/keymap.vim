@@ -92,8 +92,12 @@ function! s:double_quote()
     endif
 
     if col >= 2 && line[col-2:] =~ '^""'
-        call setline(line('.'), left.'""""'.right)
-        call setpos('.', pos)
+        if &filetype == 'rust'
+            call setline(line('.'), left.'""'.right)
+        else
+            call setline(line('.'), left.'""""'.right)
+            call setpos('.', pos)
+        endif
         return
     endif
 
