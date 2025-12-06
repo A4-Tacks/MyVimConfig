@@ -475,13 +475,11 @@ nmap zn z;
 xmap zn z;
 omap zn z;
 " }}}
-" 可视模式边缘跳转 {{{
-function! s:visual_side_jump_col()
-    let [_,      vnum, col, off] = getpos('v')
-    let [bufnum, lnum, _,   _] = getpos('.')
-    call setpos('.', [bufnum, lnum, col+off, 0, col+off])
+" 块可视模式边缘跳转 {{{
+function! s:visual_side_jump_col() abort
+    exe $"norm!o\<cmd>exe 'norm!o'.getcurpos()[4].'|'\<cr>"
 endfunction
-function! s:visual_side_jump_line()
+function! s:visual_side_jump_line() abort
     let [_,      lnum, _,   _] = getpos('v')
     let [bufnum, _,    col, off] = getpos('.')
     call setpos('.', [bufnum, lnum, col+off, 0])
