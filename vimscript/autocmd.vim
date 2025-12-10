@@ -59,6 +59,8 @@ function SetTitle()
     " goto end
     normal G$
 endfunction
+autocmd TerminalWinOpen * set nowrap " {{{1
+
 " Enter normal disbale paste {{{1
 function ClosePaste()
     if &paste
