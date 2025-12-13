@@ -78,6 +78,20 @@
     //"rust-analyzer.lens.references.method.enable": true,
     "rust-analyzer.lens.implementations.enable": true,
     "rust-analyzer.rustfmt.rangeFormatting.enable": true,
+    "rust-analyzer.completion.autoimport.exclude": [
+        {
+            "path": "std::fmt::format",
+            "type": "always"
+        },
+        {
+            "path": "core::borrow::Borrow",
+            "type": "methods"
+        },
+        {
+            "path": "core::borrow::BorrowMut",
+            "type": "methods"
+        }
+    ],
 
     "typescript.inlayHints.parameterNames.enabled": "all",
     "typescript.inlayHints.functionLikeReturnTypes.enabled": true,
