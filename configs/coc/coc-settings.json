@@ -34,7 +34,7 @@
     },
     "snippets.loadVSCodeProjectSnippets": false,
     "snippets.userSnippetsDirectory": "~/.vim/MyVimConfig/configs/coc/plugged/snippets/",
-    "snippets.priority": 900,
+    //"snippets.priority": 900,
     "snippets.extends": {
         "zsh": [
             "sh",
