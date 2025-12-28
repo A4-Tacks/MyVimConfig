@@ -160,7 +160,7 @@ function AutoLightWordTimer(time)
         execute 'match WordLight /' . g:cursor_word_regex . '/'
     endfunction
 
-    call timer_start(a:time, 'AutoLightWordTimerF', {'repeat': -1})
+    call timer_start(a:time, funcref('AutoLightWordTimerF'), {'repeat': -1})
 endfunction
 
 call AutoLightWordTimer(135)
