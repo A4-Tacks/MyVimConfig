@@ -376,9 +376,6 @@ function! ShowBufferInfo()
                     \ "%Y-%m-%d %H:%M:%S"->strftime(fname->getftime()),
                     \ )]
     endif
-    let lines += [printf("Line: %s/%s --%s%%--",
-                \   line('.'), line('$'),
-                \   float2nr((line('.')+0.0) / line('$') * 100))]
     let lines += [printf("fenc=%s ff=%s ft=%s %s%s",
                 \   &fenc->strlen() ? &fenc : 'NONE',
                 \   &ff,
@@ -395,8 +392,9 @@ function! ShowBufferInfo()
                 \   moved: 'any',
                 \   filter: { id, key -> key != "\<CursorHold>" && popup_close(id) && 0 },
                 \ })
+    execute "norm!\<c-g>"
 endfunction
-nnoremap <C-g> :call ShowBufferInfo()<cr>
+nnoremap <silent><C-g> :call ShowBufferInfo()<cr>
 " }}}
 " 快速buffer切换 {{{
 function! s:goto_selected_buffer()
