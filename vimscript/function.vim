@@ -26,10 +26,6 @@ function! Appends(line, tgt) " {{{1
         echoerr "type " .. type .. " is not str or list"
     endif
 endfunction
-function! Py3Call(name, ...) " {{{1
-    " py3eval 有一个很坑的坑, int和float会变成str
-    return py3eval(a:name .. '(*vim.eval("a:000"))')
-endfunction
 function! SplitLongStr(string, len) " {{{1
     " len > 0
     let l:l = a:len - 3
@@ -49,9 +45,6 @@ function! BuildShellArgs(args) " {{{1
     let l:res = a:args[:]
     call map(l:res, {k, v -> FileNameToShell(v)})
     return join(l:res, " ")
-endfunction
-function! ShlexSplit(str, ...) " -> list {{{1
-    return py3eval('shlex.split(vim.eval("a:str"))')
 endfunction
 function! GetCursorWord() " {{{1
     if mode() =~# "[vV\<C-v>]"
@@ -105,9 +98,6 @@ function! SplitLevelsArgs(args) " -> list[list[str]; 2] {{{1
     endif
     return [slice(a:args, 0, idx), a:args[idx+1:]]
 endfunction
-function! StrFmt(fmtter, ...) " {{{1
-    return py3eval('str(vim.eval("a:fmtter")).format(*vim.eval("a:000"))')
-endfunction
 function! Assert(expr, msg = "assert field") " {{{1
     if ! a:expr
         echoerr a:msg .. ': ' .. a:expr
@@ -126,16 +116,6 @@ function! InputRangeNumber(msg, ...) " {{{1
     else
         echoerr 'args length error: ' .. len(a:000)
     endif
-endfunction
-function! SelectLineNumberDisplay() " {{{1
-    let lines_buf = []
-    for i in range(4)
-        let [nu, rnu] = [and(i, 1), i >> 1]
-        call add(lines_buf, StrFmt("{}: number: {}, relativenumber: {}", i, nu, rnu))
-    endfor
-    echon join(lines_buf, "\n")
-    let input_number = InputRangeNumber("select number> ", 3)
-    let [&number, &relativenumber] = [and(input_number, 1), input_number >> 1]
 endfunction
 function! SystemString(x) " {{{1
     return "'" . substitute(a:x, "'", "'\\\\''", 'g') . "'"

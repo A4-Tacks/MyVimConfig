@@ -365,9 +365,9 @@ function! ShowBufferInfo()
     let fname = buffer_name()
     let flag = (&modified||!&modifiable?' ['.(&modified?'+':'').(&modifiable?'':'-').']':'')
                 \.(&readonly?' [RO]':'')
-    echo "FileName: {!r}{}"->StrFmt(fname, flag)
+    echo $'FileName: {shellescape(fname)}{flag}'
     if fname->filereadable() || fname->filewritable()
-        echo "{}{} {}B {} {}"->StrFmt(
+        echo printf("%s%s %sB %s %s",
                     \ fname->getftype()[0],
                     \ fname->getfperm(),
                     \ fname->getfsize(),
@@ -375,14 +375,14 @@ function! ShowBufferInfo()
                     \ "%Y-%m-%d %H:%M:%S"->strftime(fname->getftime()),
                     \ )
     endif
-    echo "Line: {}/{} --{}%--"->StrFmt(
+    echo printf("Line: %s/%s --%s%%--",
                 \   line('.'), line('$'),
                 \   float2nr((line('.')+0.0) / line('$') * 100))
-    echo "fenc={} ff={} ft={} {}eol{}"->StrFmt(
+    echo printf("fenc=%s ff=%s ft=%s %s%s",
                 \   &fenc->strlen() ? &fenc : 'NONE',
                 \   &ff,
                 \   &ft,
-                \   &eol  ? '' : 'no',
+                \   &eol  ? 'eol' : 'noeol',
                 \   &bomb ? ' bomb' : '',
                 \   )
     echo ">"

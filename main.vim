@@ -2,10 +2,10 @@
 " git to ~/.vim/MyVimConfig
 
 set nocompatible
-if ! has('python3') "{{{
-    echoerr "vim is not has python3"
-    finish
-endif "}}}
+"if ! has('python3') "{{{
+"    echoerr "vim is not has python3"
+"    finish
+"endif "}}}
 
 function Log(...) " {{{1
     let l:msg = join(a:000)
@@ -19,7 +19,7 @@ let s:project_root = expand("<sfile>:p:h")
 let g:loader_debug = v:false
 let g:loader_debug_log = []
 " load python main {{{1
-execute "py3file " .. fnameescape(s:project_root .. "/python/__main__.py")
+"execute "py3file " .. fnameescape(s:project_root .. "/python/__main__.py")
 " Vim Scripts {{{1
 let s:vim_scripts =<< trim EOF
 {

@@ -44,7 +44,7 @@ function! Fmt(line1, line2) abort
     let endl = line('$')
     if index(keys(eval(var_name)), ft) != -1
         let cmd = eval(var_name)[ft]->substitute('{width}', 78-indent, 'g')
-        execute StrFmt('{},{} {}', a:line1, a:line2, cmd)
+        execute $'{a:line1},{a:line2} {cmd}'
         let offset = line('$') - endl
         silent execute $'{a:line1},{a:line2+offset} s/^\ze./{repeat(" ", indent)}'
     else
