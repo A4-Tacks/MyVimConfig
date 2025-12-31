@@ -388,13 +388,12 @@ function! ShowBufferInfo()
                 \   )]
     let lines += [trim(execute("norm!g\<c-g>"))]
     call popup_create(lines, #{
-                \   line:&lines,
-                \   col:1,
-                \   border:[],
-                \   time:20000,
-                \   close:'click',
-                \   moved:'any',
-                \   filter: { id, key -> popup_close(id) && 0 },
+                \   line: &lines,
+                \   col: 1,
+                \   border: [],
+                \   close: 'click',
+                \   moved: 'any',
+                \   filter: { id, key -> key != "\<CursorHold>" && popup_close(id) && 0 },
                 \ })
 endfunction
 nnoremap <C-g> :call ShowBufferInfo()<cr>
