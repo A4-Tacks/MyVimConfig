@@ -362,31 +362,40 @@ xnoremap g/ y/<c-r>"
 "}}}
 " 缓冲区信息键强化 {{{
 function! ShowBufferInfo()
+    let lines = []
     let fname = buffer_name()
     let flag = (&modified||!&modifiable?' ['.(&modified?'+':'').(&modifiable?'':'-').']':'')
                 \.(&readonly?' [RO]':'')
-    echo $'FileName: {shellescape(fname)}{flag}'
+    let lines += [$'FileName: {shellescape(fname)}{flag}']
     if fname->filereadable() || fname->filewritable()
-        echo printf("%s%s %sB %s %s",
+        let lines += [printf("%s%s %sB %s %s",
                     \ fname->getftype()[0],
                     \ fname->getfperm(),
                     \ fname->getfsize(),
                     \ fname->getfsize()->SizeFmt('B'),
                     \ "%Y-%m-%d %H:%M:%S"->strftime(fname->getftime()),
-                    \ )
+                    \ )]
     endif
-    echo printf("Line: %s/%s --%s%%--",
+    let lines += [printf("Line: %s/%s --%s%%--",
                 \   line('.'), line('$'),
-                \   float2nr((line('.')+0.0) / line('$') * 100))
-    echo printf("fenc=%s ff=%s ft=%s %s%s",
+                \   float2nr((line('.')+0.0) / line('$') * 100))]
+    let lines += [printf("fenc=%s ff=%s ft=%s %s%s",
                 \   &fenc->strlen() ? &fenc : 'NONE',
                 \   &ff,
                 \   &ft,
                 \   &eol  ? 'eol' : 'noeol',
                 \   &bomb ? ' bomb' : '',
-                \   )
-    echo ">"
-    exe "norm!g\<c-g>"
+                \   )]
+    let lines += [trim(execute("norm!g\<c-g>"))]
+    call popup_create(lines, #{
+                \   line:&lines,
+                \   col:1,
+                \   border:[],
+                \   time:20000,
+                \   close:'click',
+                \   moved:'any',
+                \   filter: { id, key -> popup_close(id) && 0 },
+                \ })
 endfunction
 nnoremap <C-g> :call ShowBufferInfo()<cr>
 " }}}
