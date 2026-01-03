@@ -787,7 +787,7 @@ function! CompileRun(args_text) " {{{
         echo &filetype .. " not in lang config. " .. string(keys(g:runer))
         return v:none
     endif
-    let args = ShlexSplit(a:args_text)
+    let args = py3eval('__import__("shlex").split(vim.eval("a:args_text"))')
     execute "!set -x;" .. 'echo -ne "\e[0m\e[' .. &lines .. 'S\e[H";'
                 \.. funcref('ShCmdFmt', g:runer[&filetype](args))()
 endfunction " }}}
