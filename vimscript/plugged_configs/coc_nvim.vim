@@ -176,7 +176,7 @@ augroup coc_user
   " Update signature help on jump placeholder
   autocmd User CocJumpPlaceholder call CocActionAsync('showSignatureHelp')
   " Update statusline
-  autocmd User CocStatusChange if mode() !~# '^r' | redrawstatus | en
+  autocmd User CocStatusChange if mode() !~# '^r' | redrawstatus! | en
 augroup end
 
 " Applying code actions to the selected code block
