@@ -51,5 +51,23 @@ function! Fmt(line1, line2) abort
         echoerr "filetype" .. ft .. " not in " .. string(keys(eval(var_name)))
     endif
 endfunction
+" Syntax highlight {{{1
+command! SynDebug call s:syntax_highlight_debug()
+function! s:syntax_highlight_debug()
+    let id  = synID(line('.'), col('.'), v:true)
+    let idk = synIDtrans(id)
+    if !id
+        echo 'no available colors on the cursor'
+        return
+    endif
+
+    echo 'stack:' synstack(line('.'), col('.'))->map({_, v -> v->synIDattr('name')})->join(", ")
+
+    if id != idk
+        echo $'link from {synIDattr(id, "name")}'
+    endif
+    exec $'hi {synIDattr(idk, "name")}'
+endfunction
+" }}}1
 " END {{{1
 " }}}1
