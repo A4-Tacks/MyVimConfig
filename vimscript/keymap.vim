@@ -390,7 +390,7 @@ function! ShowBufferInfo()
                 \   border: [],
                 \   close: 'click',
                 \   moved: 'any',
-                \   filter: { id, key -> key != "\<CursorHold>" && popup_close(id) && 0 },
+                \   filter: { id, key -> key != "\<CursorHold>" && key != "\<CR>" && popup_close(id) && 0 },
                 \ })
     execute "norm!\<c-g>"
 endfunction
