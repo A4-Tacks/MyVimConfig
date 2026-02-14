@@ -20,6 +20,9 @@ Plug 'w0rp/ale', " { 'on': 'ALEEnable' }
 " 窗口控制模式
 Plug 'A4-Tacks/winmode.vim'
 
+" Todolist
+Plug 'A4-Tacks/todolist.vim'
+
 call plug#end() " Plug配置文件
 
 filetype plugin indent on
