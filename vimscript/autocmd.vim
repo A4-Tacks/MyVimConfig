@@ -328,6 +328,27 @@ if exists('enable_builtin_completion_auto_popup')
 endif
 " 差异模式禁用 coc {{{1
 autocmd VimEnter * if &diff | execute 'CocDisable' | en
+" 差异模式查找冲突和切换窗口 {{{1
+autocmd VimEnter * call <SID>open_vcs_conflict()
+function! s:open_vcs_conflict()
+    if !&diff
+        return
+    endif
+
+    if len(getwininfo()) == 3
+        execute "norm!\<c-w>30h\<c-w>l"
+    endif
+
+    let @/ = '^\([<|=>]\)\1\{4,}'
+    let line = search(@/, 'wcn')
+
+    if !line
+        return
+    endif
+
+    call cursor(1, 1)
+    call search(@/, 'c')
+endfunction
 " 语法文件注册 {{{1
 augroup filetypedetect
     autocmd BufNewFile,BufRead *.mdtlbl setfiletype mdtlbl
