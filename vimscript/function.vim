@@ -231,7 +231,7 @@ endfunction
 function! Snake2Camel(word, upper = 1, start = 0) " {{{1
     let prefix = a:start ? a:word[:a:start-1] : ''
     let pat = $'\v(<_{a:upper ? '*\l=' : '+'})|_(\l)'
-    return prefix . substitute(a:word[a:start:], pat, '\U\1\2', 'g')
+    return prefix . substitute(tolower(a:word[a:start:]), pat, '\U\1\2', 'g')
 endfunction
 function! MatchAll(expr, pat) " {{{1
     let rem = a:expr
