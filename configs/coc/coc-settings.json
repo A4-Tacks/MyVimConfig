@@ -56,9 +56,6 @@
     "tree.key.close": "q",
     "tree.key.collapseAll": "u",
     "dialog.confirmKey": "m",
-    "notification.statusLineProgress": false,
-    "notification.minProgressWidth": 45,
-    "notification.marginRight": 3,
 
     "rust-analyzer.updates.checkOnStartup": false,
     "rust-analyzer.check.workspace": false,
