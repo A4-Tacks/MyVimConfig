@@ -123,6 +123,11 @@ call system('mkdir -p -- ' . join(
             \map([&backupdir, &undodir, &directory, g:temp_directory],
             \{_, x -> FileNameToShell(x)})))
 
+call system('git rev-parse --show-toplevel 2>&1')
+if !v:shell_error
+    set grepprg=git\ grep\ -n\ $*
+en
+
 " 不操作多久会将 swp 交换文件写入(ms), 这个参数也影响CursorHold事件
 set updatetime=4500
 " 每输入多少次字符写入一次交换文件
