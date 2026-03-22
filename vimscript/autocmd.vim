@@ -108,7 +108,7 @@ call BigWin(v:false)
 "            \ | let @/ = ""
 autocmd InsertEnter * call feedkeys("\<cmd>:noh\<cr>", 'ni')
 " Clear search buffer {{{1
-autocmd VimEnter * let @/ = ""
+"autocmd VimEnter * let @/ = ""
 " In cmd line tag variable {{{1
 " init
 let g:in_cmd_line = v:false
