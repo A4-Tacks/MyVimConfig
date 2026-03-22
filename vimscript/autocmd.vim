@@ -109,6 +109,9 @@ call BigWin(v:false)
 autocmd InsertEnter * call feedkeys("\<cmd>:noh\<cr>", 'ni')
 " Clear search buffer {{{1
 "autocmd VimEnter * let @/ = ""
+" Change :grep uses git grep {{{1
+autocmd VimEnter * call system('git rev-parse --show-toplevel 2>&1')
+            \    | if !v:shell_error | set grepprg=git\ grep\ -n\ $* | en
 " In cmd line tag variable {{{1
 " init
 let g:in_cmd_line = v:false
