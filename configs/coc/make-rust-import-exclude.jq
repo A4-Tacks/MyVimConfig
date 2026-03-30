@@ -19,7 +19,7 @@
 def make: {path: ., type: "always"};
 def tree($parent):
   scan($group; "xm") as [$prefix, $rest] |
-  $prefix | rtrimstr($rest) as $prefix |
+  $prefix | rtrimstr($rest // "\u0000") as $prefix |
   if $rest then
     $rest | sub("^\\{"; "") | sub("\\}$"; "") | tree($parent+$prefix)
   elif $prefix == "self" then
