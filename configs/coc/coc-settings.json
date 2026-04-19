@@ -56,6 +56,9 @@
     "tree.key.close": "q",
     "tree.key.collapseAll": "u",
     "dialog.confirmKey": "m",
+    "signature.floatConfig": {
+        "border": true
+    },
 
     "rust-analyzer.updates.checkOnStartup": false,
     "rust-analyzer.check.workspace": false,
