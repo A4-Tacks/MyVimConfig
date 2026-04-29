@@ -221,8 +221,10 @@ function! s:place_fold_text() abort
     let closure = !empty(tail_parens) || breaked_len + strcharlen(end) <= line_break
                 \? s:place_fold_wrapped(line_break).end
                 \: breaked_len == line_break ? '…' : ''
+    let text = $'{line.closure} ¥ {span} 行'
+    let winleft_col = winsaveview().leftcol
 
-    return $'{line.closure} ¥ {span} 行'
+    return slice(text, winleft_col)
 endfunction
 " }}}2
 function SetDefaultFileTypeOptions()
