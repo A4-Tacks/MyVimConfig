@@ -44,6 +44,10 @@ imap #q [
 imap #w {
 imap #Q [
 imap #W {
+smap #q <bs>#q
+smap #w <bs>#w
+smap #Q <bs>#Q
+smap #W <bs>#W
 cnoremap #q []<Left>
 cnoremap #w {}<Left>
 cnoremap #Q []<Left>
@@ -58,17 +62,10 @@ inoremap ( ()<Left>
 inoremap [ <cmd>call <SID>insert_pair('[]')<cr>
 inoremap { <cmd>call <SID>insert_pair('{}', 1)<cr>
 function! s:insert_pair(pair, indent = v:false)
-    let line = getline('.')
-    let i = col('.') - 1
-    let eol = col('$')
-    let left = i ? line[:i-1] : ''
-    let right = line[i:]
-    call setline(line('.'), left.a:pair.right)
-    let pos = getpos('.')
-    if a:indent && line =~ '^\s*$' | exe 'norm!==' | endif
-    let offset = col('$') - eol - 1
-    let pos[2] += offset
-    call setpos('.', pos)
+    let @9 = a:pair
+    let p = col('.') == col('$') ? 'p' : 'P'
+    if a:indent && getline('.') =~ '^\s*$' | let p .= '==l' | endif
+    exe 'silent norm!"9'.p
 endfunction
 function! s:double_quote()
     let col = col('.')-1
