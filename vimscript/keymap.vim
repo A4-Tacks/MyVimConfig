@@ -63,7 +63,7 @@ inoremap [ <cmd>call <SID>insert_pair('[]')<cr>
 inoremap { <cmd>call <SID>insert_pair('{}', 1)<cr>
 function! s:insert_pair(pair, indent = v:false)
     let @9 = a:pair
-    let p = col('.') == col('$') ? 'p' : 'P'
+    let p = col('.') == col('$') && &ve !~ 'insert\|all' ? 'p' : 'P'
     if a:indent && getline('.') =~ '^\s*$' | let p .= '==l' | endif
     exe 'silent norm!"9'.p
 endfunction
