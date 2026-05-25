@@ -92,6 +92,34 @@
             "type": "always"
         },
         {
+            "path": "std::arch::aarch64",
+            "type": "sub_items"
+        },
+        {
+            "path": "std::intrinsics",
+            "type": "sub_items"
+        },
+        {
+            "path": "std::intrinsics::simd",
+            "type": "sub_items"
+        },
+        {
+            "path": "std::f16::consts",
+            "type": "sub_items"
+        },
+        {
+            "path": "std::f32::consts",
+            "type": "sub_items"
+        },
+        {
+            "path": "std::f64::consts",
+            "type": "sub_items"
+        },
+        {
+            "path": "std::f128::consts",
+            "type": "sub_items"
+        },
+        {
             "path": "core::borrow::Borrow",
             "type": "methods"
         },
