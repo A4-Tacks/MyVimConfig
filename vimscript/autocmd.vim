@@ -356,5 +356,9 @@ augroup filetypedetect
     autocmd BufNewFile,BufRead *.mdtlbl setfiletype mdtlbl
     autocmd BufNewFile,BufRead *.mtsx setfiletype mtsyntax
 augroup END
+" Save ~/.vim/.lastsave {{{1
+augroup lastsave
+    autocmd BufWritePost * call writefile(readfile(expand("%"), "B"), expand("~/.vim/.lastsave"))
+augroup END
 " END {{{1
 " }}}1
