@@ -68,6 +68,16 @@ function! s:syntax_highlight_debug()
     endif
     exec $'hi {synIDattr(idk, "name")}'
 endfunction
+" Backup Restore {{{1
+command! BackupRestore call s:backup_restore()
+function! s:backup_restore() abort
+    let path = expand("%:p")
+    let bakdir = substitute(&backupdir, ',.*', '', '')
+    let bakname = substitute(path, '/', '%', 'g').&backupext
+    let lines = readfile(bakdir.'/'.bakname)
+    call deletebufline(bufnr(), 1, '$')
+    call setline(1, lines)
+endfunction
 " }}}1
 " END {{{1
 " }}}1
