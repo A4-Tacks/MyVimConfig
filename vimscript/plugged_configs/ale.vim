@@ -25,10 +25,10 @@ let g:ale_echo_msg_format = '[%linter%] %s [%severity%]'
 " disabled ALE LSP Server
 let g:ale_disable_lsp = 1
 
-" 使用clang对c和c++进行语法检查，对python使用pylint进行语法检查
+" c/c++ 不用clang检查, 用coc-clangd"
 let g:ale_linters = {
-        \   'c++': ['clang'],
-        \   'c': ['clang'],
+        \   'c++': [],
+        \   'c': [],
         \   'python': ['pylint'],
         \   'rust': [],
         \}
