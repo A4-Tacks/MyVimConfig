@@ -159,15 +159,15 @@ endfunction
 function! UpdateUserMatches() " {{{1
     call UpdateIndentLine()
 
-    let g:eol_ws_light_id = get(g:, 'eol_ws_light_id', -1)
-    if g:eol_ws_light_id != -1
+    let w:eol_ws_light_id = get(w:, 'eol_ws_light_id', -1)
+    if w:eol_ws_light_id != -1
         try
-            call matchdelete(g:eol_ws_light_id)
+            call matchdelete(w:eol_ws_light_id)
         catch /^Vim\%((\a\+)\)\=:E80[23]/
         endtry
     endif
     let pat = '\v\s+$|\S\zs%(%<75v\s{40,}|\%>74v\s{20,})\ze\S'
-    let g:eol_ws_light_id = matchadd('EOLWhiteSpace', pat, 0, -1)
+    let w:eol_ws_light_id = matchadd('EOLWhiteSpace', pat, 0, -1)
 endfunction
 function! SetUserColors() " {{{1
     hi def WordLight term=nocombine cterm=underline
