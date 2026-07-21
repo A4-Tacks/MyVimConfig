@@ -166,7 +166,7 @@ function! UpdateUserMatches() " {{{1
         catch /^Vim\%((\a\+)\)\=:E80[23]/
         endtry
     endif
-    let pat = '\v\s+$|\S\zs%(%<75v\s{40,}|\%>74v\s{20,})\ze\S'
+    let pat = '\v\s+$|\S\zs%(%<75v\s{40,}|%>74v\s{20,})\ze\S'
     let w:eol_ws_light_id = matchadd('EOLWhiteSpace', pat, 0, -1)
 endfunction
 function! SetUserColors() " {{{1
