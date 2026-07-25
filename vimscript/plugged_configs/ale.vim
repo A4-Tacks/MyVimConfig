@@ -27,7 +27,7 @@ let g:ale_disable_lsp = 1
 
 " c/c++ 不用clang检查, 用coc-clangd"
 let g:ale_linters = {
-        \   'c++': [],
+        \   'cpp': [],
         \   'c': [],
         \   'python': ['pylint'],
         \   'rust': [],
