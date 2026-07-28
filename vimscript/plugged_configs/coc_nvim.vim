@@ -117,6 +117,9 @@ inoremap <silent><expr> <C-n> coc#pum#visible()
             \       ? "\<C-n>"
             \       : coc#refresh()
 
+" 代码片段中按tab不考虑触发缩进, 覆盖掉默认透明映射
+smap <tab> <bs><c-n>
+
 " Make <CR> to accept selected completion item or notify coc.nvim to format
 " <C-g>u breaks current undo, please make your own choice
 inoremap <silent><expr> <cr> foldclosed('.') != -1
