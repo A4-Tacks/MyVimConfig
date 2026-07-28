@@ -9,7 +9,10 @@ inoremap #' ''<Left>
 inoremap #_ ~
 inoremap #" `
 " 可视模式下使用退格键即可删除选中内容 {{{1
-vnoremap <Bs> <Del>
+xnoremap <bs> <del>
+snoremap <bs> <c-g>"_c
+snoremap <c-h> <c-g>"_c
+snoremap <del> <c-g>"_c
 " 全角转半角 {{{1
 nnoremap ： :
 

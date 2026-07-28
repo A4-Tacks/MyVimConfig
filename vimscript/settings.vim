@@ -226,3 +226,5 @@ let g:markdown_recommended_style = 0
 
 " ocamlformat indent
 set runtimepath^=~/.opam/default/share/ocp-indent/vim
+
+let g:coc_selectmode_mapping = 0
