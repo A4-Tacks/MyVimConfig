@@ -246,7 +246,7 @@ while getopts h$1 opt; do case "$opt" in
 		printf '%s\n' \
 			'Options:' \
 			'    -h                 show help' \
-			&& exit
+			; exit
 		;;$2
 	:|\?)
 		((--OPTIND <= 0)) && OPTIND=1
