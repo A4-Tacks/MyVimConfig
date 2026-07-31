@@ -13,6 +13,7 @@ xnoremap <bs> <del>
 snoremap <bs> <c-g>"_c
 snoremap <c-h> <c-g>"_c
 snoremap <del> <c-g>"_c
+snoremap <c-r> <c-g>"_c<c-r>
 " 全角转半角 {{{1
 nnoremap ： :
 
