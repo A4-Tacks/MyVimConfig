@@ -298,7 +298,7 @@ endfunction
 " TabAutoToEnd {{{1
 autocmd TabNew * tabmove $
 " 选择模式的文本不写入寄存器 {{{1
-autocmd ModeChanged *:s call feedkeys("\<c-r>_", 'n')
+autocmd ModeChanged *:s call feedkeys("\<c-r>_", 'in')
 " Auto input completion {{{1
 " 这将可以在启用时有多个补全结果时自动展开补全菜单, 没用coc等的时候用
 " 美中不足的是输入过快因为使用的timer实时性不够可能出现问题
