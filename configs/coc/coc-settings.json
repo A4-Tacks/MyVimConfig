@@ -105,6 +105,10 @@
             "type": "sub_items"
         },
         {
+            "path": "std::hint",
+            "type": "sub_items"
+        },
+        {
             "path": "std::intrinsics::simd",
             "type": "sub_items"
         },
