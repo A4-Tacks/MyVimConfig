@@ -272,7 +272,10 @@ function SetDefaultFileTypeOptions()
         nmap <buffer><silent> <C-F9> _vg_<C-F9>
         imap <buffer><silent> <F9>   <esc><F9>
         imap <buffer><silent> <C-F9> <esc><C-F9>
-        call s:set(#{foldmethod: syntax})
+        call s:set(#{foldmethod: syntax, tabstop: 8})
+
+    elseif l:type == 'cpp'
+        call s:set(#{foldmethod: syntax, tabstop: 8})
 
     elseif l:type == 'ocaml'
         call s:set(#{foldmethod: syntax, shiftwidth: 2})
