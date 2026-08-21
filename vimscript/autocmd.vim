@@ -291,6 +291,18 @@ function SetDefaultFileTypeOptions()
 
     elseif l:type =~# 'markdown'
         inoremap <buffer> #b > [!NOTE]<cr><end><esc>kg_hv3ho<c-g>
+        inoremap <buffer><expr> -
+                    \ getline('.') =~ '^$' ? '-' :
+                    \ getline('.') =~ '^-$' ? '--' :
+                    \ getline('.') !~ '^---$' ? '-' :
+                    \ !search('\S\n-\{3,}$', 'nw') ? repeat('-', 76) :
+                    \ repeat('-', max([1, len(getline(search('\S\n-\{3,}$', 'nw') + 1)) - 3]))
+        inoremap <buffer><expr> =
+                    \ getline('.') =~ '^$' ? '=' :
+                    \ getline('.') =~ '^=$' ? '==' :
+                    \ getline('.') !~ '^===$' ? '=' :
+                    \ !search('\S\n=\{3,}$', 'nw') ? repeat('=', 76) :
+                    \ repeat('=', max([1, len(getline(search('\S\n=\{3,}$', 'nw') + 1)) - 3]))
 
     endif
 
