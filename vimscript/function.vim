@@ -7,19 +7,20 @@ function! CliStdIn(text, args) " {{{1
     return system('echo ' . SystemString(a:text)
                 \ . '|' . join(map(a:args[:], {k, v -> SystemString(v)})))
 endfunction
-function! Appends(line, tgt) " {{{1
+function! Appends(line, tgt, indent=0) " {{{1
     " 解决换行无法被追加的问题
     " 传入列表则追加每一行, 传入字符串则将行分割
     let type = type(a:tgt)
     let n = a:line
+    let indent = repeat(' ', a:indent)
     if type == v:t_list
         for line in a:tgt
-            call append(n, line)
+            call append(n, indent.line)
             let n += 1
         endfor
     elseif type == v:t_string
         for line in split(a:tgt, "\n")
-            call append(n, line)
+            call append(n, indent.line)
             let n += 1
         endfor
     else
