@@ -296,13 +296,13 @@ function SetDefaultFileTypeOptions()
                     \ getline('.') =~ '^-$' ? '--' :
                     \ getline('.') !~ '^---$' ? '-' :
                     \ !search('\S\n\%.l\@!-\{3,}$', 'nwb') ? repeat('-', 76) :
-                    \ repeat('-', max([1, len(getline(search('\S\n-\{3,}$', 'nwb') + 1)) - 3]))
+                    \ repeat('-', max([1, len(getline(search('\S\n\%.l\@!-\{3,}$', 'nwb') + 1)) - 3]))
         inoremap <buffer><expr> =
                     \ getline('.') =~ '^$' ? '=' :
                     \ getline('.') =~ '^=$' ? '==' :
                     \ getline('.') !~ '^===$' ? '=' :
                     \ !search('\S\n\%.l\@!=\{3,}$', 'nwb') ? repeat('=', 76) :
-                    \ repeat('=', max([1, len(getline(search('\S\n=\{3,}$', 'nwb') + 1)) - 3]))
+                    \ repeat('=', max([1, len(getline(search('\S\n\%.l\@!=\{3,}$', 'nwb') + 1)) - 3]))
 
     endif
 
