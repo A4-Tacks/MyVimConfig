@@ -102,6 +102,7 @@ function! s:double_quote()
         return
     endif
 
+    " 已经尝试过 <c-r><c-o> 也没能解决列块时移动光标到后面继续插入的问题
     call setline(line('.'), left.'""'.right)
     call setpos('.', pos)
 endfunction
