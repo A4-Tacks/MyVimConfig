@@ -180,11 +180,12 @@ endfunction
 " Fold Text {{{2
 function! s:make_indent_line(line) abort
     let char = get(g:, 'indentLine_char', '|')
+    let line = substitute(a:line, '\t', repeat(' ', &tabstop), 'g')
     let pattern = '\%5c'
     for i in range(1, 8)
         let pattern .= $'\|\%{5+i*4}c'
     endfor
-    return substitute(a:line, $'\%(^ *\)\@<=\%({pattern}\) ', char, 'g')
+    return substitute(line, $'\%(^ *\)\@<=\%({pattern}\) ', char, 'g')
 endfunction
 function! s:place_fold_wrapped(line_break)
     let span = v:foldend-v:foldstart+1
