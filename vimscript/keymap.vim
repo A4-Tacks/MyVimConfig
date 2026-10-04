@@ -479,8 +479,8 @@ xnoremap <expr> # <SID>search_cursor(v:false,"\<lt>esc>")
 xnoremap <expr> * <SID>search_cursor(v:true,"\<lt>esc>")
 " }}}
 " 扩展z系列键 {{{
-nnoremap z; zzg_
-xnoremap z; zzg_
+nnoremap z; zz$
+xnoremap z; zz<cmd>call setpos('.', [0, line('.'), col('$')-1, 0])<cr>
 nmap zn z;
 xmap zn z;
 omap zn z;
@@ -535,7 +535,7 @@ onoremap <silent> av :<C-u>norm! v0og_<CR>
 
 xnoremap . ^
 onoremap z. ^
-onoremap z; g_
+onoremap z; $
 "}}}
 " 选区文本对象 {{{
 onoremap gv :<c-u>norm!gv<cr>
