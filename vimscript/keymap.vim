@@ -781,6 +781,7 @@ function! Runer() " -> dict
                 \}
     " }}}2
 endfunction
+imap <F5> <c-g>u<esc><F5>
 nnoremap <silent> <F5> :if &modified \|\| !filewritable(expand('%')) \| write \| else \| call CompileRun(input("args> ")) \| endif<CR>
 
 let g:runer = Runer()
