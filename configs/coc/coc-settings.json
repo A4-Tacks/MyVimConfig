@@ -141,6 +141,7 @@
 
     "typescript.inlayHints.parameterNames.enabled": "all",
     "typescript.inlayHints.functionLikeReturnTypes.enabled": true,
+    "typescript.inlayHints.variableTypes.enabled": true,
 
     "Lua.completion.callSnippet": "Replace",
     "Lua.hint.enable": true,
@@ -160,5 +161,9 @@
     "pyright.disableCompletion": true,
     "pyright.completion.importSupport": true,
     "pyright.completion.snippetSupport": true,
+    "pyright.inlayHints.variableTypes": true,
+    "pyright.inlayHints.functionReturnTypes": true,
+    "pyright.inlayHints.parameterTypes": true,
+    "tombi.updates.checkOnStartup": false,
     "toml.formatter.indentString": "    "
 }
