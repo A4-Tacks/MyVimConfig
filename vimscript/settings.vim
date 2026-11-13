@@ -149,7 +149,7 @@ set cmdheight=1
 set shortmess+=c
 
 " reload display outtime
-set redrawtime=5000
+set redrawtime=10000
 
 " Fold control column width
 " set foldcolumn=3
