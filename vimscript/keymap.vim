@@ -62,53 +62,39 @@ noremap! #< <><Left>
 noremap! #> <><Left>
 imap #B #b
 
+function! s:insert_solid(text, extra = "")
+    let @9 = a:text
+    let p = col('.') == col('$') && &ve !~ 'insert\|all' ? 'p' : 'P'
+    exe 'silent norm!"9'.p.a:extra
+endfunction
+
 inoremap ( ()<Left>
 inoremap [ <cmd>call <SID>insert_pair('[]')<cr>
 inoremap { <cmd>call <SID>insert_pair('{}', 1)<cr>
 function! s:insert_pair(pair, indent = v:false)
-    let @9 = a:pair
-    let p = col('.') == col('$') && &ve !~ 'insert\|all' ? 'p' : 'P'
-    if a:indent && getline('.') =~ '^\s*$' | let p .= '==l' | endif
-    exe 'silent norm!"9'.p
+    call s:insert_solid(a:pair, a:indent && getline('.') =~ '^\s*$' ? "==l" : "")
 endfunction
 function! s:double_quote()
     let col = col('.')-1
-    let pos = getpos('.')
     let line = getline('.')
-
-    let pos[2] += 1
 
     let left = col ? line[:col-1] : ''
     let right = line[col:]
 
     if left =~ '\v%(^|[^\\])%(\\\\)*\\$' || &filetype == 'vim' && left =~ '^ *$'
-        call setline(line('.'), left.'"'.right)
+        call s:insert_solid('"', "l")
+        return
+    endif
+
+    if right =~ '^"'
+        " 不能用 norm!l 因为开着pum貌似用不了
+        let pos = getpos('.')
+        let pos[2] += 1
         call setpos('.', pos)
         return
     endif
 
-    if line[col:] =~ '^"'
-        call setpos('.', pos)
-        return
-    endif
-
-    if col >= 2 && line[col-2:] =~ '^""'
-        if &filetype == 'rust'
-            call setline(line('.'), left.'""'.right)
-        else
-            call setline(line('.'), left.'""""'.right)
-            call setpos('.', pos)
-        endif
-        return
-    endif
-
-    if line[col-1:] =~ '^"' && &filetype == 'rust'
-        let pos[2] -= 1
-    endif
-
-    " 已经尝试过 <c-r><c-o> 也没能解决列块时移动光标到后面继续插入的问题
-    call setline(line('.'), left.'""'.right)
-    call setpos('.', pos)
+    call s:insert_solid('""', left =~ '"$' ? "h" : "")
 endfunction
 inoremap " <cmd>call <SID>double_quote()<cr>
 " 快捷符号映射 {{{1
